@@ -80,11 +80,33 @@ model Verification {
   @@map("verification")
 }
 
+///////////////////////
+/////   Develop   /////
+///////////////////////
+
+model Item {
+  id          String   @id @default(cuid())
+  order       Int @default(0)
+  name        String
+  description String?
+  parentId    String?
+  
+  //metadata
+  creatById String
+  creatBy User @relation(fields: [creatById], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("item")
+}
+
+
 //////////////////////
 //////   Farms   /////
 //////////////////////
 model Farm {
   id      String @id @default(cuid())
+ order       Int @default(0)
   name    String
   ownerId String
   owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
@@ -99,10 +121,13 @@ model Farm {
 
 model Batiment {
   id      String @id @default(cuid())
+  order       Int @default(0)
   name    String
+  surface Float
+  capacity Int
   farmId  String
   farm    Farm   @relation(fields: [farmId], references: [id], onDelete: Cascade)
-  
+  lotIds  Lot[]
   //metadata
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -115,14 +140,21 @@ model Batiment {
 //////   Poules   /////
 ///////////////////////
 
-modele Lot {
+model Lot {
   id          String   @id @default(cuid())
+  order       Int @default(0)
   name        String
-  batimentId  String
-  batiment    Batiment @relation(fields: [batimentId], references: [id], onDelete: Cascade)
+  status      String // actif, en pause, terminé
+  dateDebut   DateTime @default(now())
+  dateFin     DateTime? // calculé en fonction de l'âge des poules
   NombrePoules Int
   agePoueles  Int // en jours
+  
+  batimentId  String
+  batiment    Batiment @relation(fields: [batimentId], references: [id], onDelete: Cascade)
   //metadata
+  creatById String
+  creatBy User @relation(fields: [creatById], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function amenagement() {
+export default function resetPassword() {
   return <div></div>;
 }

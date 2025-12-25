@@ -1,214 +1,285 @@
-//@/app/dev/page.tsx
-/* page d'aide au developpement presentant les feature, les pages à créer, le schema prisma */ 
-import React from 'react'
-import Link from 'next/link'
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardHeader, 
-  CardTitle 
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { 
-  CheckCircle2, 
-  Circle, 
-  Clock, 
-  LayoutTemplate, 
-  Database, 
-  ShieldCheck,
-  Hammer
-} from 'lucide-react'
+// @/app/dev/page.tsx
+/* page d'aide au developpement presentant les feature, les pages à créer, le schema prisma */
+"use client";
 
-// Types pour notre roadmap
-type Status = 'todo' | 'progress' | 'done'
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+  Target,
+  FolderTree,
+  Database,
+  Menu,
+  X,
+  Home,
+  ChevronRight,
+} from "lucide-react";
+import Architecture from "./Architecture";
+import Schema from "./Schema";
+import Scrum from "./Scrum";
 
-interface Feature {
-  id: string
-  name: string
-  description: string
-  priority: 'High' | 'Medium' | 'Low'
-  status: Status
-}
+type View = "home" | "scrum" | "architecture" | "schema";
 
-interface PageRoute {
-  path: string
-  name: string
-  category: string
-  status: Status
-}
+export default function Page() {
+  const [currentView, setCurrentView] = useState<View>("home");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-export default function DevPage() {
-  
-  // 1. Liste des fonctionnalités basées sur votre document Word
-  const features: Feature[] = [
-    { id: '1', name: 'Authentification', description: 'Login, Register, Reset Password avec Better-Auth', priority: 'High', status: 'progress' },
-    { id: '2', name: 'Gestion des Troupeaux (Flocks)', description: 'CRUD complet des lots, calcul âge automatique', priority: 'High', status: 'todo' },
-    { id: '3', name: 'Production Quotidienne', description: 'Saisie œufs (bons, cassés), mortalité, aliment', priority: 'High', status: 'todo' },
-    { id: '4', name: 'Calendrier & Planning', description: 'Vue agenda, tâches récurrentes, vaccinations', priority: 'Medium', status: 'todo' },
-    { id: '5', name: 'Santé (Health)', description: 'Suivi vétérinaire, traitements, autopsies', priority: 'Medium', status: 'todo' },
-    { id: '6', name: 'Finances', description: 'Tableau des dépenses et ventes (œufs/réformes)', priority: 'Low', status: 'todo' },
-  ]
+  const navItems = [
+    {
+      id: "scrum" as View,
+      label: "Scrum / Backlog",
+      icon: <Target size={20} />,
+      description: "Gestion des fonctionnalités et suivi du sprint",
+    },
+    {
+      id: "architecture" as View,
+      label: "Architecture",
+      icon: <FolderTree size={20} />,
+      description: "Structure des pages et routes de l'application",
+    },
+    {
+      id: "schema" as View,
+      label: "Schéma BDD",
+      icon: <Database size={20} />,
+      description: "Modèle de données Prisma et relations",
+    },
+  ];
 
-  // 2. Structure des pages à créer
-  const pages: PageRoute[] = [
-    // Auth
-    { category: 'Auth', name: 'Login', path: '/auth/login', status: 'progress' },
-    { category: 'Auth', name: 'Register', path: '/auth/register', status: 'todo' },
-    
-    // Dashboard General
-    { category: 'App', name: 'Dashboard Home', path: '/dashboard', status: 'todo' },
-    
-    // Lots (Flocks)
-    { category: 'Lots', name: 'Liste des lots', path: '/dashboard/lots', status: 'todo' },
-    { category: 'Lots', name: 'Nouveau lot (Wizard)', path: '/dashboard/lots/new', status: 'todo' },
-    { category: 'Lots', name: 'Détail lot (Cycle)', path: '/dashboard/lots/[id]', status: 'todo' },
-    
-    // Production
-    { category: 'Prod', name: 'Saisie Journalière', path: '/dashboard/production/daily', status: 'todo' },
-    
-    // Santé
-    { category: 'Santé', name: 'Carnet Sanitaire', path: '/dashboard/health', status: 'todo' },
-  ]
-
-  // Helper pour les badges de statut
-  const getStatusBadge = (status: Status) => {
-    switch (status) {
-      case 'done': return <Badge variant="default" className="bg-green-600"><CheckCircle2 className="w-3 h-3 mr-1"/> Fait</Badge>
-      case 'progress': return <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 hover:bg-yellow-100"><Clock className="w-3 h-3 mr-1"/> En cours</Badge>
-      case 'todo': return <Badge variant="outline" className="text-gray-500"><Circle className="w-3 h-3 mr-1"/> À faire</Badge>
+  const renderContent = () => {
+    switch (currentView) {
+      case "scrum":
+        return <Scrum />;
+      case "architecture":
+        return <Architecture />;
+      case "schema":
+        return <Schema />;
+      case "home":
+      default:
+        return <HomePage navItems={navItems} setCurrentView={setCurrentView} />;
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8 font-sans">
-      <div className="max-w-5xl mx-auto space-y-8">
-        
-        {/* En-tête */}
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900 flex items-center gap-2">
-              <Hammer className="h-8 w-8 text-orange-500" />
-              Dev Dashboard
-            </h1>
-            <p className="text-slate-500 mt-2">Suivi du développement - Application Élevage Poules Pondeuses</p>
-          </div>
-          <div className="flex gap-2 text-sm text-slate-500 bg-white p-3 rounded-lg border shadow-sm">
-            <div className="flex items-center gap-2">
-              <Database className="h-4 w-4 text-blue-500" /> Prisma
+    <div className="min-h-screen flex flex-col bg-background">
+      {/* Navigation principale */}
+      <nav className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo / Titre */}
+            <button
+              onClick={() => setCurrentView("home")}
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
+              <Home size={24} className="text-primary" />
+              <div>
+                <h1 className="font-bold text-lg">Dev Tools</h1>
+                <p className="text-xs text-muted-foreground">PolloMondo</p>
+              </div>
+            </button>
+
+            {/* Navigation Desktop */}
+            <div className="hidden md:flex items-center gap-2">
+              {navItems.map((item) => (
+                <Button
+                  key={item.id}
+                  variant={currentView === item.id ? "default" : "ghost"}
+                  onClick={() => setCurrentView(item.id)}
+                  className="flex items-center gap-2"
+                >
+                  {item.icon}
+                  {item.label}
+                </Button>
+              ))}
             </div>
-            <Separator orientation="vertical" className="h-4" />
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-green-500" /> Better-Auth
+
+            {/* Menu hamburger Mobile */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </Button>
+          </div>
+
+          {/* Menu Mobile */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden py-4 border-t">
+              <div className="flex flex-col gap-2">
+                {navItems.map((item) => (
+                  <Button
+                    key={item.id}
+                    variant={currentView === item.id ? "default" : "ghost"}
+                    onClick={() => {
+                      setCurrentView(item.id);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="justify-start gap-2"
+                  >
+                    {item.icon}
+                    <div className="text-left">
+                      <div>{item.label}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {item.description}
+                      </div>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+
+      {/* Fil d'Ariane */}
+      {currentView !== "home" && (
+        <div className="border-b bg-muted/50">
+          <div className="container mx-auto px-4 py-2">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <button
+                onClick={() => setCurrentView("home")}
+                className="hover:text-foreground transition-colors"
+              >
+                Accueil
+              </button>
+              <ChevronRight size={16} />
+              <span className="text-foreground font-medium">
+                {navItems.find((item) => item.id === currentView)?.label}
+              </span>
             </div>
           </div>
         </div>
+      )}
 
-        {/* Section 1: Fonctionnalités (Features) */}
-        <section>
-          <Card>
-            <CardHeader>
-              <CardTitle>Fonctionnalités Clés (Backlog)</CardTitle>
-              <CardDescription>État d'avancement des modules métier</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-4">
-                {features.map((feature) => (
-                  <div key={feature.id} className="flex items-center justify-between p-4 border rounded-lg bg-white shadow-sm">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-slate-900">{feature.name}</span>
-                        <Badge variant="outline" className="text-xs">{feature.priority}</Badge>
-                      </div>
-                      <p className="text-sm text-slate-500">{feature.description}</p>
-                    </div>
-                    <div>
-                      {getStatusBadge(feature.status)}
-                    </div>
-                  </div>
-                ))}
+      {/* Contenu principal */}
+      <main className="flex-1">{renderContent()}</main>
+    </div>
+  );
+}
+
+// Page d'accueil avec les cartes
+function HomePage({
+  navItems,
+  setCurrentView,
+}: {
+  navItems: {
+    id: View;
+    label: string;
+    icon: React.ReactNode;
+    description: string;
+  }[];
+  setCurrentView: (view: View) => void;
+}) {
+  return (
+    <div className="container mx-auto px-4 py-12 max-w-6xl">
+      {/* Hero Section */}
+      <div className="text-center mb-12">
+        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-purple-500 to-pink-500 text-transparent bg-clip-text">
+          Outils de Développement
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Documentation complète et outils pour le développement de
+          l&apos;application PolloMondo
+        </p>
+      </div>
+
+      {/* Cartes de navigation */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {navItems.map((item) => (
+          <Card
+            key={item.id}
+            className="p-6 hover:shadow-lg transition-all cursor-pointer group border-2 hover:border-primary"
+            onClick={() => setCurrentView(item.id)}
+          >
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className="p-4 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <div className="text-primary">{item.icon}</div>
               </div>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Section 2: Structure des Pages (Sitemap) */}
-        <section>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <LayoutTemplate className="h-5 w-5" />
-                Structure des Pages & Routes
-              </CardTitle>
-              <CardDescription>Navigation et état d'implémentation des vues</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="rounded-md border">
-                <table className="w-full text-sm text-left">
-                  <thead className="bg-slate-100 text-slate-600 font-medium">
-                    <tr>
-                      <th className="p-4">Catégorie</th>
-                      <th className="p-4">Nom de la page</th>
-                      <th className="p-4">Route (Path)</th>
-                      <th className="p-4 text-right">Statut</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {pages.map((page, i) => {
-                      // On vérifie si c'est une route dynamique (contient des crochets)
-                      const isDynamic = page.path.includes('[') || page.path.includes(']');
-                      
-                      return (
-                        <tr key={i} className="border-t hover:bg-slate-50 transition-colors">
-                          <td className="p-4 font-medium text-slate-700">{page.category}</td>
-                          <td className="p-4">{page.name}</td>
-                          <td className="p-4 font-mono text-xs text-blue-600">
-                            {isDynamic ? (
-                              <span className="text-slate-400" title="Route dynamique (non cliquable)">
-                                {page.path}
-                              </span>
-                            ) : (
-                              <Link href={page.path} className="hover:underline">
-                                {page.path}
-                              </Link>
-                            )}
-                          </td>
-                          <td className="p-4 text-right">
-                            {getStatusBadge(page.status)}
-                          </td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Section 3: Notes Dev */}
-        <section>
-          <Card className="bg-slate-900 text-slate-50 border-slate-800">
-            <CardHeader>
-              <CardTitle>Notes Techniques</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
               <div>
-                <h4 className="font-semibold text-slate-300 mb-1">Commandes utiles :</h4>
-                <code className="block bg-slate-950 p-3 rounded text-xs font-mono text-green-400">
-                  npx prisma studio <br/>
-                  npx shadcn@latest add [component]
-                </code>
+                <h3 className="font-bold text-lg mb-2">{item.label}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {item.description}
+                </p>
               </div>
-              <p className="text-sm text-slate-400">
-                Rappel : Pour la gestion d'état globale (ex: lot sélectionné), utiliser le store Zustand `useFarmStore`.
-              </p>
-            </CardContent>
+              <Button
+                variant="outline"
+                className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+              >
+                Accéder
+                <ChevronRight
+                  size={16}
+                  className="ml-2 group-hover:translate-x-1 transition-transform"
+                />
+              </Button>
+            </div>
           </Card>
-        </section>
+        ))}
+      </div>
 
+      {/* Section informations */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card className="p-6">
+          <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+            <Target className="text-primary" />À propos du projet
+          </h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            PolloMondo est une application de gestion d&apos;élevage de poules
+            pondeuses. Cette section regroupe tous les outils nécessaires au
+            développement.
+          </p>
+          <div className="space-y-2 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500"></div>
+              <span>Next.js 15 + TypeScript</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+              <span>Prisma + PostgreSQL</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+              <span>shadcn/ui + Tailwind CSS</span>
+            </div>
+          </div>
+        </Card>
+
+        <Card className="p-6">
+          <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+            <FolderTree className="text-primary" />
+            Raccourcis utiles
+          </h3>
+          <div className="space-y-3">
+            <button
+              onClick={() => setCurrentView("scrum")}
+              className="w-full p-3 border rounded-lg hover:bg-muted transition-colors text-left"
+            >
+              <div className="font-medium">Backlog produit</div>
+              <div className="text-xs text-muted-foreground">
+                Voir les fonctionnalités à développer
+              </div>
+            </button>
+            <button
+              onClick={() => setCurrentView("architecture")}
+              className="w-full p-3 border rounded-lg hover:bg-muted transition-colors text-left"
+            >
+              <div className="font-medium">Routes de l&apos;app</div>
+              <div className="text-xs text-muted-foreground">
+                Explorer la structure des pages
+              </div>
+            </button>
+            <button
+              onClick={() => setCurrentView("schema")}
+              className="w-full p-3 border rounded-lg hover:bg-muted transition-colors text-left"
+            >
+              <div className="font-medium">Base de données</div>
+              <div className="text-xs text-muted-foreground">
+                Consulter le schéma Prisma
+              </div>
+            </button>
+          </div>
+        </Card>
       </div>
     </div>
-  )
+  );
 }
