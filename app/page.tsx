@@ -1,103 +1,142 @@
-import Image from "next/image";
+import React from 'react'
+import Link from 'next/link'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { 
+  LayoutDashboard, 
+  Bird, 
+  CalendarDays, 
+  Stethoscope, 
+  Coins, 
+  Settings, 
+  LogIn 
+} from 'lucide-react' // Assurez-vous d'avoir lucide-react installé
 
-export default function Home() {
+export default function DevPage() {
+  const modules = [
+    {
+      title: "Gestion des Troupeaux",
+      description: "Suivi des lots, production d'œufs et mortalité.",
+      icon: <Bird className="h-6 w-6 mb-2 text-orange-500" />,
+      href: "/dashboard/lots",
+      color: "bg-orange-50/50 hover:bg-orange-50"
+    },
+    {
+      title: "alimentation & Eau",
+      description: "Suivi des lots, production d'œufs et mortalité.",
+      icon: <Bird className="h-6 w-6 mb-2 text-orange-500" />,
+      href: "/dashboard/lots",
+      color: "bg-orange-50/50 hover:bg-orange-50"
+    },    {
+      title: "Santé & Soins",
+      description: "Traitements, vaccins et biosécurité.",
+      icon: <Stethoscope className="h-6 w-6 mb-2 text-green-500" />,
+      href: "/dashboard/health",
+      color: "bg-green-50/50 hover:bg-green-50"
+    },
+    
+    {
+      title: "Calendrier & Tâches",
+      description: "Planification quotidienne, vaccinations et maintenance.",
+      icon: <CalendarDays className="h-6 w-6 mb-2 text-blue-500" />,
+      href: "/dashboard/calendar",
+      color: "bg-blue-50/50 hover:bg-blue-50"
+    },
+    {
+      title: "Finances",
+      description: "Dépenses, ventes et analyse de rentabilité.",
+      icon: <Coins className="h-6 w-6 mb-2 text-yellow-500" />,
+      href: "/dashboard/finance",
+      color: "bg-yellow-50/50 hover:bg-yellow-50"
+    }
+  ]
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gray-50/50 p-8 font-sans">
+      <div className="max-w-6xl mx-auto space-y-8">
+        
+        {/* Header */}
+        <header className="flex justify-between items-center border-b pb-6">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Poultry Manager</h1>
+            <p className="text-gray-500 mt-2">Environnement de Développement • Next.js 15</p>
+          </div>
+          <div className="flex gap-3">
+             <Link href="/auth/login">
+              <Button variant="outline">
+                <LogIn className="mr-2 h-4 w-4" /> Connexion
+              </Button>
+            </Link>
+            <Link href="/admin">
+               <Button variant="secondary">
+                <Settings className="mr-2 h-4 w-4" /> Admin
+              </Button>
+            </Link>
+          </div>
+        </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        {/* Modules Grid */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <LayoutDashboard className="h-5 w-5" />
+            Modules Principaux
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {modules.map((module) => (
+              <Link key={module.title} href={module.href} className="block group">
+                <Card className={`h-full transition-all duration-200 border-2 border-transparent hover:border-gray-200 ${module.color}`}>
+                  <CardHeader>
+                    {module.icon}
+                    <CardTitle className="text-lg">{module.title}</CardTitle>
+                    <CardDescription className="text-gray-600">
+                      {module.description}
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Status / Dev Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Quick Stats Placeholder */}
+          <Card className="lg:col-span-2">
+            <CardHeader>
+              <CardTitle>État du Système</CardTitle>
+              <CardDescription>Vue d'ensemble technique</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-3 bg-white rounded-lg border">
+                  <span className="font-medium">Base de données (Prisma)</span>
+                  <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">Connecté</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-white rounded-lg border">
+                  <span className="font-medium">Authentification (Better-Auth)</span>
+                  <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Configuré</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Dev Links */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Pages Techniques</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <Link href="/design-system" className="block p-2 hover:bg-gray-100 rounded text-sm text-blue-600">
+                → Design System / UI Kit
+              </Link>
+              <Link href="/api/health" className="block p-2 hover:bg-gray-100 rounded text-sm text-blue-600">
+                → API Health Check
+              </Link>
+            </CardContent>
+          </Card>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      </div>
     </div>
-  );
+  )
 }
