@@ -38,6 +38,18 @@ const NAV_ITEMS: readonly PublicNavItem[] = [
     description: "Poules pondeuses : bases et routines d'élevage",
     icon: <BookOpen className="h-4 w-4" />,
   },
+  {
+    href: "/public/appHelp",
+    label: "Utilisaation de l'app",
+    description: "Exemple d'utilisation",
+    icon: <BookOpen className="h-4 w-4" />,
+  },
+  {
+    href: "/public/terminologie",
+    label: "Glossaire",
+    description: "definition des therme utilisé dans l'application",
+    icon: <BookOpen className="h-4 w-4" />,
+  },
 ] as const;
 
 function isActivePath(currentPath: string, href: string): boolean {

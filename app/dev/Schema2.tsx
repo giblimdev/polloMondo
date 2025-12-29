@@ -131,6 +131,18 @@ function ModelCard({ title, code }: { title: string; code: string }) {
 export default function Svhema2() {
   const prismaSchema = `
 
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+////////////////////////////
+/////  Modèles Auth   //////
+////////////////////////////
 model User {
   id            String   @id @default(cuid())
   name          String
@@ -145,18 +157,14 @@ model User {
   accounts Account[]
 
   // Business relations
-  ownedTeams Team[] @relation("TeamOwner")
+  ownedTeams Team[]     @relation("TeamOwner")
   userTeams  UserTeam[]
 
-  createdItems       Item[]        @relation("ItemCreator")
-  createdEquipements Equipement[]  @relation("EquipementCreator")
-  createdLots        Lot[]         @relation("LotCreator")
-  createdLifeInfos   LifeInfo[]     @relation("LifeInfoCreator")
+  createdItems       Item[]       @relation("ItemCreator")
+  createdEquipements Equipement[] @relation("EquipementCreator")
+  createdLots        Lot[]        @relation("LotCreator")
 
-  createdLotEvents   LotEvent[]     @relation("LotEventCreator")
   createdCalendarEvents CalendarEvent[] @relation("CalendarEventCreator")
-
-  createdEnvironements environement[] @relation("EnvironementCreator")
 
   @@map("users")
 }
@@ -193,8 +201,8 @@ model Account {
   refreshTokenExpiresAt DateTime?
   scope                 String?
   password              String?
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 
   @@unique([providerId, accountId])
   @@index([userId])
@@ -219,6 +227,7 @@ model Verification {
 model Item {
   id          String  @id @default(cuid())
   order       Int     @default(0)
+  TypeItem    String  @default("") // Epic | feature/ us | Task | Model| Champs|
   name        String
   description String?
   parentId    String?
@@ -242,15 +251,15 @@ model Item {
 //////   Teams   /////
 //////////////////////
 model Team {
-  id       String @id @default(cuid())
-  order    Int    @default(0)
+  id       String  @id @default(cuid())
+  order    Int     @default(0)
   name     String
-  type     String @default("TEAM") // ORGANIZATION | TEAM | FARM
+  type     String  @default("TEAM") // ORGANIZATION | TEAM | FARM
   parentId String?
 
   // Relations
-  parent    Team?   @relation("TeamHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
-  children  Team[]  @relation("TeamHierarchy")
+  parent    Team?      @relation("TeamHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children  Team[]     @relation("TeamHierarchy")
   members   UserTeam[]
   batiments Batiment[]
 
@@ -301,7 +310,7 @@ model Batiment {
   teamId   String
 
   // Relations
-  team        Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  team        Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
   lots        Lot[]
   equipements Equipement[]
 
@@ -314,8 +323,8 @@ model Batiment {
 }
 
 model Equipement {
-  id                  String @id @default(cuid())
-  order               Int    @default(0)
+  id                  String  @id @default(cuid())
+  order               Int     @default(0)
   name                String
   description         String?
   legalNorms          String?
@@ -336,34 +345,104 @@ model Equipement {
   @@map("equipements")
 }
 
-/////////////////////////
-//////   Breeding   /////
-/////////////////////////
-model Lot {
-  id            String   @id @default(cuid())
-  order         Int      @default(0)
+/////////////////////////////////////////
+//////   Breeding plannification   /////
+///////////////////////////////////////
+
+model LifeCircle {
+  id    String  @id @default(cuid())
+  order Int     @default(0)
+  type  String // pondeuse | chair
+  phase Phase[] //Démarrage, Croissance, Pré-ponte, Mise en ponte, Monté en ponte, Pic de ponte, Plateau de ponte, Fin de cycle
+}
+
+model Phase {
+  id            String           @id @default(cuid())
+  order         Int              @default(0)
   name          String
-  status        String   @default("ACTIVE")
-  startDate     DateTime @default(now())
-  actualEndDate DateTime?
+  weekStart     DateTime
+  weekEnd       DateTime
+  events        Event[] // objectif de poid, consomation de Gr, ponte
+  task          Tasks[] // prophylavie, intervention
+  breedingParam BreedingParams[] // reglage environement
+  lifeCircleId  String
+  lifeCircle    LifeCircle       @relation(fields: [lifeCircleId], references: [id], onDelete: Cascade)
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  source      String   @default("predicted") // | observed (validation)
+  order       Int      @default(0)
+  name        String
+  day         DateTime
+  currentAge  Int // en  J
+  Cheptel     Int // % restant de poule calculé dans l'app 
+  weightGrams Int // Objectif de poid en Gr,
+  feedAmount  Json //Alimtype et FeedQuantity
+  nbEggs      Int // ex ; 0.88 
+  nbeggS      Int // en % pourcalcul du nombre d'oeuf dans l'app
+  nbeggM      Int // en % pourcalcul du nombre d'oeuf dans l'app
+  nbeggL      Int // en % pourcalcul du nombre d'oeuf dans l'app
+  nbeggXL     Int // en % pourcalcul du nombre d'oeuf dans l'app
+
+  phaseId String?
+  phase   Phase?  @relation(fields: [phaseId], references: [id])
+
+  lots Lot[]
+}
+
+model Tasks {
+  id         String   @id @default(cuid())
+  source     String   @default("predicted") // | observed (validation)
+  order      Int      @default(0)
+  name       String
+  day        DateTime
+  currentAge Int // en  J
+  taskList   String[]
+
+  phaseId String?
+  phase   Phase?  @relation(fields: [phaseId], references: [id])
+
+  lots Lot[]
+}
+
+model BreedingParams {
+  id     String @id @default(cuid())
+  source String @default("predicted") // | observed (validation)
+
+  order          Int      @default(0)
+  day            DateTime
+  currentAge     Int // en  J
+  temperature    String // °C
+  humidity       String // 40%,
+  lightHours     String // 15 h,
+  lightIntensity String // 25 mix,
+  phase          Phase?   @relation(fields: [phaseId], references: [id])
+  phaseId        String?
+
+  lots Lot[]
+}
+
+///////////////////////
+/////   Breeding   ////
+///////////////////////
+
+model Lot {
+  id             String           @id @default(cuid())
+  order          Int              @default(0)
+  name           String
+  status         String           @default("ACTIVE")
+  startDate      DateTime         @default(now())
+  actualEndDate  DateTime?
   plannedEndDate DateTime?
-  initialChicks Int
-  initialAge    Int
-  currentAge    Int
-
-  // Relations
-  batimentId String
-  batiment   Batiment @relation(fields: [batimentId], references: [id], onDelete: Cascade)
-
-  // 1 Lot -> N LifeInfo (journalier)
-  lifeInfos LifeInfo[]
-
+  initialChicks  Int
+  initialAge     Int
+  batimentId     String
+  batiment       Batiment         @relation(fields: [batimentId], references: [id], onDelete: Cascade)
+  events         Event[] // objectif de poid, consomation de Gr, ponte
+  task           Tasks[] // prophylavie, intervention
+  breedingParam  BreedingParams[] // reglage environement
   // 1 Lot -> N LotEvent
-  events LotEvent[]
-
-  // Lot -> environement (optionnel)
-  environementId String?
-  environement   environement? @relation(fields: [environementId], references: [id], onDelete: SetNull)
 
   // Metadata
   createdById String
@@ -374,54 +453,7 @@ model Lot {
   @@index([batimentId])
   @@index([status])
   @@index([startDate])
-  @@index([environementId])
   @@map("lots")
-}
-
-model LotEvent {
-  id         String @id @default(cuid())
-  order      Int    @default(0)
-  eventType  String // dc | cost | revenue
-
-  deadCount   Int?
-  costfood    Float?
-  revenueSale Float?
-
-  // Relation to Lot (optional in your original intent? Here: required)
-  lotId String
-  lot   Lot @relation(fields: [lotId], references: [id], onDelete: Cascade)
-
-  // Metadata
-  createdById String
-  createdBy   User     @relation("LotEventCreator", fields: [createdById], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([lotId])
-  @@index([createdById])
-  @@map("lot_events")
-}
-
-model LifeInfo {
-  id         String @id @default(cuid())
-  order      Int    @default(0)
-  jAge       String
-  AlimType   String
-  feedAmount Int
-
-  // Relation to Lot (journalier)
-  lotId String
-  lot   Lot @relation(fields: [lotId], references: [id], onDelete: Cascade)
-
-  // Metadata
-  createdById String
-  createdBy   User     @relation("LifeInfoCreator", fields: [createdById], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([lotId])
-  @@index([createdById])
-  @@map("life_infos")
 }
 
 ///////////////////////
@@ -455,55 +487,11 @@ model Setting {
   @@map("settings")
 }
 
-model environement {
-  id       String @id @default(cuid())
-  order    Int    @default(0)
-  category String @default("LAYING") // LAYING | BROILER
-  phase    String
-  objective String
-  dayStart Int
-  dayEnd   Int
-  weekStart Int
-  weekEnd   Int
-
-  minTemperature Float
-  maxTemperature Float
-  minHumidity    Float
-  maxHumidity    Float
-  minLightHours  Float
-  maxLightHours  Float
-  feedType       String
-  minFeedQuantity Float
-  maxFeedQuantity Float
-  minWeight      Float
-  maxWeight      Float
-  minLayingRate  Float
-  maxLayingRate  Float
-  minEggsPerHen  Float
-  maxEggsPerHen  Float
-  minMortalityRate Float
-  maxMortalityRate Float
-
-  // Relations (1 environement -> N lots)
-  lots Lot[]
-
-  // Metadata
-  createdById String
-  createdBy   User     @relation("EnvironementCreator", fields: [createdById], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([category])
-  @@index([phase])
-  @@index([createdById])
-  @@map("breeding")
-}
-
 //////////////////////////
 /////   Calendrier   /////
 //////////////////////////
 model CalendarEvent {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   title       String
   description String?
   startDate   DateTime
@@ -524,7 +512,7 @@ model CalendarEvent {
   @@index([createdById])
   @@map("events")
 }
-_HERE`;
+`;
 
   const blocks = useMemo(() => splitPrismaSchema(prismaSchema), [prismaSchema]);
 
