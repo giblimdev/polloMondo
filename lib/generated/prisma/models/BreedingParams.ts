@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -38,7 +38,7 @@ export type BreedingParamsSumAggregateOutputType = {
 
 export type BreedingParamsMinAggregateOutputType = {
   id: string | null
-  source: string | null
+  source: $Enums.SourceType | null
   predictedId: string | null
   order: number | null
   day: Date | null
@@ -55,7 +55,7 @@ export type BreedingParamsMinAggregateOutputType = {
 
 export type BreedingParamsMaxAggregateOutputType = {
   id: string | null
-  source: string | null
+  source: $Enums.SourceType | null
   predictedId: string | null
   order: number | null
   day: Date | null
@@ -239,7 +239,7 @@ export type BreedingParamsGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 
 export type BreedingParamsGroupByOutputType = {
   id: string
-  source: string
+  source: $Enums.SourceType
   predictedId: string | null
   order: number
   day: Date
@@ -279,7 +279,7 @@ export type BreedingParamsWhereInput = {
   OR?: Prisma.BreedingParamsWhereInput[]
   NOT?: Prisma.BreedingParamsWhereInput | Prisma.BreedingParamsWhereInput[]
   id?: Prisma.StringFilter<"BreedingParams"> | string
-  source?: Prisma.StringFilter<"BreedingParams"> | string
+  source?: Prisma.EnumSourceTypeFilter<"BreedingParams"> | $Enums.SourceType
   predictedId?: Prisma.StringNullableFilter<"BreedingParams"> | string | null
   order?: Prisma.IntFilter<"BreedingParams"> | number
   day?: Prisma.DateTimeFilter<"BreedingParams"> | Date | string
@@ -292,9 +292,12 @@ export type BreedingParamsWhereInput = {
   createdById?: Prisma.StringFilter<"BreedingParams"> | string
   createdAt?: Prisma.DateTimeFilter<"BreedingParams"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BreedingParams"> | Date | string
+  predicted?: Prisma.XOR<Prisma.BreedingParamsNullableScalarRelationFilter, Prisma.BreedingParamsWhereInput> | null
+  observations?: Prisma.BreedingParamsListRelationFilter
   phase?: Prisma.XOR<Prisma.PhaseNullableScalarRelationFilter, Prisma.PhaseWhereInput> | null
   lots?: Prisma.LotListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }
 
 export type BreedingParamsOrderByWithRelationInput = {
@@ -312,9 +315,12 @@ export type BreedingParamsOrderByWithRelationInput = {
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  predicted?: Prisma.BreedingParamsOrderByWithRelationInput
+  observations?: Prisma.BreedingParamsOrderByRelationAggregateInput
   phase?: Prisma.PhaseOrderByWithRelationInput
   lots?: Prisma.LotOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  users?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type BreedingParamsWhereUniqueInput = Prisma.AtLeast<{
@@ -322,7 +328,7 @@ export type BreedingParamsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.BreedingParamsWhereInput | Prisma.BreedingParamsWhereInput[]
   OR?: Prisma.BreedingParamsWhereInput[]
   NOT?: Prisma.BreedingParamsWhereInput | Prisma.BreedingParamsWhereInput[]
-  source?: Prisma.StringFilter<"BreedingParams"> | string
+  source?: Prisma.EnumSourceTypeFilter<"BreedingParams"> | $Enums.SourceType
   predictedId?: Prisma.StringNullableFilter<"BreedingParams"> | string | null
   order?: Prisma.IntFilter<"BreedingParams"> | number
   day?: Prisma.DateTimeFilter<"BreedingParams"> | Date | string
@@ -335,9 +341,12 @@ export type BreedingParamsWhereUniqueInput = Prisma.AtLeast<{
   createdById?: Prisma.StringFilter<"BreedingParams"> | string
   createdAt?: Prisma.DateTimeFilter<"BreedingParams"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BreedingParams"> | Date | string
+  predicted?: Prisma.XOR<Prisma.BreedingParamsNullableScalarRelationFilter, Prisma.BreedingParamsWhereInput> | null
+  observations?: Prisma.BreedingParamsListRelationFilter
   phase?: Prisma.XOR<Prisma.PhaseNullableScalarRelationFilter, Prisma.PhaseWhereInput> | null
   lots?: Prisma.LotListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }, "id">
 
 export type BreedingParamsOrderByWithAggregationInput = {
@@ -367,7 +376,7 @@ export type BreedingParamsScalarWhereWithAggregatesInput = {
   OR?: Prisma.BreedingParamsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BreedingParamsScalarWhereWithAggregatesInput | Prisma.BreedingParamsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"BreedingParams"> | string
-  source?: Prisma.StringWithAggregatesFilter<"BreedingParams"> | string
+  source?: Prisma.EnumSourceTypeWithAggregatesFilter<"BreedingParams"> | $Enums.SourceType
   predictedId?: Prisma.StringNullableWithAggregatesFilter<"BreedingParams"> | string | null
   order?: Prisma.IntWithAggregatesFilter<"BreedingParams"> | number
   day?: Prisma.DateTimeWithAggregatesFilter<"BreedingParams"> | Date | string
@@ -384,8 +393,7 @@ export type BreedingParamsScalarWhereWithAggregatesInput = {
 
 export type BreedingParamsCreateInput = {
   id?: string
-  source?: string
-  predictedId?: string | null
+  source?: $Enums.SourceType
   order?: number
   day: Date | string
   currentAge: number
@@ -395,14 +403,17 @@ export type BreedingParamsCreateInput = {
   lightIntensity: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  phase?: Prisma.PhaseCreateNestedOneWithoutBreedingParamInput
-  lots?: Prisma.LotCreateNestedManyWithoutBreedingParamInput
-  createdBy: Prisma.UserCreateNestedOneWithoutBreedingParamsInput
+  predicted?: Prisma.BreedingParamsCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.BreedingParamsCreateNestedManyWithoutPredictedInput
+  phase?: Prisma.PhaseCreateNestedOneWithoutBreedingParamsInput
+  lots?: Prisma.LotCreateNestedManyWithoutBreedingParamsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedBreedingParamsInput
+  users?: Prisma.UserCreateNestedManyWithoutBreedingParamsInput
 }
 
 export type BreedingParamsUncheckedCreateInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   day: Date | string
@@ -415,13 +426,14 @@ export type BreedingParamsUncheckedCreateInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  lots?: Prisma.LotUncheckedCreateNestedManyWithoutBreedingParamInput
+  observations?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPredictedInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutBreedingParamsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBreedingParamsInput
 }
 
 export type BreedingParamsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentAge?: Prisma.IntFieldUpdateOperationsInput | number
@@ -431,14 +443,17 @@ export type BreedingParamsUpdateInput = {
   lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  phase?: Prisma.PhaseUpdateOneWithoutBreedingParamNestedInput
-  lots?: Prisma.LotUpdateManyWithoutBreedingParamNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutBreedingParamsNestedInput
+  predicted?: Prisma.BreedingParamsUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.BreedingParamsUpdateManyWithoutPredictedNestedInput
+  phase?: Prisma.PhaseUpdateOneWithoutBreedingParamsNestedInput
+  lots?: Prisma.LotUpdateManyWithoutBreedingParamsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedBreedingParamsNestedInput
+  users?: Prisma.UserUpdateManyWithoutBreedingParamsNestedInput
 }
 
 export type BreedingParamsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -451,12 +466,14 @@ export type BreedingParamsUncheckedUpdateInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lots?: Prisma.LotUncheckedUpdateManyWithoutBreedingParamNestedInput
+  observations?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPredictedNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutBreedingParamsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutBreedingParamsNestedInput
 }
 
 export type BreedingParamsCreateManyInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   day: Date | string
@@ -473,8 +490,7 @@ export type BreedingParamsCreateManyInput = {
 
 export type BreedingParamsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentAge?: Prisma.IntFieldUpdateOperationsInput | number
@@ -488,7 +504,7 @@ export type BreedingParamsUpdateManyMutationInput = {
 
 export type BreedingParamsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -511,6 +527,11 @@ export type BreedingParamsListRelationFilter = {
 
 export type BreedingParamsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type BreedingParamsNullableScalarRelationFilter = {
+  is?: Prisma.BreedingParamsWhereInput | null
+  isNot?: Prisma.BreedingParamsWhereInput | null
 }
 
 export type BreedingParamsCountOrderByAggregateInput = {
@@ -581,10 +602,22 @@ export type BreedingParamsCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
 }
 
+export type BreedingParamsCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutUsersInput, Prisma.BreedingParamsUncheckedCreateWithoutUsersInput> | Prisma.BreedingParamsCreateWithoutUsersInput[] | Prisma.BreedingParamsUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutUsersInput | Prisma.BreedingParamsCreateOrConnectWithoutUsersInput[]
+  connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+}
+
 export type BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutCreatedByInput, Prisma.BreedingParamsUncheckedCreateWithoutCreatedByInput> | Prisma.BreedingParamsCreateWithoutCreatedByInput[] | Prisma.BreedingParamsUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutCreatedByInput | Prisma.BreedingParamsCreateOrConnectWithoutCreatedByInput[]
   createMany?: Prisma.BreedingParamsCreateManyCreatedByInputEnvelope
+  connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+}
+
+export type BreedingParamsUncheckedCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutUsersInput, Prisma.BreedingParamsUncheckedCreateWithoutUsersInput> | Prisma.BreedingParamsCreateWithoutUsersInput[] | Prisma.BreedingParamsUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutUsersInput | Prisma.BreedingParamsCreateOrConnectWithoutUsersInput[]
   connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
 }
 
@@ -602,6 +635,19 @@ export type BreedingParamsUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.BreedingParamsScalarWhereInput | Prisma.BreedingParamsScalarWhereInput[]
 }
 
+export type BreedingParamsUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutUsersInput, Prisma.BreedingParamsUncheckedCreateWithoutUsersInput> | Prisma.BreedingParamsCreateWithoutUsersInput[] | Prisma.BreedingParamsUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutUsersInput | Prisma.BreedingParamsCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.BreedingParamsUpsertWithWhereUniqueWithoutUsersInput | Prisma.BreedingParamsUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  disconnect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  delete?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  update?: Prisma.BreedingParamsUpdateWithWhereUniqueWithoutUsersInput | Prisma.BreedingParamsUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.BreedingParamsUpdateManyWithWhereWithoutUsersInput | Prisma.BreedingParamsUpdateManyWithWhereWithoutUsersInput[]
+  deleteMany?: Prisma.BreedingParamsScalarWhereInput | Prisma.BreedingParamsScalarWhereInput[]
+}
+
 export type BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutCreatedByInput, Prisma.BreedingParamsUncheckedCreateWithoutCreatedByInput> | Prisma.BreedingParamsCreateWithoutCreatedByInput[] | Prisma.BreedingParamsUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutCreatedByInput | Prisma.BreedingParamsCreateOrConnectWithoutCreatedByInput[]
@@ -613,6 +659,19 @@ export type BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput = {
   connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
   update?: Prisma.BreedingParamsUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.BreedingParamsUpdateWithWhereUniqueWithoutCreatedByInput[]
   updateMany?: Prisma.BreedingParamsUpdateManyWithWhereWithoutCreatedByInput | Prisma.BreedingParamsUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.BreedingParamsScalarWhereInput | Prisma.BreedingParamsScalarWhereInput[]
+}
+
+export type BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutUsersInput, Prisma.BreedingParamsUncheckedCreateWithoutUsersInput> | Prisma.BreedingParamsCreateWithoutUsersInput[] | Prisma.BreedingParamsUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutUsersInput | Prisma.BreedingParamsCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.BreedingParamsUpsertWithWhereUniqueWithoutUsersInput | Prisma.BreedingParamsUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  disconnect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  delete?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  update?: Prisma.BreedingParamsUpdateWithWhereUniqueWithoutUsersInput | Prisma.BreedingParamsUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.BreedingParamsUpdateManyWithWhereWithoutUsersInput | Prisma.BreedingParamsUpdateManyWithWhereWithoutUsersInput[]
   deleteMany?: Prisma.BreedingParamsScalarWhereInput | Prisma.BreedingParamsScalarWhereInput[]
 }
 
@@ -658,6 +717,64 @@ export type BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput = {
   deleteMany?: Prisma.BreedingParamsScalarWhereInput | Prisma.BreedingParamsScalarWhereInput[]
 }
 
+export type BreedingParamsCreateNestedOneWithoutObservationsInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutObservationsInput, Prisma.BreedingParamsUncheckedCreateWithoutObservationsInput>
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutObservationsInput
+  connect?: Prisma.BreedingParamsWhereUniqueInput
+}
+
+export type BreedingParamsCreateNestedManyWithoutPredictedInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutPredictedInput, Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput> | Prisma.BreedingParamsCreateWithoutPredictedInput[] | Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput[]
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutPredictedInput | Prisma.BreedingParamsCreateOrConnectWithoutPredictedInput[]
+  createMany?: Prisma.BreedingParamsCreateManyPredictedInputEnvelope
+  connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+}
+
+export type BreedingParamsUncheckedCreateNestedManyWithoutPredictedInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutPredictedInput, Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput> | Prisma.BreedingParamsCreateWithoutPredictedInput[] | Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput[]
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutPredictedInput | Prisma.BreedingParamsCreateOrConnectWithoutPredictedInput[]
+  createMany?: Prisma.BreedingParamsCreateManyPredictedInputEnvelope
+  connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+}
+
+export type BreedingParamsUpdateOneWithoutObservationsNestedInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutObservationsInput, Prisma.BreedingParamsUncheckedCreateWithoutObservationsInput>
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutObservationsInput
+  upsert?: Prisma.BreedingParamsUpsertWithoutObservationsInput
+  disconnect?: Prisma.BreedingParamsWhereInput | boolean
+  delete?: Prisma.BreedingParamsWhereInput | boolean
+  connect?: Prisma.BreedingParamsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BreedingParamsUpdateToOneWithWhereWithoutObservationsInput, Prisma.BreedingParamsUpdateWithoutObservationsInput>, Prisma.BreedingParamsUncheckedUpdateWithoutObservationsInput>
+}
+
+export type BreedingParamsUpdateManyWithoutPredictedNestedInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutPredictedInput, Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput> | Prisma.BreedingParamsCreateWithoutPredictedInput[] | Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput[]
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutPredictedInput | Prisma.BreedingParamsCreateOrConnectWithoutPredictedInput[]
+  upsert?: Prisma.BreedingParamsUpsertWithWhereUniqueWithoutPredictedInput | Prisma.BreedingParamsUpsertWithWhereUniqueWithoutPredictedInput[]
+  createMany?: Prisma.BreedingParamsCreateManyPredictedInputEnvelope
+  set?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  disconnect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  delete?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  update?: Prisma.BreedingParamsUpdateWithWhereUniqueWithoutPredictedInput | Prisma.BreedingParamsUpdateWithWhereUniqueWithoutPredictedInput[]
+  updateMany?: Prisma.BreedingParamsUpdateManyWithWhereWithoutPredictedInput | Prisma.BreedingParamsUpdateManyWithWhereWithoutPredictedInput[]
+  deleteMany?: Prisma.BreedingParamsScalarWhereInput | Prisma.BreedingParamsScalarWhereInput[]
+}
+
+export type BreedingParamsUncheckedUpdateManyWithoutPredictedNestedInput = {
+  create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutPredictedInput, Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput> | Prisma.BreedingParamsCreateWithoutPredictedInput[] | Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput[]
+  connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutPredictedInput | Prisma.BreedingParamsCreateOrConnectWithoutPredictedInput[]
+  upsert?: Prisma.BreedingParamsUpsertWithWhereUniqueWithoutPredictedInput | Prisma.BreedingParamsUpsertWithWhereUniqueWithoutPredictedInput[]
+  createMany?: Prisma.BreedingParamsCreateManyPredictedInputEnvelope
+  set?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  disconnect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  delete?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  connect?: Prisma.BreedingParamsWhereUniqueInput | Prisma.BreedingParamsWhereUniqueInput[]
+  update?: Prisma.BreedingParamsUpdateWithWhereUniqueWithoutPredictedInput | Prisma.BreedingParamsUpdateWithWhereUniqueWithoutPredictedInput[]
+  updateMany?: Prisma.BreedingParamsUpdateManyWithWhereWithoutPredictedInput | Prisma.BreedingParamsUpdateManyWithWhereWithoutPredictedInput[]
+  deleteMany?: Prisma.BreedingParamsScalarWhereInput | Prisma.BreedingParamsScalarWhereInput[]
+}
+
 export type BreedingParamsCreateNestedManyWithoutLotsInput = {
   create?: Prisma.XOR<Prisma.BreedingParamsCreateWithoutLotsInput, Prisma.BreedingParamsUncheckedCreateWithoutLotsInput> | Prisma.BreedingParamsCreateWithoutLotsInput[] | Prisma.BreedingParamsUncheckedCreateWithoutLotsInput[]
   connectOrCreate?: Prisma.BreedingParamsCreateOrConnectWithoutLotsInput | Prisma.BreedingParamsCreateOrConnectWithoutLotsInput[]
@@ -698,8 +815,7 @@ export type BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput = {
 
 export type BreedingParamsCreateWithoutCreatedByInput = {
   id?: string
-  source?: string
-  predictedId?: string | null
+  source?: $Enums.SourceType
   order?: number
   day: Date | string
   currentAge: number
@@ -709,13 +825,16 @@ export type BreedingParamsCreateWithoutCreatedByInput = {
   lightIntensity: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  phase?: Prisma.PhaseCreateNestedOneWithoutBreedingParamInput
-  lots?: Prisma.LotCreateNestedManyWithoutBreedingParamInput
+  predicted?: Prisma.BreedingParamsCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.BreedingParamsCreateNestedManyWithoutPredictedInput
+  phase?: Prisma.PhaseCreateNestedOneWithoutBreedingParamsInput
+  lots?: Prisma.LotCreateNestedManyWithoutBreedingParamsInput
+  users?: Prisma.UserCreateNestedManyWithoutBreedingParamsInput
 }
 
 export type BreedingParamsUncheckedCreateWithoutCreatedByInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   day: Date | string
@@ -727,7 +846,9 @@ export type BreedingParamsUncheckedCreateWithoutCreatedByInput = {
   phaseId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lots?: Prisma.LotUncheckedCreateNestedManyWithoutBreedingParamInput
+  observations?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPredictedInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutBreedingParamsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBreedingParamsInput
 }
 
 export type BreedingParamsCreateOrConnectWithoutCreatedByInput = {
@@ -738,6 +859,49 @@ export type BreedingParamsCreateOrConnectWithoutCreatedByInput = {
 export type BreedingParamsCreateManyCreatedByInputEnvelope = {
   data: Prisma.BreedingParamsCreateManyCreatedByInput | Prisma.BreedingParamsCreateManyCreatedByInput[]
   skipDuplicates?: boolean
+}
+
+export type BreedingParamsCreateWithoutUsersInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  day: Date | string
+  currentAge: number
+  temperature: string
+  humidity: string
+  lightHours: string
+  lightIntensity: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  predicted?: Prisma.BreedingParamsCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.BreedingParamsCreateNestedManyWithoutPredictedInput
+  phase?: Prisma.PhaseCreateNestedOneWithoutBreedingParamsInput
+  lots?: Prisma.LotCreateNestedManyWithoutBreedingParamsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedBreedingParamsInput
+}
+
+export type BreedingParamsUncheckedCreateWithoutUsersInput = {
+  id?: string
+  source?: $Enums.SourceType
+  predictedId?: string | null
+  order?: number
+  day: Date | string
+  currentAge: number
+  temperature: string
+  humidity: string
+  lightHours: string
+  lightIntensity: string
+  phaseId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  observations?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPredictedInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutBreedingParamsInput
+}
+
+export type BreedingParamsCreateOrConnectWithoutUsersInput = {
+  where: Prisma.BreedingParamsWhereUniqueInput
+  create: Prisma.XOR<Prisma.BreedingParamsCreateWithoutUsersInput, Prisma.BreedingParamsUncheckedCreateWithoutUsersInput>
 }
 
 export type BreedingParamsUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -761,7 +925,7 @@ export type BreedingParamsScalarWhereInput = {
   OR?: Prisma.BreedingParamsScalarWhereInput[]
   NOT?: Prisma.BreedingParamsScalarWhereInput | Prisma.BreedingParamsScalarWhereInput[]
   id?: Prisma.StringFilter<"BreedingParams"> | string
-  source?: Prisma.StringFilter<"BreedingParams"> | string
+  source?: Prisma.EnumSourceTypeFilter<"BreedingParams"> | $Enums.SourceType
   predictedId?: Prisma.StringNullableFilter<"BreedingParams"> | string | null
   order?: Prisma.IntFilter<"BreedingParams"> | number
   day?: Prisma.DateTimeFilter<"BreedingParams"> | Date | string
@@ -776,10 +940,25 @@ export type BreedingParamsScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"BreedingParams"> | Date | string
 }
 
+export type BreedingParamsUpsertWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.BreedingParamsWhereUniqueInput
+  update: Prisma.XOR<Prisma.BreedingParamsUpdateWithoutUsersInput, Prisma.BreedingParamsUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.BreedingParamsCreateWithoutUsersInput, Prisma.BreedingParamsUncheckedCreateWithoutUsersInput>
+}
+
+export type BreedingParamsUpdateWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.BreedingParamsWhereUniqueInput
+  data: Prisma.XOR<Prisma.BreedingParamsUpdateWithoutUsersInput, Prisma.BreedingParamsUncheckedUpdateWithoutUsersInput>
+}
+
+export type BreedingParamsUpdateManyWithWhereWithoutUsersInput = {
+  where: Prisma.BreedingParamsScalarWhereInput
+  data: Prisma.XOR<Prisma.BreedingParamsUpdateManyMutationInput, Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersInput>
+}
+
 export type BreedingParamsCreateWithoutPhaseInput = {
   id?: string
-  source?: string
-  predictedId?: string | null
+  source?: $Enums.SourceType
   order?: number
   day: Date | string
   currentAge: number
@@ -789,13 +968,16 @@ export type BreedingParamsCreateWithoutPhaseInput = {
   lightIntensity: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  lots?: Prisma.LotCreateNestedManyWithoutBreedingParamInput
-  createdBy: Prisma.UserCreateNestedOneWithoutBreedingParamsInput
+  predicted?: Prisma.BreedingParamsCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.BreedingParamsCreateNestedManyWithoutPredictedInput
+  lots?: Prisma.LotCreateNestedManyWithoutBreedingParamsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedBreedingParamsInput
+  users?: Prisma.UserCreateNestedManyWithoutBreedingParamsInput
 }
 
 export type BreedingParamsUncheckedCreateWithoutPhaseInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   day: Date | string
@@ -807,7 +989,9 @@ export type BreedingParamsUncheckedCreateWithoutPhaseInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  lots?: Prisma.LotUncheckedCreateNestedManyWithoutBreedingParamInput
+  observations?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPredictedInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutBreedingParamsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBreedingParamsInput
 }
 
 export type BreedingParamsCreateOrConnectWithoutPhaseInput = {
@@ -836,10 +1020,9 @@ export type BreedingParamsUpdateManyWithWhereWithoutPhaseInput = {
   data: Prisma.XOR<Prisma.BreedingParamsUpdateManyMutationInput, Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseInput>
 }
 
-export type BreedingParamsCreateWithoutLotsInput = {
+export type BreedingParamsCreateWithoutObservationsInput = {
   id?: string
-  source?: string
-  predictedId?: string | null
+  source?: $Enums.SourceType
   order?: number
   day: Date | string
   currentAge: number
@@ -849,13 +1032,16 @@ export type BreedingParamsCreateWithoutLotsInput = {
   lightIntensity: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  phase?: Prisma.PhaseCreateNestedOneWithoutBreedingParamInput
-  createdBy: Prisma.UserCreateNestedOneWithoutBreedingParamsInput
+  predicted?: Prisma.BreedingParamsCreateNestedOneWithoutObservationsInput
+  phase?: Prisma.PhaseCreateNestedOneWithoutBreedingParamsInput
+  lots?: Prisma.LotCreateNestedManyWithoutBreedingParamsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedBreedingParamsInput
+  users?: Prisma.UserCreateNestedManyWithoutBreedingParamsInput
 }
 
-export type BreedingParamsUncheckedCreateWithoutLotsInput = {
+export type BreedingParamsUncheckedCreateWithoutObservationsInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   day: Date | string
@@ -868,6 +1054,164 @@ export type BreedingParamsUncheckedCreateWithoutLotsInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutBreedingParamsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBreedingParamsInput
+}
+
+export type BreedingParamsCreateOrConnectWithoutObservationsInput = {
+  where: Prisma.BreedingParamsWhereUniqueInput
+  create: Prisma.XOR<Prisma.BreedingParamsCreateWithoutObservationsInput, Prisma.BreedingParamsUncheckedCreateWithoutObservationsInput>
+}
+
+export type BreedingParamsCreateWithoutPredictedInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  day: Date | string
+  currentAge: number
+  temperature: string
+  humidity: string
+  lightHours: string
+  lightIntensity: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  observations?: Prisma.BreedingParamsCreateNestedManyWithoutPredictedInput
+  phase?: Prisma.PhaseCreateNestedOneWithoutBreedingParamsInput
+  lots?: Prisma.LotCreateNestedManyWithoutBreedingParamsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedBreedingParamsInput
+  users?: Prisma.UserCreateNestedManyWithoutBreedingParamsInput
+}
+
+export type BreedingParamsUncheckedCreateWithoutPredictedInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  day: Date | string
+  currentAge: number
+  temperature: string
+  humidity: string
+  lightHours: string
+  lightIntensity: string
+  phaseId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  observations?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPredictedInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutBreedingParamsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBreedingParamsInput
+}
+
+export type BreedingParamsCreateOrConnectWithoutPredictedInput = {
+  where: Prisma.BreedingParamsWhereUniqueInput
+  create: Prisma.XOR<Prisma.BreedingParamsCreateWithoutPredictedInput, Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput>
+}
+
+export type BreedingParamsCreateManyPredictedInputEnvelope = {
+  data: Prisma.BreedingParamsCreateManyPredictedInput | Prisma.BreedingParamsCreateManyPredictedInput[]
+  skipDuplicates?: boolean
+}
+
+export type BreedingParamsUpsertWithoutObservationsInput = {
+  update: Prisma.XOR<Prisma.BreedingParamsUpdateWithoutObservationsInput, Prisma.BreedingParamsUncheckedUpdateWithoutObservationsInput>
+  create: Prisma.XOR<Prisma.BreedingParamsCreateWithoutObservationsInput, Prisma.BreedingParamsUncheckedCreateWithoutObservationsInput>
+  where?: Prisma.BreedingParamsWhereInput
+}
+
+export type BreedingParamsUpdateToOneWithWhereWithoutObservationsInput = {
+  where?: Prisma.BreedingParamsWhereInput
+  data: Prisma.XOR<Prisma.BreedingParamsUpdateWithoutObservationsInput, Prisma.BreedingParamsUncheckedUpdateWithoutObservationsInput>
+}
+
+export type BreedingParamsUpdateWithoutObservationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  temperature?: Prisma.StringFieldUpdateOperationsInput | string
+  humidity?: Prisma.StringFieldUpdateOperationsInput | string
+  lightHours?: Prisma.StringFieldUpdateOperationsInput | string
+  lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  predicted?: Prisma.BreedingParamsUpdateOneWithoutObservationsNestedInput
+  phase?: Prisma.PhaseUpdateOneWithoutBreedingParamsNestedInput
+  lots?: Prisma.LotUpdateManyWithoutBreedingParamsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedBreedingParamsNestedInput
+  users?: Prisma.UserUpdateManyWithoutBreedingParamsNestedInput
+}
+
+export type BreedingParamsUncheckedUpdateWithoutObservationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  temperature?: Prisma.StringFieldUpdateOperationsInput | string
+  humidity?: Prisma.StringFieldUpdateOperationsInput | string
+  lightHours?: Prisma.StringFieldUpdateOperationsInput | string
+  lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lots?: Prisma.LotUncheckedUpdateManyWithoutBreedingParamsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutBreedingParamsNestedInput
+}
+
+export type BreedingParamsUpsertWithWhereUniqueWithoutPredictedInput = {
+  where: Prisma.BreedingParamsWhereUniqueInput
+  update: Prisma.XOR<Prisma.BreedingParamsUpdateWithoutPredictedInput, Prisma.BreedingParamsUncheckedUpdateWithoutPredictedInput>
+  create: Prisma.XOR<Prisma.BreedingParamsCreateWithoutPredictedInput, Prisma.BreedingParamsUncheckedCreateWithoutPredictedInput>
+}
+
+export type BreedingParamsUpdateWithWhereUniqueWithoutPredictedInput = {
+  where: Prisma.BreedingParamsWhereUniqueInput
+  data: Prisma.XOR<Prisma.BreedingParamsUpdateWithoutPredictedInput, Prisma.BreedingParamsUncheckedUpdateWithoutPredictedInput>
+}
+
+export type BreedingParamsUpdateManyWithWhereWithoutPredictedInput = {
+  where: Prisma.BreedingParamsScalarWhereInput
+  data: Prisma.XOR<Prisma.BreedingParamsUpdateManyMutationInput, Prisma.BreedingParamsUncheckedUpdateManyWithoutPredictedInput>
+}
+
+export type BreedingParamsCreateWithoutLotsInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  day: Date | string
+  currentAge: number
+  temperature: string
+  humidity: string
+  lightHours: string
+  lightIntensity: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  predicted?: Prisma.BreedingParamsCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.BreedingParamsCreateNestedManyWithoutPredictedInput
+  phase?: Prisma.PhaseCreateNestedOneWithoutBreedingParamsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedBreedingParamsInput
+  users?: Prisma.UserCreateNestedManyWithoutBreedingParamsInput
+}
+
+export type BreedingParamsUncheckedCreateWithoutLotsInput = {
+  id?: string
+  source?: $Enums.SourceType
+  predictedId?: string | null
+  order?: number
+  day: Date | string
+  currentAge: number
+  temperature: string
+  humidity: string
+  lightHours: string
+  lightIntensity: string
+  phaseId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  observations?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPredictedInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBreedingParamsInput
 }
 
 export type BreedingParamsCreateOrConnectWithoutLotsInput = {
@@ -893,7 +1237,7 @@ export type BreedingParamsUpdateManyWithWhereWithoutLotsInput = {
 
 export type BreedingParamsCreateManyCreatedByInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   day: Date | string
@@ -909,8 +1253,7 @@ export type BreedingParamsCreateManyCreatedByInput = {
 
 export type BreedingParamsUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentAge?: Prisma.IntFieldUpdateOperationsInput | number
@@ -920,13 +1263,16 @@ export type BreedingParamsUpdateWithoutCreatedByInput = {
   lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  phase?: Prisma.PhaseUpdateOneWithoutBreedingParamNestedInput
-  lots?: Prisma.LotUpdateManyWithoutBreedingParamNestedInput
+  predicted?: Prisma.BreedingParamsUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.BreedingParamsUpdateManyWithoutPredictedNestedInput
+  phase?: Prisma.PhaseUpdateOneWithoutBreedingParamsNestedInput
+  lots?: Prisma.LotUpdateManyWithoutBreedingParamsNestedInput
+  users?: Prisma.UserUpdateManyWithoutBreedingParamsNestedInput
 }
 
 export type BreedingParamsUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -938,12 +1284,14 @@ export type BreedingParamsUncheckedUpdateWithoutCreatedByInput = {
   phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lots?: Prisma.LotUncheckedUpdateManyWithoutBreedingParamNestedInput
+  observations?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPredictedNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutBreedingParamsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutBreedingParamsNestedInput
 }
 
 export type BreedingParamsUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -953,13 +1301,68 @@ export type BreedingParamsUncheckedUpdateManyWithoutCreatedByInput = {
   lightHours?: Prisma.StringFieldUpdateOperationsInput | string
   lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
   phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BreedingParamsUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  temperature?: Prisma.StringFieldUpdateOperationsInput | string
+  humidity?: Prisma.StringFieldUpdateOperationsInput | string
+  lightHours?: Prisma.StringFieldUpdateOperationsInput | string
+  lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  predicted?: Prisma.BreedingParamsUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.BreedingParamsUpdateManyWithoutPredictedNestedInput
+  phase?: Prisma.PhaseUpdateOneWithoutBreedingParamsNestedInput
+  lots?: Prisma.LotUpdateManyWithoutBreedingParamsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedBreedingParamsNestedInput
+}
+
+export type BreedingParamsUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  temperature?: Prisma.StringFieldUpdateOperationsInput | string
+  humidity?: Prisma.StringFieldUpdateOperationsInput | string
+  lightHours?: Prisma.StringFieldUpdateOperationsInput | string
+  lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPredictedNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutBreedingParamsNestedInput
+}
+
+export type BreedingParamsUncheckedUpdateManyWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  temperature?: Prisma.StringFieldUpdateOperationsInput | string
+  humidity?: Prisma.StringFieldUpdateOperationsInput | string
+  lightHours?: Prisma.StringFieldUpdateOperationsInput | string
+  lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BreedingParamsCreateManyPhaseInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   day: Date | string
@@ -975,8 +1378,7 @@ export type BreedingParamsCreateManyPhaseInput = {
 
 export type BreedingParamsUpdateWithoutPhaseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentAge?: Prisma.IntFieldUpdateOperationsInput | number
@@ -986,13 +1388,16 @@ export type BreedingParamsUpdateWithoutPhaseInput = {
   lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lots?: Prisma.LotUpdateManyWithoutBreedingParamNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutBreedingParamsNestedInput
+  predicted?: Prisma.BreedingParamsUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.BreedingParamsUpdateManyWithoutPredictedNestedInput
+  lots?: Prisma.LotUpdateManyWithoutBreedingParamsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedBreedingParamsNestedInput
+  users?: Prisma.UserUpdateManyWithoutBreedingParamsNestedInput
 }
 
 export type BreedingParamsUncheckedUpdateWithoutPhaseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1004,12 +1409,14 @@ export type BreedingParamsUncheckedUpdateWithoutPhaseInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lots?: Prisma.LotUncheckedUpdateManyWithoutBreedingParamNestedInput
+  observations?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPredictedNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutBreedingParamsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutBreedingParamsNestedInput
 }
 
 export type BreedingParamsUncheckedUpdateManyWithoutPhaseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1023,10 +1430,25 @@ export type BreedingParamsUncheckedUpdateManyWithoutPhaseInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type BreedingParamsUpdateWithoutLotsInput = {
+export type BreedingParamsCreateManyPredictedInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  day: Date | string
+  currentAge: number
+  temperature: string
+  humidity: string
+  lightHours: string
+  lightIntensity: string
+  phaseId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BreedingParamsUpdateWithoutPredictedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentAge?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1036,14 +1458,35 @@ export type BreedingParamsUpdateWithoutLotsInput = {
   lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  phase?: Prisma.PhaseUpdateOneWithoutBreedingParamNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutBreedingParamsNestedInput
+  observations?: Prisma.BreedingParamsUpdateManyWithoutPredictedNestedInput
+  phase?: Prisma.PhaseUpdateOneWithoutBreedingParamsNestedInput
+  lots?: Prisma.LotUpdateManyWithoutBreedingParamsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedBreedingParamsNestedInput
+  users?: Prisma.UserUpdateManyWithoutBreedingParamsNestedInput
 }
 
-export type BreedingParamsUncheckedUpdateWithoutLotsInput = {
+export type BreedingParamsUncheckedUpdateWithoutPredictedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  temperature?: Prisma.StringFieldUpdateOperationsInput | string
+  humidity?: Prisma.StringFieldUpdateOperationsInput | string
+  lightHours?: Prisma.StringFieldUpdateOperationsInput | string
+  lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPredictedNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutBreedingParamsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutBreedingParamsNestedInput
+}
+
+export type BreedingParamsUncheckedUpdateManyWithoutPredictedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentAge?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1057,9 +1500,47 @@ export type BreedingParamsUncheckedUpdateWithoutLotsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type BreedingParamsUpdateWithoutLotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  temperature?: Prisma.StringFieldUpdateOperationsInput | string
+  humidity?: Prisma.StringFieldUpdateOperationsInput | string
+  lightHours?: Prisma.StringFieldUpdateOperationsInput | string
+  lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  predicted?: Prisma.BreedingParamsUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.BreedingParamsUpdateManyWithoutPredictedNestedInput
+  phase?: Prisma.PhaseUpdateOneWithoutBreedingParamsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedBreedingParamsNestedInput
+  users?: Prisma.UserUpdateManyWithoutBreedingParamsNestedInput
+}
+
+export type BreedingParamsUncheckedUpdateWithoutLotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  temperature?: Prisma.StringFieldUpdateOperationsInput | string
+  humidity?: Prisma.StringFieldUpdateOperationsInput | string
+  lightHours?: Prisma.StringFieldUpdateOperationsInput | string
+  lightIntensity?: Prisma.StringFieldUpdateOperationsInput | string
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPredictedNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutBreedingParamsNestedInput
+}
+
 export type BreedingParamsUncheckedUpdateManyWithoutLotsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1080,11 +1561,15 @@ export type BreedingParamsUncheckedUpdateManyWithoutLotsInput = {
  */
 
 export type BreedingParamsCountOutputType = {
+  observations: number
   lots: number
+  users: number
 }
 
 export type BreedingParamsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  observations?: boolean | BreedingParamsCountOutputTypeCountObservationsArgs
   lots?: boolean | BreedingParamsCountOutputTypeCountLotsArgs
+  users?: boolean | BreedingParamsCountOutputTypeCountUsersArgs
 }
 
 /**
@@ -1100,8 +1585,22 @@ export type BreedingParamsCountOutputTypeDefaultArgs<ExtArgs extends runtime.Typ
 /**
  * BreedingParamsCountOutputType without action
  */
+export type BreedingParamsCountOutputTypeCountObservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BreedingParamsWhereInput
+}
+
+/**
+ * BreedingParamsCountOutputType without action
+ */
 export type BreedingParamsCountOutputTypeCountLotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LotWhereInput
+}
+
+/**
+ * BreedingParamsCountOutputType without action
+ */
+export type BreedingParamsCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
 }
 
 
@@ -1120,9 +1619,12 @@ export type BreedingParamsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  predicted?: boolean | Prisma.BreedingParams$predictedArgs<ExtArgs>
+  observations?: boolean | Prisma.BreedingParams$observationsArgs<ExtArgs>
   phase?: boolean | Prisma.BreedingParams$phaseArgs<ExtArgs>
   lots?: boolean | Prisma.BreedingParams$lotsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.BreedingParams$usersArgs<ExtArgs>
   _count?: boolean | Prisma.BreedingParamsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["breedingParams"]>
 
@@ -1141,6 +1643,7 @@ export type BreedingParamsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  predicted?: boolean | Prisma.BreedingParams$predictedArgs<ExtArgs>
   phase?: boolean | Prisma.BreedingParams$phaseArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["breedingParams"]>
@@ -1160,6 +1663,7 @@ export type BreedingParamsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  predicted?: boolean | Prisma.BreedingParams$predictedArgs<ExtArgs>
   phase?: boolean | Prisma.BreedingParams$phaseArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["breedingParams"]>
@@ -1183,16 +1687,21 @@ export type BreedingParamsSelectScalar = {
 
 export type BreedingParamsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "source" | "predictedId" | "order" | "day" | "currentAge" | "temperature" | "humidity" | "lightHours" | "lightIntensity" | "phaseId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["breedingParams"]>
 export type BreedingParamsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  predicted?: boolean | Prisma.BreedingParams$predictedArgs<ExtArgs>
+  observations?: boolean | Prisma.BreedingParams$observationsArgs<ExtArgs>
   phase?: boolean | Prisma.BreedingParams$phaseArgs<ExtArgs>
   lots?: boolean | Prisma.BreedingParams$lotsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.BreedingParams$usersArgs<ExtArgs>
   _count?: boolean | Prisma.BreedingParamsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BreedingParamsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  predicted?: boolean | Prisma.BreedingParams$predictedArgs<ExtArgs>
   phase?: boolean | Prisma.BreedingParams$phaseArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type BreedingParamsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  predicted?: boolean | Prisma.BreedingParams$predictedArgs<ExtArgs>
   phase?: boolean | Prisma.BreedingParams$phaseArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -1200,13 +1709,16 @@ export type BreedingParamsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Typ
 export type $BreedingParamsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BreedingParams"
   objects: {
+    predicted: Prisma.$BreedingParamsPayload<ExtArgs> | null
+    observations: Prisma.$BreedingParamsPayload<ExtArgs>[]
     phase: Prisma.$PhasePayload<ExtArgs> | null
     lots: Prisma.$LotPayload<ExtArgs>[]
     createdBy: Prisma.$UserPayload<ExtArgs>
+    users: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    source: string
+    source: $Enums.SourceType
     predictedId: string | null
     order: number
     day: Date
@@ -1613,9 +2125,12 @@ readonly fields: BreedingParamsFieldRefs;
  */
 export interface Prisma__BreedingParamsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  predicted<T extends Prisma.BreedingParams$predictedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BreedingParams$predictedArgs<ExtArgs>>): Prisma.Prisma__BreedingParamsClient<runtime.Types.Result.GetResult<Prisma.$BreedingParamsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  observations<T extends Prisma.BreedingParams$observationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BreedingParams$observationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BreedingParamsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   phase<T extends Prisma.BreedingParams$phaseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BreedingParams$phaseArgs<ExtArgs>>): Prisma.Prisma__PhaseClient<runtime.Types.Result.GetResult<Prisma.$PhasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   lots<T extends Prisma.BreedingParams$lotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BreedingParams$lotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.BreedingParams$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BreedingParams$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1646,7 +2161,7 @@ export interface Prisma__BreedingParamsClient<T, Null = never, ExtArgs extends r
  */
 export interface BreedingParamsFieldRefs {
   readonly id: Prisma.FieldRef<"BreedingParams", 'String'>
-  readonly source: Prisma.FieldRef<"BreedingParams", 'String'>
+  readonly source: Prisma.FieldRef<"BreedingParams", 'SourceType'>
   readonly predictedId: Prisma.FieldRef<"BreedingParams", 'String'>
   readonly order: Prisma.FieldRef<"BreedingParams", 'Int'>
   readonly day: Prisma.FieldRef<"BreedingParams", 'DateTime'>
@@ -2055,6 +2570,49 @@ export type BreedingParamsDeleteManyArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
+ * BreedingParams.predicted
+ */
+export type BreedingParams$predictedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BreedingParams
+   */
+  select?: Prisma.BreedingParamsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BreedingParams
+   */
+  omit?: Prisma.BreedingParamsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BreedingParamsInclude<ExtArgs> | null
+  where?: Prisma.BreedingParamsWhereInput
+}
+
+/**
+ * BreedingParams.observations
+ */
+export type BreedingParams$observationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BreedingParams
+   */
+  select?: Prisma.BreedingParamsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BreedingParams
+   */
+  omit?: Prisma.BreedingParamsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BreedingParamsInclude<ExtArgs> | null
+  where?: Prisma.BreedingParamsWhereInput
+  orderBy?: Prisma.BreedingParamsOrderByWithRelationInput | Prisma.BreedingParamsOrderByWithRelationInput[]
+  cursor?: Prisma.BreedingParamsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BreedingParamsScalarFieldEnum | Prisma.BreedingParamsScalarFieldEnum[]
+}
+
+/**
  * BreedingParams.phase
  */
 export type BreedingParams$phaseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2095,6 +2653,30 @@ export type BreedingParams$lotsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.LotScalarFieldEnum | Prisma.LotScalarFieldEnum[]
+}
+
+/**
+ * BreedingParams.users
+ */
+export type BreedingParams$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

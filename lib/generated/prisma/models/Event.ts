@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -52,7 +52,7 @@ export type EventSumAggregateOutputType = {
 
 export type EventMinAggregateOutputType = {
   id: string | null
-  source: string | null
+  source: $Enums.SourceType | null
   predictedId: string | null
   order: number | null
   name: string | null
@@ -73,7 +73,7 @@ export type EventMinAggregateOutputType = {
 
 export type EventMaxAggregateOutputType = {
   id: string | null
-  source: string | null
+  source: $Enums.SourceType | null
   predictedId: string | null
   order: number | null
   name: string | null
@@ -293,7 +293,7 @@ export type EventGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type EventGroupByOutputType = {
   id: string
-  source: string
+  source: $Enums.SourceType
   predictedId: string | null
   order: number
   name: string
@@ -338,7 +338,7 @@ export type EventWhereInput = {
   OR?: Prisma.EventWhereInput[]
   NOT?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
   id?: Prisma.StringFilter<"Event"> | string
-  source?: Prisma.StringFilter<"Event"> | string
+  source?: Prisma.EnumSourceTypeFilter<"Event"> | $Enums.SourceType
   predictedId?: Prisma.StringNullableFilter<"Event"> | string | null
   order?: Prisma.IntFilter<"Event"> | number
   name?: Prisma.StringFilter<"Event"> | string
@@ -356,9 +356,12 @@ export type EventWhereInput = {
   createdById?: Prisma.StringFilter<"Event"> | string
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
+  predicted?: Prisma.XOR<Prisma.EventNullableScalarRelationFilter, Prisma.EventWhereInput> | null
+  observations?: Prisma.EventListRelationFilter
   phase?: Prisma.XOR<Prisma.PhaseNullableScalarRelationFilter, Prisma.PhaseWhereInput> | null
   lots?: Prisma.LotListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }
 
 export type EventOrderByWithRelationInput = {
@@ -381,9 +384,12 @@ export type EventOrderByWithRelationInput = {
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  predicted?: Prisma.EventOrderByWithRelationInput
+  observations?: Prisma.EventOrderByRelationAggregateInput
   phase?: Prisma.PhaseOrderByWithRelationInput
   lots?: Prisma.LotOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  users?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -391,7 +397,7 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
   OR?: Prisma.EventWhereInput[]
   NOT?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
-  source?: Prisma.StringFilter<"Event"> | string
+  source?: Prisma.EnumSourceTypeFilter<"Event"> | $Enums.SourceType
   predictedId?: Prisma.StringNullableFilter<"Event"> | string | null
   order?: Prisma.IntFilter<"Event"> | number
   name?: Prisma.StringFilter<"Event"> | string
@@ -409,9 +415,12 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   createdById?: Prisma.StringFilter<"Event"> | string
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
+  predicted?: Prisma.XOR<Prisma.EventNullableScalarRelationFilter, Prisma.EventWhereInput> | null
+  observations?: Prisma.EventListRelationFilter
   phase?: Prisma.XOR<Prisma.PhaseNullableScalarRelationFilter, Prisma.PhaseWhereInput> | null
   lots?: Prisma.LotListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }, "id">
 
 export type EventOrderByWithAggregationInput = {
@@ -446,7 +455,7 @@ export type EventScalarWhereWithAggregatesInput = {
   OR?: Prisma.EventScalarWhereWithAggregatesInput[]
   NOT?: Prisma.EventScalarWhereWithAggregatesInput | Prisma.EventScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Event"> | string
-  source?: Prisma.StringWithAggregatesFilter<"Event"> | string
+  source?: Prisma.EnumSourceTypeWithAggregatesFilter<"Event"> | $Enums.SourceType
   predictedId?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
   order?: Prisma.IntWithAggregatesFilter<"Event"> | number
   name?: Prisma.StringWithAggregatesFilter<"Event"> | string
@@ -468,8 +477,7 @@ export type EventScalarWhereWithAggregatesInput = {
 
 export type EventCreateInput = {
   id?: string
-  source?: string
-  predictedId?: string | null
+  source?: $Enums.SourceType
   order?: number
   name: string
   day: Date | string
@@ -484,14 +492,17 @@ export type EventCreateInput = {
   nbeggXL: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  predicted?: Prisma.EventCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.EventCreateNestedManyWithoutPredictedInput
   phase?: Prisma.PhaseCreateNestedOneWithoutEventsInput
   lots?: Prisma.LotCreateNestedManyWithoutEventsInput
-  createdBy: Prisma.UserCreateNestedOneWithoutEventsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
+  users?: Prisma.UserCreateNestedManyWithoutEventsInput
 }
 
 export type EventUncheckedCreateInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   name: string
@@ -509,13 +520,14 @@ export type EventUncheckedCreateInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  observations?: Prisma.EventUncheckedCreateNestedManyWithoutPredictedInput
   lots?: Prisma.LotUncheckedCreateNestedManyWithoutEventsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutEventsInput
 }
 
 export type EventUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -530,14 +542,17 @@ export type EventUpdateInput = {
   nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  predicted?: Prisma.EventUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.EventUpdateManyWithoutPredictedNestedInput
   phase?: Prisma.PhaseUpdateOneWithoutEventsNestedInput
   lots?: Prisma.LotUpdateManyWithoutEventsNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutEventsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedEventsNestedInput
+  users?: Prisma.UserUpdateManyWithoutEventsNestedInput
 }
 
 export type EventUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -555,12 +570,14 @@ export type EventUncheckedUpdateInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.EventUncheckedUpdateManyWithoutPredictedNestedInput
   lots?: Prisma.LotUncheckedUpdateManyWithoutEventsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutEventsNestedInput
 }
 
 export type EventCreateManyInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   name: string
@@ -582,8 +599,7 @@ export type EventCreateManyInput = {
 
 export type EventUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -602,7 +618,7 @@ export type EventUpdateManyMutationInput = {
 
 export type EventUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -630,6 +646,11 @@ export type EventListRelationFilter = {
 
 export type EventOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type EventNullableScalarRelationFilter = {
+  is?: Prisma.EventWhereInput | null
+  isNot?: Prisma.EventWhereInput | null
 }
 
 export type EventCountOrderByAggregateInput = {
@@ -727,10 +748,22 @@ export type EventCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
 }
 
+export type EventCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput> | Prisma.EventCreateWithoutUsersInput[] | Prisma.EventUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutUsersInput | Prisma.EventCreateOrConnectWithoutUsersInput[]
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+}
+
 export type EventUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.EventCreateWithoutCreatedByInput, Prisma.EventUncheckedCreateWithoutCreatedByInput> | Prisma.EventCreateWithoutCreatedByInput[] | Prisma.EventUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.EventCreateOrConnectWithoutCreatedByInput | Prisma.EventCreateOrConnectWithoutCreatedByInput[]
   createMany?: Prisma.EventCreateManyCreatedByInputEnvelope
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+}
+
+export type EventUncheckedCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput> | Prisma.EventCreateWithoutUsersInput[] | Prisma.EventUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutUsersInput | Prisma.EventCreateOrConnectWithoutUsersInput[]
   connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
 }
 
@@ -748,6 +781,19 @@ export type EventUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
 }
 
+export type EventUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput> | Prisma.EventCreateWithoutUsersInput[] | Prisma.EventUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutUsersInput | Prisma.EventCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.EventUpsertWithWhereUniqueWithoutUsersInput | Prisma.EventUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  disconnect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  delete?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  update?: Prisma.EventUpdateWithWhereUniqueWithoutUsersInput | Prisma.EventUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.EventUpdateManyWithWhereWithoutUsersInput | Prisma.EventUpdateManyWithWhereWithoutUsersInput[]
+  deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
+}
+
 export type EventUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.EventCreateWithoutCreatedByInput, Prisma.EventUncheckedCreateWithoutCreatedByInput> | Prisma.EventCreateWithoutCreatedByInput[] | Prisma.EventUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.EventCreateOrConnectWithoutCreatedByInput | Prisma.EventCreateOrConnectWithoutCreatedByInput[]
@@ -759,6 +805,19 @@ export type EventUncheckedUpdateManyWithoutCreatedByNestedInput = {
   connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
   update?: Prisma.EventUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.EventUpdateWithWhereUniqueWithoutCreatedByInput[]
   updateMany?: Prisma.EventUpdateManyWithWhereWithoutCreatedByInput | Prisma.EventUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
+}
+
+export type EventUncheckedUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput> | Prisma.EventCreateWithoutUsersInput[] | Prisma.EventUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutUsersInput | Prisma.EventCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.EventUpsertWithWhereUniqueWithoutUsersInput | Prisma.EventUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  disconnect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  delete?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  update?: Prisma.EventUpdateWithWhereUniqueWithoutUsersInput | Prisma.EventUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.EventUpdateManyWithWhereWithoutUsersInput | Prisma.EventUpdateManyWithWhereWithoutUsersInput[]
   deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
 }
 
@@ -804,6 +863,68 @@ export type EventUncheckedUpdateManyWithoutPhaseNestedInput = {
   deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
 }
 
+export type EventCreateNestedOneWithoutObservationsInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutObservationsInput, Prisma.EventUncheckedCreateWithoutObservationsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutObservationsInput
+  connect?: Prisma.EventWhereUniqueInput
+}
+
+export type EventCreateNestedManyWithoutPredictedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutPredictedInput, Prisma.EventUncheckedCreateWithoutPredictedInput> | Prisma.EventCreateWithoutPredictedInput[] | Prisma.EventUncheckedCreateWithoutPredictedInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutPredictedInput | Prisma.EventCreateOrConnectWithoutPredictedInput[]
+  createMany?: Prisma.EventCreateManyPredictedInputEnvelope
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+}
+
+export type EventUncheckedCreateNestedManyWithoutPredictedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutPredictedInput, Prisma.EventUncheckedCreateWithoutPredictedInput> | Prisma.EventCreateWithoutPredictedInput[] | Prisma.EventUncheckedCreateWithoutPredictedInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutPredictedInput | Prisma.EventCreateOrConnectWithoutPredictedInput[]
+  createMany?: Prisma.EventCreateManyPredictedInputEnvelope
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+}
+
+export type EnumSourceTypeFieldUpdateOperationsInput = {
+  set?: $Enums.SourceType
+}
+
+export type EventUpdateOneWithoutObservationsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutObservationsInput, Prisma.EventUncheckedCreateWithoutObservationsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutObservationsInput
+  upsert?: Prisma.EventUpsertWithoutObservationsInput
+  disconnect?: Prisma.EventWhereInput | boolean
+  delete?: Prisma.EventWhereInput | boolean
+  connect?: Prisma.EventWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutObservationsInput, Prisma.EventUpdateWithoutObservationsInput>, Prisma.EventUncheckedUpdateWithoutObservationsInput>
+}
+
+export type EventUpdateManyWithoutPredictedNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutPredictedInput, Prisma.EventUncheckedCreateWithoutPredictedInput> | Prisma.EventCreateWithoutPredictedInput[] | Prisma.EventUncheckedCreateWithoutPredictedInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutPredictedInput | Prisma.EventCreateOrConnectWithoutPredictedInput[]
+  upsert?: Prisma.EventUpsertWithWhereUniqueWithoutPredictedInput | Prisma.EventUpsertWithWhereUniqueWithoutPredictedInput[]
+  createMany?: Prisma.EventCreateManyPredictedInputEnvelope
+  set?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  disconnect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  delete?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  update?: Prisma.EventUpdateWithWhereUniqueWithoutPredictedInput | Prisma.EventUpdateWithWhereUniqueWithoutPredictedInput[]
+  updateMany?: Prisma.EventUpdateManyWithWhereWithoutPredictedInput | Prisma.EventUpdateManyWithWhereWithoutPredictedInput[]
+  deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
+}
+
+export type EventUncheckedUpdateManyWithoutPredictedNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutPredictedInput, Prisma.EventUncheckedCreateWithoutPredictedInput> | Prisma.EventCreateWithoutPredictedInput[] | Prisma.EventUncheckedCreateWithoutPredictedInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutPredictedInput | Prisma.EventCreateOrConnectWithoutPredictedInput[]
+  upsert?: Prisma.EventUpsertWithWhereUniqueWithoutPredictedInput | Prisma.EventUpsertWithWhereUniqueWithoutPredictedInput[]
+  createMany?: Prisma.EventCreateManyPredictedInputEnvelope
+  set?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  disconnect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  delete?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  update?: Prisma.EventUpdateWithWhereUniqueWithoutPredictedInput | Prisma.EventUpdateWithWhereUniqueWithoutPredictedInput[]
+  updateMany?: Prisma.EventUpdateManyWithWhereWithoutPredictedInput | Prisma.EventUpdateManyWithWhereWithoutPredictedInput[]
+  deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
+}
+
 export type EventCreateNestedManyWithoutLotsInput = {
   create?: Prisma.XOR<Prisma.EventCreateWithoutLotsInput, Prisma.EventUncheckedCreateWithoutLotsInput> | Prisma.EventCreateWithoutLotsInput[] | Prisma.EventUncheckedCreateWithoutLotsInput[]
   connectOrCreate?: Prisma.EventCreateOrConnectWithoutLotsInput | Prisma.EventCreateOrConnectWithoutLotsInput[]
@@ -844,8 +965,7 @@ export type EventUncheckedUpdateManyWithoutLotsNestedInput = {
 
 export type EventCreateWithoutCreatedByInput = {
   id?: string
-  source?: string
-  predictedId?: string | null
+  source?: $Enums.SourceType
   order?: number
   name: string
   day: Date | string
@@ -860,13 +980,16 @@ export type EventCreateWithoutCreatedByInput = {
   nbeggXL: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  predicted?: Prisma.EventCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.EventCreateNestedManyWithoutPredictedInput
   phase?: Prisma.PhaseCreateNestedOneWithoutEventsInput
   lots?: Prisma.LotCreateNestedManyWithoutEventsInput
+  users?: Prisma.UserCreateNestedManyWithoutEventsInput
 }
 
 export type EventUncheckedCreateWithoutCreatedByInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   name: string
@@ -883,7 +1006,9 @@ export type EventUncheckedCreateWithoutCreatedByInput = {
   phaseId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  observations?: Prisma.EventUncheckedCreateNestedManyWithoutPredictedInput
   lots?: Prisma.LotUncheckedCreateNestedManyWithoutEventsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutEventsInput
 }
 
 export type EventCreateOrConnectWithoutCreatedByInput = {
@@ -894,6 +1019,59 @@ export type EventCreateOrConnectWithoutCreatedByInput = {
 export type EventCreateManyCreatedByInputEnvelope = {
   data: Prisma.EventCreateManyCreatedByInput | Prisma.EventCreateManyCreatedByInput[]
   skipDuplicates?: boolean
+}
+
+export type EventCreateWithoutUsersInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  name: string
+  day: Date | string
+  currentAge: number
+  Cheptel: number
+  weightGrams: number
+  feedAmount: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs: number
+  nbeggS: number
+  nbeggM: number
+  nbeggL: number
+  nbeggXL: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  predicted?: Prisma.EventCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.EventCreateNestedManyWithoutPredictedInput
+  phase?: Prisma.PhaseCreateNestedOneWithoutEventsInput
+  lots?: Prisma.LotCreateNestedManyWithoutEventsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
+}
+
+export type EventUncheckedCreateWithoutUsersInput = {
+  id?: string
+  source?: $Enums.SourceType
+  predictedId?: string | null
+  order?: number
+  name: string
+  day: Date | string
+  currentAge: number
+  Cheptel: number
+  weightGrams: number
+  feedAmount: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs: number
+  nbeggS: number
+  nbeggM: number
+  nbeggL: number
+  nbeggXL: number
+  phaseId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  observations?: Prisma.EventUncheckedCreateNestedManyWithoutPredictedInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutEventsInput
+}
+
+export type EventCreateOrConnectWithoutUsersInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput>
 }
 
 export type EventUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -917,7 +1095,7 @@ export type EventScalarWhereInput = {
   OR?: Prisma.EventScalarWhereInput[]
   NOT?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
   id?: Prisma.StringFilter<"Event"> | string
-  source?: Prisma.StringFilter<"Event"> | string
+  source?: Prisma.EnumSourceTypeFilter<"Event"> | $Enums.SourceType
   predictedId?: Prisma.StringNullableFilter<"Event"> | string | null
   order?: Prisma.IntFilter<"Event"> | number
   name?: Prisma.StringFilter<"Event"> | string
@@ -937,10 +1115,25 @@ export type EventScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
 }
 
+export type EventUpsertWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.EventWhereUniqueInput
+  update: Prisma.XOR<Prisma.EventUpdateWithoutUsersInput, Prisma.EventUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput>
+}
+
+export type EventUpdateWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.EventWhereUniqueInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutUsersInput, Prisma.EventUncheckedUpdateWithoutUsersInput>
+}
+
+export type EventUpdateManyWithWhereWithoutUsersInput = {
+  where: Prisma.EventScalarWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateManyMutationInput, Prisma.EventUncheckedUpdateManyWithoutUsersInput>
+}
+
 export type EventCreateWithoutPhaseInput = {
   id?: string
-  source?: string
-  predictedId?: string | null
+  source?: $Enums.SourceType
   order?: number
   name: string
   day: Date | string
@@ -955,13 +1148,16 @@ export type EventCreateWithoutPhaseInput = {
   nbeggXL: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  predicted?: Prisma.EventCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.EventCreateNestedManyWithoutPredictedInput
   lots?: Prisma.LotCreateNestedManyWithoutEventsInput
-  createdBy: Prisma.UserCreateNestedOneWithoutEventsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
+  users?: Prisma.UserCreateNestedManyWithoutEventsInput
 }
 
 export type EventUncheckedCreateWithoutPhaseInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   name: string
@@ -978,7 +1174,9 @@ export type EventUncheckedCreateWithoutPhaseInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  observations?: Prisma.EventUncheckedCreateNestedManyWithoutPredictedInput
   lots?: Prisma.LotUncheckedCreateNestedManyWithoutEventsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutEventsInput
 }
 
 export type EventCreateOrConnectWithoutPhaseInput = {
@@ -1007,10 +1205,9 @@ export type EventUpdateManyWithWhereWithoutPhaseInput = {
   data: Prisma.XOR<Prisma.EventUpdateManyMutationInput, Prisma.EventUncheckedUpdateManyWithoutPhaseInput>
 }
 
-export type EventCreateWithoutLotsInput = {
+export type EventCreateWithoutObservationsInput = {
   id?: string
-  source?: string
-  predictedId?: string | null
+  source?: $Enums.SourceType
   order?: number
   name: string
   day: Date | string
@@ -1025,13 +1222,16 @@ export type EventCreateWithoutLotsInput = {
   nbeggXL: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  predicted?: Prisma.EventCreateNestedOneWithoutObservationsInput
   phase?: Prisma.PhaseCreateNestedOneWithoutEventsInput
-  createdBy: Prisma.UserCreateNestedOneWithoutEventsInput
+  lots?: Prisma.LotCreateNestedManyWithoutEventsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
+  users?: Prisma.UserCreateNestedManyWithoutEventsInput
 }
 
-export type EventUncheckedCreateWithoutLotsInput = {
+export type EventUncheckedCreateWithoutObservationsInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   name: string
@@ -1049,6 +1249,194 @@ export type EventUncheckedCreateWithoutLotsInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutEventsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutEventsInput
+}
+
+export type EventCreateOrConnectWithoutObservationsInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutObservationsInput, Prisma.EventUncheckedCreateWithoutObservationsInput>
+}
+
+export type EventCreateWithoutPredictedInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  name: string
+  day: Date | string
+  currentAge: number
+  Cheptel: number
+  weightGrams: number
+  feedAmount: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs: number
+  nbeggS: number
+  nbeggM: number
+  nbeggL: number
+  nbeggXL: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  observations?: Prisma.EventCreateNestedManyWithoutPredictedInput
+  phase?: Prisma.PhaseCreateNestedOneWithoutEventsInput
+  lots?: Prisma.LotCreateNestedManyWithoutEventsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
+  users?: Prisma.UserCreateNestedManyWithoutEventsInput
+}
+
+export type EventUncheckedCreateWithoutPredictedInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  name: string
+  day: Date | string
+  currentAge: number
+  Cheptel: number
+  weightGrams: number
+  feedAmount: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs: number
+  nbeggS: number
+  nbeggM: number
+  nbeggL: number
+  nbeggXL: number
+  phaseId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  observations?: Prisma.EventUncheckedCreateNestedManyWithoutPredictedInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutEventsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutEventsInput
+}
+
+export type EventCreateOrConnectWithoutPredictedInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutPredictedInput, Prisma.EventUncheckedCreateWithoutPredictedInput>
+}
+
+export type EventCreateManyPredictedInputEnvelope = {
+  data: Prisma.EventCreateManyPredictedInput | Prisma.EventCreateManyPredictedInput[]
+  skipDuplicates?: boolean
+}
+
+export type EventUpsertWithoutObservationsInput = {
+  update: Prisma.XOR<Prisma.EventUpdateWithoutObservationsInput, Prisma.EventUncheckedUpdateWithoutObservationsInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutObservationsInput, Prisma.EventUncheckedCreateWithoutObservationsInput>
+  where?: Prisma.EventWhereInput
+}
+
+export type EventUpdateToOneWithWhereWithoutObservationsInput = {
+  where?: Prisma.EventWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutObservationsInput, Prisma.EventUncheckedUpdateWithoutObservationsInput>
+}
+
+export type EventUpdateWithoutObservationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  Cheptel?: Prisma.IntFieldUpdateOperationsInput | number
+  weightGrams?: Prisma.IntFieldUpdateOperationsInput | number
+  feedAmount?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggS?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggM?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggL?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  predicted?: Prisma.EventUpdateOneWithoutObservationsNestedInput
+  phase?: Prisma.PhaseUpdateOneWithoutEventsNestedInput
+  lots?: Prisma.LotUpdateManyWithoutEventsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedEventsNestedInput
+  users?: Prisma.UserUpdateManyWithoutEventsNestedInput
+}
+
+export type EventUncheckedUpdateWithoutObservationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  Cheptel?: Prisma.IntFieldUpdateOperationsInput | number
+  weightGrams?: Prisma.IntFieldUpdateOperationsInput | number
+  feedAmount?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggS?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggM?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggL?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lots?: Prisma.LotUncheckedUpdateManyWithoutEventsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutEventsNestedInput
+}
+
+export type EventUpsertWithWhereUniqueWithoutPredictedInput = {
+  where: Prisma.EventWhereUniqueInput
+  update: Prisma.XOR<Prisma.EventUpdateWithoutPredictedInput, Prisma.EventUncheckedUpdateWithoutPredictedInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutPredictedInput, Prisma.EventUncheckedCreateWithoutPredictedInput>
+}
+
+export type EventUpdateWithWhereUniqueWithoutPredictedInput = {
+  where: Prisma.EventWhereUniqueInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutPredictedInput, Prisma.EventUncheckedUpdateWithoutPredictedInput>
+}
+
+export type EventUpdateManyWithWhereWithoutPredictedInput = {
+  where: Prisma.EventScalarWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateManyMutationInput, Prisma.EventUncheckedUpdateManyWithoutPredictedInput>
+}
+
+export type EventCreateWithoutLotsInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  name: string
+  day: Date | string
+  currentAge: number
+  Cheptel: number
+  weightGrams: number
+  feedAmount: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs: number
+  nbeggS: number
+  nbeggM: number
+  nbeggL: number
+  nbeggXL: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  predicted?: Prisma.EventCreateNestedOneWithoutObservationsInput
+  observations?: Prisma.EventCreateNestedManyWithoutPredictedInput
+  phase?: Prisma.PhaseCreateNestedOneWithoutEventsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
+  users?: Prisma.UserCreateNestedManyWithoutEventsInput
+}
+
+export type EventUncheckedCreateWithoutLotsInput = {
+  id?: string
+  source?: $Enums.SourceType
+  predictedId?: string | null
+  order?: number
+  name: string
+  day: Date | string
+  currentAge: number
+  Cheptel: number
+  weightGrams: number
+  feedAmount: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs: number
+  nbeggS: number
+  nbeggM: number
+  nbeggL: number
+  nbeggXL: number
+  phaseId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  observations?: Prisma.EventUncheckedCreateNestedManyWithoutPredictedInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutEventsInput
 }
 
 export type EventCreateOrConnectWithoutLotsInput = {
@@ -1074,7 +1462,7 @@ export type EventUpdateManyWithWhereWithoutLotsInput = {
 
 export type EventCreateManyCreatedByInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   name: string
@@ -1095,8 +1483,7 @@ export type EventCreateManyCreatedByInput = {
 
 export type EventUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1111,13 +1498,16 @@ export type EventUpdateWithoutCreatedByInput = {
   nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  predicted?: Prisma.EventUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.EventUpdateManyWithoutPredictedNestedInput
   phase?: Prisma.PhaseUpdateOneWithoutEventsNestedInput
   lots?: Prisma.LotUpdateManyWithoutEventsNestedInput
+  users?: Prisma.UserUpdateManyWithoutEventsNestedInput
 }
 
 export type EventUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1134,12 +1524,14 @@ export type EventUncheckedUpdateWithoutCreatedByInput = {
   phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.EventUncheckedUpdateManyWithoutPredictedNestedInput
   lots?: Prisma.LotUncheckedUpdateManyWithoutEventsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutEventsNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1154,13 +1546,83 @@ export type EventUncheckedUpdateManyWithoutCreatedByInput = {
   nbeggL?: Prisma.IntFieldUpdateOperationsInput | number
   nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
   phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EventUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  Cheptel?: Prisma.IntFieldUpdateOperationsInput | number
+  weightGrams?: Prisma.IntFieldUpdateOperationsInput | number
+  feedAmount?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggS?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggM?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggL?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  predicted?: Prisma.EventUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.EventUpdateManyWithoutPredictedNestedInput
+  phase?: Prisma.PhaseUpdateOneWithoutEventsNestedInput
+  lots?: Prisma.LotUpdateManyWithoutEventsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedEventsNestedInput
+}
+
+export type EventUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  Cheptel?: Prisma.IntFieldUpdateOperationsInput | number
+  weightGrams?: Prisma.IntFieldUpdateOperationsInput | number
+  feedAmount?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggS?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggM?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggL?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.EventUncheckedUpdateManyWithoutPredictedNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutEventsNestedInput
+}
+
+export type EventUncheckedUpdateManyWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  Cheptel?: Prisma.IntFieldUpdateOperationsInput | number
+  weightGrams?: Prisma.IntFieldUpdateOperationsInput | number
+  feedAmount?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggS?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggM?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggL?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EventCreateManyPhaseInput = {
   id?: string
-  source?: string
+  source?: $Enums.SourceType
   predictedId?: string | null
   order?: number
   name: string
@@ -1181,8 +1643,7 @@ export type EventCreateManyPhaseInput = {
 
 export type EventUpdateWithoutPhaseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1197,13 +1658,16 @@ export type EventUpdateWithoutPhaseInput = {
   nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  predicted?: Prisma.EventUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.EventUpdateManyWithoutPredictedNestedInput
   lots?: Prisma.LotUpdateManyWithoutEventsNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutEventsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedEventsNestedInput
+  users?: Prisma.UserUpdateManyWithoutEventsNestedInput
 }
 
 export type EventUncheckedUpdateWithoutPhaseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1220,12 +1684,14 @@ export type EventUncheckedUpdateWithoutPhaseInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.EventUncheckedUpdateManyWithoutPredictedNestedInput
   lots?: Prisma.LotUncheckedUpdateManyWithoutEventsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutEventsNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutPhaseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1244,10 +1710,30 @@ export type EventUncheckedUpdateManyWithoutPhaseInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type EventUpdateWithoutLotsInput = {
+export type EventCreateManyPredictedInput = {
+  id?: string
+  source?: $Enums.SourceType
+  order?: number
+  name: string
+  day: Date | string
+  currentAge: number
+  Cheptel: number
+  weightGrams: number
+  feedAmount: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs: number
+  nbeggS: number
+  nbeggM: number
+  nbeggL: number
+  nbeggXL: number
+  phaseId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type EventUpdateWithoutPredictedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1262,14 +1748,40 @@ export type EventUpdateWithoutLotsInput = {
   nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.EventUpdateManyWithoutPredictedNestedInput
   phase?: Prisma.PhaseUpdateOneWithoutEventsNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutEventsNestedInput
+  lots?: Prisma.LotUpdateManyWithoutEventsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedEventsNestedInput
+  users?: Prisma.UserUpdateManyWithoutEventsNestedInput
 }
 
-export type EventUncheckedUpdateWithoutLotsInput = {
+export type EventUncheckedUpdateWithoutPredictedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
-  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  Cheptel?: Prisma.IntFieldUpdateOperationsInput | number
+  weightGrams?: Prisma.IntFieldUpdateOperationsInput | number
+  feedAmount?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggS?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggM?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggL?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.EventUncheckedUpdateManyWithoutPredictedNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutEventsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutEventsNestedInput
+}
+
+export type EventUncheckedUpdateManyWithoutPredictedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1288,9 +1800,57 @@ export type EventUncheckedUpdateWithoutLotsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type EventUpdateWithoutLotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  Cheptel?: Prisma.IntFieldUpdateOperationsInput | number
+  weightGrams?: Prisma.IntFieldUpdateOperationsInput | number
+  feedAmount?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggS?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggM?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggL?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  predicted?: Prisma.EventUpdateOneWithoutObservationsNestedInput
+  observations?: Prisma.EventUpdateManyWithoutPredictedNestedInput
+  phase?: Prisma.PhaseUpdateOneWithoutEventsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedEventsNestedInput
+  users?: Prisma.UserUpdateManyWithoutEventsNestedInput
+}
+
+export type EventUncheckedUpdateWithoutLotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  day?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentAge?: Prisma.IntFieldUpdateOperationsInput | number
+  Cheptel?: Prisma.IntFieldUpdateOperationsInput | number
+  weightGrams?: Prisma.IntFieldUpdateOperationsInput | number
+  feedAmount?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  nbEggs?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggS?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggM?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggL?: Prisma.IntFieldUpdateOperationsInput | number
+  nbeggXL?: Prisma.IntFieldUpdateOperationsInput | number
+  phaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  observations?: Prisma.EventUncheckedUpdateManyWithoutPredictedNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutEventsNestedInput
+}
+
 export type EventUncheckedUpdateManyWithoutLotsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  source?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   predictedId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1316,11 +1876,15 @@ export type EventUncheckedUpdateManyWithoutLotsInput = {
  */
 
 export type EventCountOutputType = {
+  observations: number
   lots: number
+  users: number
 }
 
 export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  observations?: boolean | EventCountOutputTypeCountObservationsArgs
   lots?: boolean | EventCountOutputTypeCountLotsArgs
+  users?: boolean | EventCountOutputTypeCountUsersArgs
 }
 
 /**
@@ -1336,8 +1900,22 @@ export type EventCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * EventCountOutputType without action
  */
+export type EventCountOutputTypeCountObservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventWhereInput
+}
+
+/**
+ * EventCountOutputType without action
+ */
 export type EventCountOutputTypeCountLotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LotWhereInput
+}
+
+/**
+ * EventCountOutputType without action
+ */
+export type EventCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
 }
 
 
@@ -1361,9 +1939,12 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  predicted?: boolean | Prisma.Event$predictedArgs<ExtArgs>
+  observations?: boolean | Prisma.Event$observationsArgs<ExtArgs>
   phase?: boolean | Prisma.Event$phaseArgs<ExtArgs>
   lots?: boolean | Prisma.Event$lotsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Event$usersArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
@@ -1387,6 +1968,7 @@ export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  predicted?: boolean | Prisma.Event$predictedArgs<ExtArgs>
   phase?: boolean | Prisma.Event$phaseArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -1411,6 +1993,7 @@ export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  predicted?: boolean | Prisma.Event$predictedArgs<ExtArgs>
   phase?: boolean | Prisma.Event$phaseArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
@@ -1439,16 +2022,21 @@ export type EventSelectScalar = {
 
 export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "source" | "predictedId" | "order" | "name" | "day" | "currentAge" | "Cheptel" | "weightGrams" | "feedAmount" | "nbEggs" | "nbeggS" | "nbeggM" | "nbeggL" | "nbeggXL" | "phaseId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
 export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  predicted?: boolean | Prisma.Event$predictedArgs<ExtArgs>
+  observations?: boolean | Prisma.Event$observationsArgs<ExtArgs>
   phase?: boolean | Prisma.Event$phaseArgs<ExtArgs>
   lots?: boolean | Prisma.Event$lotsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Event$usersArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  predicted?: boolean | Prisma.Event$predictedArgs<ExtArgs>
   phase?: boolean | Prisma.Event$phaseArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type EventIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  predicted?: boolean | Prisma.Event$predictedArgs<ExtArgs>
   phase?: boolean | Prisma.Event$phaseArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -1456,13 +2044,16 @@ export type EventIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Event"
   objects: {
+    predicted: Prisma.$EventPayload<ExtArgs> | null
+    observations: Prisma.$EventPayload<ExtArgs>[]
     phase: Prisma.$PhasePayload<ExtArgs> | null
     lots: Prisma.$LotPayload<ExtArgs>[]
     createdBy: Prisma.$UserPayload<ExtArgs>
+    users: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    source: string
+    source: $Enums.SourceType
     predictedId: string | null
     order: number
     name: string
@@ -1874,9 +2465,12 @@ readonly fields: EventFieldRefs;
  */
 export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  predicted<T extends Prisma.Event$predictedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$predictedArgs<ExtArgs>>): Prisma.Prisma__EventClient<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  observations<T extends Prisma.Event$observationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$observationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   phase<T extends Prisma.Event$phaseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$phaseArgs<ExtArgs>>): Prisma.Prisma__PhaseClient<runtime.Types.Result.GetResult<Prisma.$PhasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   lots<T extends Prisma.Event$lotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$lotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.Event$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1907,7 +2501,7 @@ export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface EventFieldRefs {
   readonly id: Prisma.FieldRef<"Event", 'String'>
-  readonly source: Prisma.FieldRef<"Event", 'String'>
+  readonly source: Prisma.FieldRef<"Event", 'SourceType'>
   readonly predictedId: Prisma.FieldRef<"Event", 'String'>
   readonly order: Prisma.FieldRef<"Event", 'Int'>
   readonly name: Prisma.FieldRef<"Event", 'String'>
@@ -2321,6 +2915,49 @@ export type EventDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Event.predicted
+ */
+export type Event$predictedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Event
+   */
+  select?: Prisma.EventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Event
+   */
+  omit?: Prisma.EventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
+  where?: Prisma.EventWhereInput
+}
+
+/**
+ * Event.observations
+ */
+export type Event$observationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Event
+   */
+  select?: Prisma.EventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Event
+   */
+  omit?: Prisma.EventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
+  where?: Prisma.EventWhereInput
+  orderBy?: Prisma.EventOrderByWithRelationInput | Prisma.EventOrderByWithRelationInput[]
+  cursor?: Prisma.EventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventScalarFieldEnum | Prisma.EventScalarFieldEnum[]
+}
+
+/**
  * Event.phase
  */
 export type Event$phaseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2361,6 +2998,30 @@ export type Event$lotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.LotScalarFieldEnum | Prisma.LotScalarFieldEnum[]
+}
+
+/**
+ * Event.users
+ */
+export type Event$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

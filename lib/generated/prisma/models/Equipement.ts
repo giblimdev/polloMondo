@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -258,6 +258,7 @@ export type EquipementWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Equipement"> | Date | string
   batiment?: Prisma.XOR<Prisma.BatimentScalarRelationFilter, Prisma.BatimentWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }
 
 export type EquipementOrderByWithRelationInput = {
@@ -273,6 +274,7 @@ export type EquipementOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   batiment?: Prisma.BatimentOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  users?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type EquipementWhereUniqueInput = Prisma.AtLeast<{
@@ -291,6 +293,7 @@ export type EquipementWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Equipement"> | Date | string
   batiment?: Prisma.XOR<Prisma.BatimentScalarRelationFilter, Prisma.BatimentWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }, "id">
 
 export type EquipementOrderByWithAggregationInput = {
@@ -338,6 +341,7 @@ export type EquipementCreateInput = {
   updatedAt?: Date | string
   batiment: Prisma.BatimentCreateNestedOneWithoutEquipementsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedEquipementsInput
+  users?: Prisma.UserCreateNestedManyWithoutEquipementsInput
 }
 
 export type EquipementUncheckedCreateInput = {
@@ -351,6 +355,7 @@ export type EquipementUncheckedCreateInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutEquipementsInput
 }
 
 export type EquipementUpdateInput = {
@@ -364,6 +369,7 @@ export type EquipementUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutEquipementsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedEquipementsNestedInput
+  users?: Prisma.UserUpdateManyWithoutEquipementsNestedInput
 }
 
 export type EquipementUncheckedUpdateInput = {
@@ -377,6 +383,7 @@ export type EquipementUncheckedUpdateInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutEquipementsNestedInput
 }
 
 export type EquipementCreateManyInput = {
@@ -480,10 +487,22 @@ export type EquipementCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
 }
 
+export type EquipementCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.EquipementCreateWithoutUsersInput, Prisma.EquipementUncheckedCreateWithoutUsersInput> | Prisma.EquipementCreateWithoutUsersInput[] | Prisma.EquipementUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.EquipementCreateOrConnectWithoutUsersInput | Prisma.EquipementCreateOrConnectWithoutUsersInput[]
+  connect?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+}
+
 export type EquipementUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.EquipementCreateWithoutCreatedByInput, Prisma.EquipementUncheckedCreateWithoutCreatedByInput> | Prisma.EquipementCreateWithoutCreatedByInput[] | Prisma.EquipementUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.EquipementCreateOrConnectWithoutCreatedByInput | Prisma.EquipementCreateOrConnectWithoutCreatedByInput[]
   createMany?: Prisma.EquipementCreateManyCreatedByInputEnvelope
+  connect?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+}
+
+export type EquipementUncheckedCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.EquipementCreateWithoutUsersInput, Prisma.EquipementUncheckedCreateWithoutUsersInput> | Prisma.EquipementCreateWithoutUsersInput[] | Prisma.EquipementUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.EquipementCreateOrConnectWithoutUsersInput | Prisma.EquipementCreateOrConnectWithoutUsersInput[]
   connect?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
 }
 
@@ -501,6 +520,19 @@ export type EquipementUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.EquipementScalarWhereInput | Prisma.EquipementScalarWhereInput[]
 }
 
+export type EquipementUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipementCreateWithoutUsersInput, Prisma.EquipementUncheckedCreateWithoutUsersInput> | Prisma.EquipementCreateWithoutUsersInput[] | Prisma.EquipementUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.EquipementCreateOrConnectWithoutUsersInput | Prisma.EquipementCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.EquipementUpsertWithWhereUniqueWithoutUsersInput | Prisma.EquipementUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+  disconnect?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+  delete?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+  connect?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+  update?: Prisma.EquipementUpdateWithWhereUniqueWithoutUsersInput | Prisma.EquipementUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.EquipementUpdateManyWithWhereWithoutUsersInput | Prisma.EquipementUpdateManyWithWhereWithoutUsersInput[]
+  deleteMany?: Prisma.EquipementScalarWhereInput | Prisma.EquipementScalarWhereInput[]
+}
+
 export type EquipementUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.EquipementCreateWithoutCreatedByInput, Prisma.EquipementUncheckedCreateWithoutCreatedByInput> | Prisma.EquipementCreateWithoutCreatedByInput[] | Prisma.EquipementUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.EquipementCreateOrConnectWithoutCreatedByInput | Prisma.EquipementCreateOrConnectWithoutCreatedByInput[]
@@ -512,6 +544,19 @@ export type EquipementUncheckedUpdateManyWithoutCreatedByNestedInput = {
   connect?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
   update?: Prisma.EquipementUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.EquipementUpdateWithWhereUniqueWithoutCreatedByInput[]
   updateMany?: Prisma.EquipementUpdateManyWithWhereWithoutCreatedByInput | Prisma.EquipementUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.EquipementScalarWhereInput | Prisma.EquipementScalarWhereInput[]
+}
+
+export type EquipementUncheckedUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipementCreateWithoutUsersInput, Prisma.EquipementUncheckedCreateWithoutUsersInput> | Prisma.EquipementCreateWithoutUsersInput[] | Prisma.EquipementUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.EquipementCreateOrConnectWithoutUsersInput | Prisma.EquipementCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.EquipementUpsertWithWhereUniqueWithoutUsersInput | Prisma.EquipementUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+  disconnect?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+  delete?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+  connect?: Prisma.EquipementWhereUniqueInput | Prisma.EquipementWhereUniqueInput[]
+  update?: Prisma.EquipementUpdateWithWhereUniqueWithoutUsersInput | Prisma.EquipementUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.EquipementUpdateManyWithWhereWithoutUsersInput | Prisma.EquipementUpdateManyWithWhereWithoutUsersInput[]
   deleteMany?: Prisma.EquipementScalarWhereInput | Prisma.EquipementScalarWhereInput[]
 }
 
@@ -567,6 +612,7 @@ export type EquipementCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   batiment: Prisma.BatimentCreateNestedOneWithoutEquipementsInput
+  users?: Prisma.UserCreateNestedManyWithoutEquipementsInput
 }
 
 export type EquipementUncheckedCreateWithoutCreatedByInput = {
@@ -579,6 +625,7 @@ export type EquipementUncheckedCreateWithoutCreatedByInput = {
   batimentId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutEquipementsInput
 }
 
 export type EquipementCreateOrConnectWithoutCreatedByInput = {
@@ -589,6 +636,37 @@ export type EquipementCreateOrConnectWithoutCreatedByInput = {
 export type EquipementCreateManyCreatedByInputEnvelope = {
   data: Prisma.EquipementCreateManyCreatedByInput | Prisma.EquipementCreateManyCreatedByInput[]
   skipDuplicates?: boolean
+}
+
+export type EquipementCreateWithoutUsersInput = {
+  id?: string
+  order?: number
+  name: string
+  description?: string | null
+  legalNorms?: string | null
+  maintenanceSchedule?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  batiment: Prisma.BatimentCreateNestedOneWithoutEquipementsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedEquipementsInput
+}
+
+export type EquipementUncheckedCreateWithoutUsersInput = {
+  id?: string
+  order?: number
+  name: string
+  description?: string | null
+  legalNorms?: string | null
+  maintenanceSchedule?: string | null
+  batimentId: string
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type EquipementCreateOrConnectWithoutUsersInput = {
+  where: Prisma.EquipementWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipementCreateWithoutUsersInput, Prisma.EquipementUncheckedCreateWithoutUsersInput>
 }
 
 export type EquipementUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -623,6 +701,22 @@ export type EquipementScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Equipement"> | Date | string
 }
 
+export type EquipementUpsertWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.EquipementWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipementUpdateWithoutUsersInput, Prisma.EquipementUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.EquipementCreateWithoutUsersInput, Prisma.EquipementUncheckedCreateWithoutUsersInput>
+}
+
+export type EquipementUpdateWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.EquipementWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipementUpdateWithoutUsersInput, Prisma.EquipementUncheckedUpdateWithoutUsersInput>
+}
+
+export type EquipementUpdateManyWithWhereWithoutUsersInput = {
+  where: Prisma.EquipementScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipementUpdateManyMutationInput, Prisma.EquipementUncheckedUpdateManyWithoutUsersInput>
+}
+
 export type EquipementCreateWithoutBatimentInput = {
   id?: string
   order?: number
@@ -633,6 +727,7 @@ export type EquipementCreateWithoutBatimentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedEquipementsInput
+  users?: Prisma.UserCreateNestedManyWithoutEquipementsInput
 }
 
 export type EquipementUncheckedCreateWithoutBatimentInput = {
@@ -645,6 +740,7 @@ export type EquipementUncheckedCreateWithoutBatimentInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutEquipementsInput
 }
 
 export type EquipementCreateOrConnectWithoutBatimentInput = {
@@ -695,6 +791,7 @@ export type EquipementUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutEquipementsNestedInput
+  users?: Prisma.UserUpdateManyWithoutEquipementsNestedInput
 }
 
 export type EquipementUncheckedUpdateWithoutCreatedByInput = {
@@ -707,6 +804,7 @@ export type EquipementUncheckedUpdateWithoutCreatedByInput = {
   batimentId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutEquipementsNestedInput
 }
 
 export type EquipementUncheckedUpdateManyWithoutCreatedByInput = {
@@ -717,6 +815,45 @@ export type EquipementUncheckedUpdateManyWithoutCreatedByInput = {
   legalNorms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maintenanceSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   batimentId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipementUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalNorms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maintenanceSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batiment?: Prisma.BatimentUpdateOneRequiredWithoutEquipementsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedEquipementsNestedInput
+}
+
+export type EquipementUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalNorms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maintenanceSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  batimentId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipementUncheckedUpdateManyWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalNorms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maintenanceSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  batimentId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -743,6 +880,7 @@ export type EquipementUpdateWithoutBatimentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedEquipementsNestedInput
+  users?: Prisma.UserUpdateManyWithoutEquipementsNestedInput
 }
 
 export type EquipementUncheckedUpdateWithoutBatimentInput = {
@@ -755,6 +893,7 @@ export type EquipementUncheckedUpdateWithoutBatimentInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutEquipementsNestedInput
 }
 
 export type EquipementUncheckedUpdateManyWithoutBatimentInput = {
@@ -770,6 +909,35 @@ export type EquipementUncheckedUpdateManyWithoutBatimentInput = {
 }
 
 
+/**
+ * Count Type EquipementCountOutputType
+ */
+
+export type EquipementCountOutputType = {
+  users: number
+}
+
+export type EquipementCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  users?: boolean | EquipementCountOutputTypeCountUsersArgs
+}
+
+/**
+ * EquipementCountOutputType without action
+ */
+export type EquipementCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EquipementCountOutputType
+   */
+  select?: Prisma.EquipementCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EquipementCountOutputType without action
+ */
+export type EquipementCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
 
 export type EquipementSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -784,6 +952,8 @@ export type EquipementSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   updatedAt?: boolean
   batiment?: boolean | Prisma.BatimentDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Equipement$usersArgs<ExtArgs>
+  _count?: boolean | Prisma.EquipementCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["equipement"]>
 
 export type EquipementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -833,6 +1003,8 @@ export type EquipementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type EquipementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   batiment?: boolean | Prisma.BatimentDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Equipement$usersArgs<ExtArgs>
+  _count?: boolean | Prisma.EquipementCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EquipementIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   batiment?: boolean | Prisma.BatimentDefaultArgs<ExtArgs>
@@ -848,6 +1020,7 @@ export type $EquipementPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     batiment: Prisma.$BatimentPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs>
+    users: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1256,6 +1429,7 @@ export interface Prisma__EquipementClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   batiment<T extends Prisma.BatimentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BatimentDefaultArgs<ExtArgs>>): Prisma.Prisma__BatimentClient<runtime.Types.Result.GetResult<Prisma.$BatimentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.Equipement$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipement$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1688,6 +1862,30 @@ export type EquipementDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Equipements to delete.
    */
   limit?: number
+}
+
+/**
+ * Equipement.users
+ */
+export type Equipement$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

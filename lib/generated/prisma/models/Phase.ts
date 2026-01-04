@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -249,10 +249,11 @@ export type PhaseWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Phase"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Phase"> | Date | string
   events?: Prisma.EventListRelationFilter
-  task?: Prisma.TasksListRelationFilter
-  breedingParam?: Prisma.BreedingParamsListRelationFilter
+  tasks?: Prisma.TasksListRelationFilter
+  breedingParams?: Prisma.BreedingParamsListRelationFilter
   lifeCircle?: Prisma.XOR<Prisma.LifeCircleScalarRelationFilter, Prisma.LifeCircleWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }
 
 export type PhaseOrderByWithRelationInput = {
@@ -266,10 +267,11 @@ export type PhaseOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   events?: Prisma.EventOrderByRelationAggregateInput
-  task?: Prisma.TasksOrderByRelationAggregateInput
-  breedingParam?: Prisma.BreedingParamsOrderByRelationAggregateInput
+  tasks?: Prisma.TasksOrderByRelationAggregateInput
+  breedingParams?: Prisma.BreedingParamsOrderByRelationAggregateInput
   lifeCircle?: Prisma.LifeCircleOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  users?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type PhaseWhereUniqueInput = Prisma.AtLeast<{
@@ -286,10 +288,11 @@ export type PhaseWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Phase"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Phase"> | Date | string
   events?: Prisma.EventListRelationFilter
-  task?: Prisma.TasksListRelationFilter
-  breedingParam?: Prisma.BreedingParamsListRelationFilter
+  tasks?: Prisma.TasksListRelationFilter
+  breedingParams?: Prisma.BreedingParamsListRelationFilter
   lifeCircle?: Prisma.XOR<Prisma.LifeCircleScalarRelationFilter, Prisma.LifeCircleWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }, "id">
 
 export type PhaseOrderByWithAggregationInput = {
@@ -333,10 +336,11 @@ export type PhaseCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventCreateNestedManyWithoutPhaseInput
-  task?: Prisma.TasksCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
-  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhaseInput
-  createdBy: Prisma.UserCreateNestedOneWithoutPhasesInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
+  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhasesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedPhasesInput
+  users?: Prisma.UserCreateNestedManyWithoutPhasesInput
 }
 
 export type PhaseUncheckedCreateInput = {
@@ -350,8 +354,9 @@ export type PhaseUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutPhaseInput
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutPhasesInput
 }
 
 export type PhaseUpdateInput = {
@@ -363,10 +368,11 @@ export type PhaseUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUpdateManyWithoutPhaseNestedInput
-  task?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
-  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhaseNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutPhasesNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
+  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhasesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedPhasesNestedInput
+  users?: Prisma.UserUpdateManyWithoutPhasesNestedInput
 }
 
 export type PhaseUncheckedUpdateInput = {
@@ -380,8 +386,9 @@ export type PhaseUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutPhaseNestedInput
-  task?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutPhasesNestedInput
 }
 
 export type PhaseCreateManyInput = {
@@ -484,10 +491,22 @@ export type PhaseCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
 }
 
+export type PhaseCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.PhaseCreateWithoutUsersInput, Prisma.PhaseUncheckedCreateWithoutUsersInput> | Prisma.PhaseCreateWithoutUsersInput[] | Prisma.PhaseUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutUsersInput | Prisma.PhaseCreateOrConnectWithoutUsersInput[]
+  connect?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+}
+
 export type PhaseUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.PhaseCreateWithoutCreatedByInput, Prisma.PhaseUncheckedCreateWithoutCreatedByInput> | Prisma.PhaseCreateWithoutCreatedByInput[] | Prisma.PhaseUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutCreatedByInput | Prisma.PhaseCreateOrConnectWithoutCreatedByInput[]
   createMany?: Prisma.PhaseCreateManyCreatedByInputEnvelope
+  connect?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+}
+
+export type PhaseUncheckedCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.PhaseCreateWithoutUsersInput, Prisma.PhaseUncheckedCreateWithoutUsersInput> | Prisma.PhaseCreateWithoutUsersInput[] | Prisma.PhaseUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutUsersInput | Prisma.PhaseCreateOrConnectWithoutUsersInput[]
   connect?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
 }
 
@@ -505,6 +524,19 @@ export type PhaseUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.PhaseScalarWhereInput | Prisma.PhaseScalarWhereInput[]
 }
 
+export type PhaseUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.PhaseCreateWithoutUsersInput, Prisma.PhaseUncheckedCreateWithoutUsersInput> | Prisma.PhaseCreateWithoutUsersInput[] | Prisma.PhaseUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutUsersInput | Prisma.PhaseCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.PhaseUpsertWithWhereUniqueWithoutUsersInput | Prisma.PhaseUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+  disconnect?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+  delete?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+  connect?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+  update?: Prisma.PhaseUpdateWithWhereUniqueWithoutUsersInput | Prisma.PhaseUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.PhaseUpdateManyWithWhereWithoutUsersInput | Prisma.PhaseUpdateManyWithWhereWithoutUsersInput[]
+  deleteMany?: Prisma.PhaseScalarWhereInput | Prisma.PhaseScalarWhereInput[]
+}
+
 export type PhaseUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.PhaseCreateWithoutCreatedByInput, Prisma.PhaseUncheckedCreateWithoutCreatedByInput> | Prisma.PhaseCreateWithoutCreatedByInput[] | Prisma.PhaseUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutCreatedByInput | Prisma.PhaseCreateOrConnectWithoutCreatedByInput[]
@@ -516,6 +548,19 @@ export type PhaseUncheckedUpdateManyWithoutCreatedByNestedInput = {
   connect?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
   update?: Prisma.PhaseUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.PhaseUpdateWithWhereUniqueWithoutCreatedByInput[]
   updateMany?: Prisma.PhaseUpdateManyWithWhereWithoutCreatedByInput | Prisma.PhaseUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.PhaseScalarWhereInput | Prisma.PhaseScalarWhereInput[]
+}
+
+export type PhaseUncheckedUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.PhaseCreateWithoutUsersInput, Prisma.PhaseUncheckedCreateWithoutUsersInput> | Prisma.PhaseCreateWithoutUsersInput[] | Prisma.PhaseUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutUsersInput | Prisma.PhaseCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.PhaseUpsertWithWhereUniqueWithoutUsersInput | Prisma.PhaseUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+  disconnect?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+  delete?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+  connect?: Prisma.PhaseWhereUniqueInput | Prisma.PhaseWhereUniqueInput[]
+  update?: Prisma.PhaseUpdateWithWhereUniqueWithoutUsersInput | Prisma.PhaseUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.PhaseUpdateManyWithWhereWithoutUsersInput | Prisma.PhaseUpdateManyWithWhereWithoutUsersInput[]
   deleteMany?: Prisma.PhaseScalarWhereInput | Prisma.PhaseScalarWhereInput[]
 }
 
@@ -577,36 +622,36 @@ export type PhaseUpdateOneWithoutEventsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PhaseUpdateToOneWithWhereWithoutEventsInput, Prisma.PhaseUpdateWithoutEventsInput>, Prisma.PhaseUncheckedUpdateWithoutEventsInput>
 }
 
-export type PhaseCreateNestedOneWithoutTaskInput = {
-  create?: Prisma.XOR<Prisma.PhaseCreateWithoutTaskInput, Prisma.PhaseUncheckedCreateWithoutTaskInput>
-  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutTaskInput
+export type PhaseCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.PhaseCreateWithoutTasksInput, Prisma.PhaseUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutTasksInput
   connect?: Prisma.PhaseWhereUniqueInput
 }
 
-export type PhaseUpdateOneWithoutTaskNestedInput = {
-  create?: Prisma.XOR<Prisma.PhaseCreateWithoutTaskInput, Prisma.PhaseUncheckedCreateWithoutTaskInput>
-  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutTaskInput
-  upsert?: Prisma.PhaseUpsertWithoutTaskInput
+export type PhaseUpdateOneWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.PhaseCreateWithoutTasksInput, Prisma.PhaseUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.PhaseUpsertWithoutTasksInput
   disconnect?: Prisma.PhaseWhereInput | boolean
   delete?: Prisma.PhaseWhereInput | boolean
   connect?: Prisma.PhaseWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PhaseUpdateToOneWithWhereWithoutTaskInput, Prisma.PhaseUpdateWithoutTaskInput>, Prisma.PhaseUncheckedUpdateWithoutTaskInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PhaseUpdateToOneWithWhereWithoutTasksInput, Prisma.PhaseUpdateWithoutTasksInput>, Prisma.PhaseUncheckedUpdateWithoutTasksInput>
 }
 
-export type PhaseCreateNestedOneWithoutBreedingParamInput = {
-  create?: Prisma.XOR<Prisma.PhaseCreateWithoutBreedingParamInput, Prisma.PhaseUncheckedCreateWithoutBreedingParamInput>
-  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutBreedingParamInput
+export type PhaseCreateNestedOneWithoutBreedingParamsInput = {
+  create?: Prisma.XOR<Prisma.PhaseCreateWithoutBreedingParamsInput, Prisma.PhaseUncheckedCreateWithoutBreedingParamsInput>
+  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutBreedingParamsInput
   connect?: Prisma.PhaseWhereUniqueInput
 }
 
-export type PhaseUpdateOneWithoutBreedingParamNestedInput = {
-  create?: Prisma.XOR<Prisma.PhaseCreateWithoutBreedingParamInput, Prisma.PhaseUncheckedCreateWithoutBreedingParamInput>
-  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutBreedingParamInput
-  upsert?: Prisma.PhaseUpsertWithoutBreedingParamInput
+export type PhaseUpdateOneWithoutBreedingParamsNestedInput = {
+  create?: Prisma.XOR<Prisma.PhaseCreateWithoutBreedingParamsInput, Prisma.PhaseUncheckedCreateWithoutBreedingParamsInput>
+  connectOrCreate?: Prisma.PhaseCreateOrConnectWithoutBreedingParamsInput
+  upsert?: Prisma.PhaseUpsertWithoutBreedingParamsInput
   disconnect?: Prisma.PhaseWhereInput | boolean
   delete?: Prisma.PhaseWhereInput | boolean
   connect?: Prisma.PhaseWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PhaseUpdateToOneWithWhereWithoutBreedingParamInput, Prisma.PhaseUpdateWithoutBreedingParamInput>, Prisma.PhaseUncheckedUpdateWithoutBreedingParamInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PhaseUpdateToOneWithWhereWithoutBreedingParamsInput, Prisma.PhaseUpdateWithoutBreedingParamsInput>, Prisma.PhaseUncheckedUpdateWithoutBreedingParamsInput>
 }
 
 export type PhaseCreateWithoutCreatedByInput = {
@@ -618,9 +663,10 @@ export type PhaseCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventCreateNestedManyWithoutPhaseInput
-  task?: Prisma.TasksCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
-  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhaseInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
+  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhasesInput
+  users?: Prisma.UserCreateNestedManyWithoutPhasesInput
 }
 
 export type PhaseUncheckedCreateWithoutCreatedByInput = {
@@ -633,8 +679,9 @@ export type PhaseUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutPhaseInput
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutPhasesInput
 }
 
 export type PhaseCreateOrConnectWithoutCreatedByInput = {
@@ -645,6 +692,41 @@ export type PhaseCreateOrConnectWithoutCreatedByInput = {
 export type PhaseCreateManyCreatedByInputEnvelope = {
   data: Prisma.PhaseCreateManyCreatedByInput | Prisma.PhaseCreateManyCreatedByInput[]
   skipDuplicates?: boolean
+}
+
+export type PhaseCreateWithoutUsersInput = {
+  id?: string
+  order?: number
+  name: string
+  weekStart: Date | string
+  weekEnd: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  events?: Prisma.EventCreateNestedManyWithoutPhaseInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
+  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhasesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedPhasesInput
+}
+
+export type PhaseUncheckedCreateWithoutUsersInput = {
+  id?: string
+  order?: number
+  name: string
+  weekStart: Date | string
+  weekEnd: Date | string
+  lifeCircleId: string
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutPhaseInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+}
+
+export type PhaseCreateOrConnectWithoutUsersInput = {
+  where: Prisma.PhaseWhereUniqueInput
+  create: Prisma.XOR<Prisma.PhaseCreateWithoutUsersInput, Prisma.PhaseUncheckedCreateWithoutUsersInput>
 }
 
 export type PhaseUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -678,6 +760,22 @@ export type PhaseScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Phase"> | Date | string
 }
 
+export type PhaseUpsertWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.PhaseWhereUniqueInput
+  update: Prisma.XOR<Prisma.PhaseUpdateWithoutUsersInput, Prisma.PhaseUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.PhaseCreateWithoutUsersInput, Prisma.PhaseUncheckedCreateWithoutUsersInput>
+}
+
+export type PhaseUpdateWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.PhaseWhereUniqueInput
+  data: Prisma.XOR<Prisma.PhaseUpdateWithoutUsersInput, Prisma.PhaseUncheckedUpdateWithoutUsersInput>
+}
+
+export type PhaseUpdateManyWithWhereWithoutUsersInput = {
+  where: Prisma.PhaseScalarWhereInput
+  data: Prisma.XOR<Prisma.PhaseUpdateManyMutationInput, Prisma.PhaseUncheckedUpdateManyWithoutUsersInput>
+}
+
 export type PhaseCreateWithoutLifeCircleInput = {
   id?: string
   order?: number
@@ -687,9 +785,10 @@ export type PhaseCreateWithoutLifeCircleInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventCreateNestedManyWithoutPhaseInput
-  task?: Prisma.TasksCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
-  createdBy: Prisma.UserCreateNestedOneWithoutPhasesInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedPhasesInput
+  users?: Prisma.UserCreateNestedManyWithoutPhasesInput
 }
 
 export type PhaseUncheckedCreateWithoutLifeCircleInput = {
@@ -702,8 +801,9 @@ export type PhaseUncheckedCreateWithoutLifeCircleInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutPhaseInput
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutPhasesInput
 }
 
 export type PhaseCreateOrConnectWithoutLifeCircleInput = {
@@ -740,10 +840,11 @@ export type PhaseCreateWithoutEventsInput = {
   weekEnd: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
-  task?: Prisma.TasksCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
-  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhaseInput
-  createdBy: Prisma.UserCreateNestedOneWithoutPhasesInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
+  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhasesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedPhasesInput
+  users?: Prisma.UserCreateNestedManyWithoutPhasesInput
 }
 
 export type PhaseUncheckedCreateWithoutEventsInput = {
@@ -756,8 +857,9 @@ export type PhaseUncheckedCreateWithoutEventsInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutPhasesInput
 }
 
 export type PhaseCreateOrConnectWithoutEventsInput = {
@@ -784,10 +886,11 @@ export type PhaseUpdateWithoutEventsInput = {
   weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  task?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
-  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhaseNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutPhasesNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
+  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhasesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedPhasesNestedInput
+  users?: Prisma.UserUpdateManyWithoutPhasesNestedInput
 }
 
 export type PhaseUncheckedUpdateWithoutEventsInput = {
@@ -800,11 +903,12 @@ export type PhaseUncheckedUpdateWithoutEventsInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  task?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutPhasesNestedInput
 }
 
-export type PhaseCreateWithoutTaskInput = {
+export type PhaseCreateWithoutTasksInput = {
   id?: string
   order?: number
   name: string
@@ -813,12 +917,13 @@ export type PhaseCreateWithoutTaskInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
-  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhaseInput
-  createdBy: Prisma.UserCreateNestedOneWithoutPhasesInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutPhaseInput
+  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhasesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedPhasesInput
+  users?: Prisma.UserCreateNestedManyWithoutPhasesInput
 }
 
-export type PhaseUncheckedCreateWithoutTaskInput = {
+export type PhaseUncheckedCreateWithoutTasksInput = {
   id?: string
   order?: number
   name: string
@@ -829,26 +934,27 @@ export type PhaseUncheckedCreateWithoutTaskInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutPhaseInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutPhaseInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutPhasesInput
 }
 
-export type PhaseCreateOrConnectWithoutTaskInput = {
+export type PhaseCreateOrConnectWithoutTasksInput = {
   where: Prisma.PhaseWhereUniqueInput
-  create: Prisma.XOR<Prisma.PhaseCreateWithoutTaskInput, Prisma.PhaseUncheckedCreateWithoutTaskInput>
+  create: Prisma.XOR<Prisma.PhaseCreateWithoutTasksInput, Prisma.PhaseUncheckedCreateWithoutTasksInput>
 }
 
-export type PhaseUpsertWithoutTaskInput = {
-  update: Prisma.XOR<Prisma.PhaseUpdateWithoutTaskInput, Prisma.PhaseUncheckedUpdateWithoutTaskInput>
-  create: Prisma.XOR<Prisma.PhaseCreateWithoutTaskInput, Prisma.PhaseUncheckedCreateWithoutTaskInput>
+export type PhaseUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.PhaseUpdateWithoutTasksInput, Prisma.PhaseUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.PhaseCreateWithoutTasksInput, Prisma.PhaseUncheckedCreateWithoutTasksInput>
   where?: Prisma.PhaseWhereInput
 }
 
-export type PhaseUpdateToOneWithWhereWithoutTaskInput = {
+export type PhaseUpdateToOneWithWhereWithoutTasksInput = {
   where?: Prisma.PhaseWhereInput
-  data: Prisma.XOR<Prisma.PhaseUpdateWithoutTaskInput, Prisma.PhaseUncheckedUpdateWithoutTaskInput>
+  data: Prisma.XOR<Prisma.PhaseUpdateWithoutTasksInput, Prisma.PhaseUncheckedUpdateWithoutTasksInput>
 }
 
-export type PhaseUpdateWithoutTaskInput = {
+export type PhaseUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -857,12 +963,13 @@ export type PhaseUpdateWithoutTaskInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
-  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhaseNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutPhasesNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
+  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhasesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedPhasesNestedInput
+  users?: Prisma.UserUpdateManyWithoutPhasesNestedInput
 }
 
-export type PhaseUncheckedUpdateWithoutTaskInput = {
+export type PhaseUncheckedUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -873,10 +980,11 @@ export type PhaseUncheckedUpdateWithoutTaskInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutPhasesNestedInput
 }
 
-export type PhaseCreateWithoutBreedingParamInput = {
+export type PhaseCreateWithoutBreedingParamsInput = {
   id?: string
   order?: number
   name: string
@@ -885,12 +993,13 @@ export type PhaseCreateWithoutBreedingParamInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventCreateNestedManyWithoutPhaseInput
-  task?: Prisma.TasksCreateNestedManyWithoutPhaseInput
-  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhaseInput
-  createdBy: Prisma.UserCreateNestedOneWithoutPhasesInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutPhaseInput
+  lifeCircle: Prisma.LifeCircleCreateNestedOneWithoutPhasesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedPhasesInput
+  users?: Prisma.UserCreateNestedManyWithoutPhasesInput
 }
 
-export type PhaseUncheckedCreateWithoutBreedingParamInput = {
+export type PhaseUncheckedCreateWithoutBreedingParamsInput = {
   id?: string
   order?: number
   name: string
@@ -901,26 +1010,27 @@ export type PhaseUncheckedCreateWithoutBreedingParamInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutPhaseInput
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutPhaseInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutPhasesInput
 }
 
-export type PhaseCreateOrConnectWithoutBreedingParamInput = {
+export type PhaseCreateOrConnectWithoutBreedingParamsInput = {
   where: Prisma.PhaseWhereUniqueInput
-  create: Prisma.XOR<Prisma.PhaseCreateWithoutBreedingParamInput, Prisma.PhaseUncheckedCreateWithoutBreedingParamInput>
+  create: Prisma.XOR<Prisma.PhaseCreateWithoutBreedingParamsInput, Prisma.PhaseUncheckedCreateWithoutBreedingParamsInput>
 }
 
-export type PhaseUpsertWithoutBreedingParamInput = {
-  update: Prisma.XOR<Prisma.PhaseUpdateWithoutBreedingParamInput, Prisma.PhaseUncheckedUpdateWithoutBreedingParamInput>
-  create: Prisma.XOR<Prisma.PhaseCreateWithoutBreedingParamInput, Prisma.PhaseUncheckedCreateWithoutBreedingParamInput>
+export type PhaseUpsertWithoutBreedingParamsInput = {
+  update: Prisma.XOR<Prisma.PhaseUpdateWithoutBreedingParamsInput, Prisma.PhaseUncheckedUpdateWithoutBreedingParamsInput>
+  create: Prisma.XOR<Prisma.PhaseCreateWithoutBreedingParamsInput, Prisma.PhaseUncheckedCreateWithoutBreedingParamsInput>
   where?: Prisma.PhaseWhereInput
 }
 
-export type PhaseUpdateToOneWithWhereWithoutBreedingParamInput = {
+export type PhaseUpdateToOneWithWhereWithoutBreedingParamsInput = {
   where?: Prisma.PhaseWhereInput
-  data: Prisma.XOR<Prisma.PhaseUpdateWithoutBreedingParamInput, Prisma.PhaseUncheckedUpdateWithoutBreedingParamInput>
+  data: Prisma.XOR<Prisma.PhaseUpdateWithoutBreedingParamsInput, Prisma.PhaseUncheckedUpdateWithoutBreedingParamsInput>
 }
 
-export type PhaseUpdateWithoutBreedingParamInput = {
+export type PhaseUpdateWithoutBreedingParamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -929,12 +1039,13 @@ export type PhaseUpdateWithoutBreedingParamInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUpdateManyWithoutPhaseNestedInput
-  task?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
-  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhaseNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutPhasesNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
+  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhasesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedPhasesNestedInput
+  users?: Prisma.UserUpdateManyWithoutPhasesNestedInput
 }
 
-export type PhaseUncheckedUpdateWithoutBreedingParamInput = {
+export type PhaseUncheckedUpdateWithoutBreedingParamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -945,7 +1056,8 @@ export type PhaseUncheckedUpdateWithoutBreedingParamInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutPhaseNestedInput
-  task?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutPhasesNestedInput
 }
 
 export type PhaseCreateManyCreatedByInput = {
@@ -968,9 +1080,10 @@ export type PhaseUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUpdateManyWithoutPhaseNestedInput
-  task?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
-  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhaseNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
+  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhasesNestedInput
+  users?: Prisma.UserUpdateManyWithoutPhasesNestedInput
 }
 
 export type PhaseUncheckedUpdateWithoutCreatedByInput = {
@@ -983,8 +1096,9 @@ export type PhaseUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutPhaseNestedInput
-  task?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutPhasesNestedInput
 }
 
 export type PhaseUncheckedUpdateManyWithoutCreatedByInput = {
@@ -994,6 +1108,48 @@ export type PhaseUncheckedUpdateManyWithoutCreatedByInput = {
   weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lifeCircleId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PhaseUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  events?: Prisma.EventUpdateManyWithoutPhaseNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
+  lifeCircle?: Prisma.LifeCircleUpdateOneRequiredWithoutPhasesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedPhasesNestedInput
+}
+
+export type PhaseUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lifeCircleId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  events?: Prisma.EventUncheckedUpdateManyWithoutPhaseNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+}
+
+export type PhaseUncheckedUpdateManyWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  weekStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lifeCircleId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1018,9 +1174,10 @@ export type PhaseUpdateWithoutLifeCircleInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUpdateManyWithoutPhaseNestedInput
-  task?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutPhasesNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutPhaseNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedPhasesNestedInput
+  users?: Prisma.UserUpdateManyWithoutPhasesNestedInput
 }
 
 export type PhaseUncheckedUpdateWithoutLifeCircleInput = {
@@ -1033,8 +1190,9 @@ export type PhaseUncheckedUpdateWithoutLifeCircleInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutPhaseNestedInput
-  task?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutPhaseNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutPhaseNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutPhasesNestedInput
 }
 
 export type PhaseUncheckedUpdateManyWithoutLifeCircleInput = {
@@ -1055,14 +1213,16 @@ export type PhaseUncheckedUpdateManyWithoutLifeCircleInput = {
 
 export type PhaseCountOutputType = {
   events: number
-  task: number
-  breedingParam: number
+  tasks: number
+  breedingParams: number
+  users: number
 }
 
 export type PhaseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   events?: boolean | PhaseCountOutputTypeCountEventsArgs
-  task?: boolean | PhaseCountOutputTypeCountTaskArgs
-  breedingParam?: boolean | PhaseCountOutputTypeCountBreedingParamArgs
+  tasks?: boolean | PhaseCountOutputTypeCountTasksArgs
+  breedingParams?: boolean | PhaseCountOutputTypeCountBreedingParamsArgs
+  users?: boolean | PhaseCountOutputTypeCountUsersArgs
 }
 
 /**
@@ -1085,15 +1245,22 @@ export type PhaseCountOutputTypeCountEventsArgs<ExtArgs extends runtime.Types.Ex
 /**
  * PhaseCountOutputType without action
  */
-export type PhaseCountOutputTypeCountTaskArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PhaseCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TasksWhereInput
 }
 
 /**
  * PhaseCountOutputType without action
  */
-export type PhaseCountOutputTypeCountBreedingParamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PhaseCountOutputTypeCountBreedingParamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BreedingParamsWhereInput
+}
+
+/**
+ * PhaseCountOutputType without action
+ */
+export type PhaseCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
 }
 
 
@@ -1108,10 +1275,11 @@ export type PhaseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdAt?: boolean
   updatedAt?: boolean
   events?: boolean | Prisma.Phase$eventsArgs<ExtArgs>
-  task?: boolean | Prisma.Phase$taskArgs<ExtArgs>
-  breedingParam?: boolean | Prisma.Phase$breedingParamArgs<ExtArgs>
+  tasks?: boolean | Prisma.Phase$tasksArgs<ExtArgs>
+  breedingParams?: boolean | Prisma.Phase$breedingParamsArgs<ExtArgs>
   lifeCircle?: boolean | Prisma.LifeCircleDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Phase$usersArgs<ExtArgs>
   _count?: boolean | Prisma.PhaseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["phase"]>
 
@@ -1158,10 +1326,11 @@ export type PhaseSelectScalar = {
 export type PhaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "order" | "name" | "weekStart" | "weekEnd" | "lifeCircleId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["phase"]>
 export type PhaseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   events?: boolean | Prisma.Phase$eventsArgs<ExtArgs>
-  task?: boolean | Prisma.Phase$taskArgs<ExtArgs>
-  breedingParam?: boolean | Prisma.Phase$breedingParamArgs<ExtArgs>
+  tasks?: boolean | Prisma.Phase$tasksArgs<ExtArgs>
+  breedingParams?: boolean | Prisma.Phase$breedingParamsArgs<ExtArgs>
   lifeCircle?: boolean | Prisma.LifeCircleDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Phase$usersArgs<ExtArgs>
   _count?: boolean | Prisma.PhaseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PhaseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1177,10 +1346,11 @@ export type $PhasePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name: "Phase"
   objects: {
     events: Prisma.$EventPayload<ExtArgs>[]
-    task: Prisma.$TasksPayload<ExtArgs>[]
-    breedingParam: Prisma.$BreedingParamsPayload<ExtArgs>[]
+    tasks: Prisma.$TasksPayload<ExtArgs>[]
+    breedingParams: Prisma.$BreedingParamsPayload<ExtArgs>[]
     lifeCircle: Prisma.$LifeCirclePayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs>
+    users: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1587,10 +1757,11 @@ readonly fields: PhaseFieldRefs;
 export interface Prisma__PhaseClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   events<T extends Prisma.Phase$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Phase$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  task<T extends Prisma.Phase$taskArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Phase$taskArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  breedingParam<T extends Prisma.Phase$breedingParamArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Phase$breedingParamArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BreedingParamsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.Phase$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Phase$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  breedingParams<T extends Prisma.Phase$breedingParamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Phase$breedingParamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BreedingParamsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lifeCircle<T extends Prisma.LifeCircleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LifeCircleDefaultArgs<ExtArgs>>): Prisma.Prisma__LifeCircleClient<runtime.Types.Result.GetResult<Prisma.$LifeCirclePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.Phase$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Phase$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2049,9 +2220,9 @@ export type Phase$eventsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
- * Phase.task
+ * Phase.tasks
  */
-export type Phase$taskArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Phase$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Tasks
    */
@@ -2073,9 +2244,9 @@ export type Phase$taskArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 /**
- * Phase.breedingParam
+ * Phase.breedingParams
  */
-export type Phase$breedingParamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Phase$breedingParamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the BreedingParams
    */
@@ -2094,6 +2265,30 @@ export type Phase$breedingParamArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.BreedingParamsScalarFieldEnum | Prisma.BreedingParamsScalarFieldEnum[]
+}
+
+/**
+ * Phase.users
+ */
+export type Phase$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

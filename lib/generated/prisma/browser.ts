@@ -19,9 +19,9 @@ export * as $Enums from './enums'
 export * from './enums';
 /**
  * Model User
- * /////////////////////////
- * //  Modèles Auth   //////
- * /////////////////////////
+ * ////////////////////////////////
+ * //  Modèles Better-Auth   ////// 
+ * ////////////////////////////////
  */
 export type User = Prisma.UserModel
 /**
@@ -35,10 +35,10 @@ export type Session = Prisma.SessionModel
  */
 export type Account = Prisma.AccountModel
 /**
- * Model Verification
+ * Model VerificationToken
  * 
  */
-export type Verification = Prisma.VerificationModel
+export type VerificationToken = Prisma.VerificationTokenModel
 /**
  * Model Item
  * ///////////////
@@ -97,7 +97,9 @@ export type Tasks = Prisma.TasksModel
 export type BreedingParams = Prisma.BreedingParamsModel
 /**
  * Model Lot
- * 
+ * ////////////////////
+ * //   Breeding   ////
+ * ////////////////////
  */
 export type Lot = Prisma.LotModel
 /**

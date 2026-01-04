@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -336,6 +336,7 @@ export type SettingWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Setting"> | Date | string
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }
 
 export type SettingOrderByWithRelationInput = {
@@ -356,6 +357,7 @@ export type SettingOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   team?: Prisma.TeamOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  users?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type SettingWhereUniqueInput = Prisma.AtLeast<{
@@ -379,6 +381,7 @@ export type SettingWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Setting"> | Date | string
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }, "id" | "teamId">
 
 export type SettingOrderByWithAggregationInput = {
@@ -440,7 +443,8 @@ export type SettingCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   team: Prisma.TeamCreateNestedOneWithoutSettingInput
-  createdBy: Prisma.UserCreateNestedOneWithoutSettingsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedSettingsInput
+  users?: Prisma.UserCreateNestedManyWithoutSettingsInput
 }
 
 export type SettingUncheckedCreateInput = {
@@ -459,6 +463,7 @@ export type SettingUncheckedCreateInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSettingsInput
 }
 
 export type SettingUpdateInput = {
@@ -476,7 +481,8 @@ export type SettingUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   team?: Prisma.TeamUpdateOneRequiredWithoutSettingNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutSettingsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedSettingsNestedInput
+  users?: Prisma.UserUpdateManyWithoutSettingsNestedInput
 }
 
 export type SettingUncheckedUpdateInput = {
@@ -495,6 +501,7 @@ export type SettingUncheckedUpdateInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutSettingsNestedInput
 }
 
 export type SettingCreateManyInput = {
@@ -651,10 +658,22 @@ export type SettingCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
 }
 
+export type SettingCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.SettingCreateWithoutUsersInput, Prisma.SettingUncheckedCreateWithoutUsersInput> | Prisma.SettingCreateWithoutUsersInput[] | Prisma.SettingUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.SettingCreateOrConnectWithoutUsersInput | Prisma.SettingCreateOrConnectWithoutUsersInput[]
+  connect?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+}
+
 export type SettingUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.SettingCreateWithoutCreatedByInput, Prisma.SettingUncheckedCreateWithoutCreatedByInput> | Prisma.SettingCreateWithoutCreatedByInput[] | Prisma.SettingUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.SettingCreateOrConnectWithoutCreatedByInput | Prisma.SettingCreateOrConnectWithoutCreatedByInput[]
   createMany?: Prisma.SettingCreateManyCreatedByInputEnvelope
+  connect?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+}
+
+export type SettingUncheckedCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.SettingCreateWithoutUsersInput, Prisma.SettingUncheckedCreateWithoutUsersInput> | Prisma.SettingCreateWithoutUsersInput[] | Prisma.SettingUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.SettingCreateOrConnectWithoutUsersInput | Prisma.SettingCreateOrConnectWithoutUsersInput[]
   connect?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
 }
 
@@ -672,6 +691,19 @@ export type SettingUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.SettingScalarWhereInput | Prisma.SettingScalarWhereInput[]
 }
 
+export type SettingUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.SettingCreateWithoutUsersInput, Prisma.SettingUncheckedCreateWithoutUsersInput> | Prisma.SettingCreateWithoutUsersInput[] | Prisma.SettingUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.SettingCreateOrConnectWithoutUsersInput | Prisma.SettingCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.SettingUpsertWithWhereUniqueWithoutUsersInput | Prisma.SettingUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+  disconnect?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+  delete?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+  connect?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+  update?: Prisma.SettingUpdateWithWhereUniqueWithoutUsersInput | Prisma.SettingUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.SettingUpdateManyWithWhereWithoutUsersInput | Prisma.SettingUpdateManyWithWhereWithoutUsersInput[]
+  deleteMany?: Prisma.SettingScalarWhereInput | Prisma.SettingScalarWhereInput[]
+}
+
 export type SettingUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.SettingCreateWithoutCreatedByInput, Prisma.SettingUncheckedCreateWithoutCreatedByInput> | Prisma.SettingCreateWithoutCreatedByInput[] | Prisma.SettingUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.SettingCreateOrConnectWithoutCreatedByInput | Prisma.SettingCreateOrConnectWithoutCreatedByInput[]
@@ -683,6 +715,19 @@ export type SettingUncheckedUpdateManyWithoutCreatedByNestedInput = {
   connect?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
   update?: Prisma.SettingUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.SettingUpdateWithWhereUniqueWithoutCreatedByInput[]
   updateMany?: Prisma.SettingUpdateManyWithWhereWithoutCreatedByInput | Prisma.SettingUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.SettingScalarWhereInput | Prisma.SettingScalarWhereInput[]
+}
+
+export type SettingUncheckedUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.SettingCreateWithoutUsersInput, Prisma.SettingUncheckedCreateWithoutUsersInput> | Prisma.SettingCreateWithoutUsersInput[] | Prisma.SettingUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.SettingCreateOrConnectWithoutUsersInput | Prisma.SettingCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.SettingUpsertWithWhereUniqueWithoutUsersInput | Prisma.SettingUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+  disconnect?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+  delete?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+  connect?: Prisma.SettingWhereUniqueInput | Prisma.SettingWhereUniqueInput[]
+  update?: Prisma.SettingUpdateWithWhereUniqueWithoutUsersInput | Prisma.SettingUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.SettingUpdateManyWithWhereWithoutUsersInput | Prisma.SettingUpdateManyWithWhereWithoutUsersInput[]
   deleteMany?: Prisma.SettingScalarWhereInput | Prisma.SettingScalarWhereInput[]
 }
 
@@ -733,6 +778,7 @@ export type SettingCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   team: Prisma.TeamCreateNestedOneWithoutSettingInput
+  users?: Prisma.UserCreateNestedManyWithoutSettingsInput
 }
 
 export type SettingUncheckedCreateWithoutCreatedByInput = {
@@ -750,6 +796,7 @@ export type SettingUncheckedCreateWithoutCreatedByInput = {
   salePriceBoilerKg: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSettingsInput
 }
 
 export type SettingCreateOrConnectWithoutCreatedByInput = {
@@ -760,6 +807,47 @@ export type SettingCreateOrConnectWithoutCreatedByInput = {
 export type SettingCreateManyCreatedByInputEnvelope = {
   data: Prisma.SettingCreateManyCreatedByInput | Prisma.SettingCreateManyCreatedByInput[]
   skipDuplicates?: boolean
+}
+
+export type SettingCreateWithoutUsersInput = {
+  id?: string
+  costAlimStarter: number
+  costAlimGrower: number
+  costAlimPreLay: number
+  costAlimLayer: number
+  salePriceEggS: number
+  salePriceEggM: number
+  salePriceEggL: number
+  salePriceEggXL: number
+  salePriceLayKg: number
+  salePriceBoilerKg: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  team: Prisma.TeamCreateNestedOneWithoutSettingInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedSettingsInput
+}
+
+export type SettingUncheckedCreateWithoutUsersInput = {
+  id?: string
+  teamId: string
+  costAlimStarter: number
+  costAlimGrower: number
+  costAlimPreLay: number
+  costAlimLayer: number
+  salePriceEggS: number
+  salePriceEggM: number
+  salePriceEggL: number
+  salePriceEggXL: number
+  salePriceLayKg: number
+  salePriceBoilerKg: number
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SettingCreateOrConnectWithoutUsersInput = {
+  where: Prisma.SettingWhereUniqueInput
+  create: Prisma.XOR<Prisma.SettingCreateWithoutUsersInput, Prisma.SettingUncheckedCreateWithoutUsersInput>
 }
 
 export type SettingUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -799,6 +887,22 @@ export type SettingScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Setting"> | Date | string
 }
 
+export type SettingUpsertWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.SettingWhereUniqueInput
+  update: Prisma.XOR<Prisma.SettingUpdateWithoutUsersInput, Prisma.SettingUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.SettingCreateWithoutUsersInput, Prisma.SettingUncheckedCreateWithoutUsersInput>
+}
+
+export type SettingUpdateWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.SettingWhereUniqueInput
+  data: Prisma.XOR<Prisma.SettingUpdateWithoutUsersInput, Prisma.SettingUncheckedUpdateWithoutUsersInput>
+}
+
+export type SettingUpdateManyWithWhereWithoutUsersInput = {
+  where: Prisma.SettingScalarWhereInput
+  data: Prisma.XOR<Prisma.SettingUpdateManyMutationInput, Prisma.SettingUncheckedUpdateManyWithoutUsersInput>
+}
+
 export type SettingCreateWithoutTeamInput = {
   id?: string
   costAlimStarter: number
@@ -813,7 +917,8 @@ export type SettingCreateWithoutTeamInput = {
   salePriceBoilerKg: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdBy: Prisma.UserCreateNestedOneWithoutSettingsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedSettingsInput
+  users?: Prisma.UserCreateNestedManyWithoutSettingsInput
 }
 
 export type SettingUncheckedCreateWithoutTeamInput = {
@@ -831,6 +936,7 @@ export type SettingUncheckedCreateWithoutTeamInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSettingsInput
 }
 
 export type SettingCreateOrConnectWithoutTeamInput = {
@@ -863,7 +969,8 @@ export type SettingUpdateWithoutTeamInput = {
   salePriceBoilerKg?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutSettingsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedSettingsNestedInput
+  users?: Prisma.UserUpdateManyWithoutSettingsNestedInput
 }
 
 export type SettingUncheckedUpdateWithoutTeamInput = {
@@ -881,6 +988,7 @@ export type SettingUncheckedUpdateWithoutTeamInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutSettingsNestedInput
 }
 
 export type SettingCreateManyCreatedByInput = {
@@ -915,6 +1023,7 @@ export type SettingUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   team?: Prisma.TeamUpdateOneRequiredWithoutSettingNestedInput
+  users?: Prisma.UserUpdateManyWithoutSettingsNestedInput
 }
 
 export type SettingUncheckedUpdateWithoutCreatedByInput = {
@@ -932,6 +1041,7 @@ export type SettingUncheckedUpdateWithoutCreatedByInput = {
   salePriceBoilerKg?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutSettingsNestedInput
 }
 
 export type SettingUncheckedUpdateManyWithoutCreatedByInput = {
@@ -951,6 +1061,89 @@ export type SettingUncheckedUpdateManyWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type SettingUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  costAlimStarter?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAlimGrower?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAlimPreLay?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAlimLayer?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggS?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggM?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggL?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggXL?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceLayKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceBoilerKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  team?: Prisma.TeamUpdateOneRequiredWithoutSettingNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedSettingsNestedInput
+}
+
+export type SettingUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.StringFieldUpdateOperationsInput | string
+  costAlimStarter?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAlimGrower?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAlimPreLay?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAlimLayer?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggS?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggM?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggL?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggXL?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceLayKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceBoilerKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SettingUncheckedUpdateManyWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.StringFieldUpdateOperationsInput | string
+  costAlimStarter?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAlimGrower?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAlimPreLay?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAlimLayer?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggS?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggM?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggL?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceEggXL?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceLayKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  salePriceBoilerKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type SettingCountOutputType
+ */
+
+export type SettingCountOutputType = {
+  users: number
+}
+
+export type SettingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  users?: boolean | SettingCountOutputTypeCountUsersArgs
+}
+
+/**
+ * SettingCountOutputType without action
+ */
+export type SettingCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SettingCountOutputType
+   */
+  select?: Prisma.SettingCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SettingCountOutputType without action
+ */
+export type SettingCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
 
 
 export type SettingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -971,6 +1164,8 @@ export type SettingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Setting$usersArgs<ExtArgs>
+  _count?: boolean | Prisma.SettingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["setting"]>
 
 export type SettingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1035,6 +1230,8 @@ export type SettingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type SettingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Setting$usersArgs<ExtArgs>
+  _count?: boolean | Prisma.SettingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SettingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
@@ -1050,6 +1247,7 @@ export type $SettingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     team: Prisma.$TeamPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs>
+    users: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1463,6 +1661,7 @@ export interface Prisma__SettingClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   team<T extends Prisma.TeamDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeamDefaultArgs<ExtArgs>>): Prisma.Prisma__TeamClient<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.Setting$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Setting$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1900,6 +2099,30 @@ export type SettingDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Settings to delete.
    */
   limit?: number
+}
+
+/**
+ * Setting.users
+ */
+export type Setting$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

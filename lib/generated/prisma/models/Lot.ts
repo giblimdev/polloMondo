@@ -8,13 +8,15 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model Lot
- * 
+ * ////////////////////
+ * //   Breeding   ////
+ * ////////////////////
  */
 export type LotModel = runtime.Types.Result.DefaultSelection<Prisma.$LotPayload>
 
@@ -290,9 +292,10 @@ export type LotWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Lot"> | Date | string
   batiment?: Prisma.XOR<Prisma.BatimentScalarRelationFilter, Prisma.BatimentWhereInput>
   events?: Prisma.EventListRelationFilter
-  task?: Prisma.TasksListRelationFilter
-  breedingParam?: Prisma.BreedingParamsListRelationFilter
+  tasks?: Prisma.TasksListRelationFilter
+  breedingParams?: Prisma.BreedingParamsListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  users?: Prisma.UserListRelationFilter
 }
 
 export type LotOrderByWithRelationInput = {
@@ -311,13 +314,15 @@ export type LotOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   batiment?: Prisma.BatimentOrderByWithRelationInput
   events?: Prisma.EventOrderByRelationAggregateInput
-  task?: Prisma.TasksOrderByRelationAggregateInput
-  breedingParam?: Prisma.BreedingParamsOrderByRelationAggregateInput
+  tasks?: Prisma.TasksOrderByRelationAggregateInput
+  breedingParams?: Prisma.BreedingParamsOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  users?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type LotWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  batimentId_name?: Prisma.LotBatimentIdNameCompoundUniqueInput
   AND?: Prisma.LotWhereInput | Prisma.LotWhereInput[]
   OR?: Prisma.LotWhereInput[]
   NOT?: Prisma.LotWhereInput | Prisma.LotWhereInput[]
@@ -335,10 +340,11 @@ export type LotWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Lot"> | Date | string
   batiment?: Prisma.XOR<Prisma.BatimentScalarRelationFilter, Prisma.BatimentWhereInput>
   events?: Prisma.EventListRelationFilter
-  task?: Prisma.TasksListRelationFilter
-  breedingParam?: Prisma.BreedingParamsListRelationFilter
+  tasks?: Prisma.TasksListRelationFilter
+  breedingParams?: Prisma.BreedingParamsListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+  users?: Prisma.UserListRelationFilter
+}, "id" | "batimentId_name">
 
 export type LotOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -394,9 +400,10 @@ export type LotCreateInput = {
   updatedAt?: Date | string
   batiment: Prisma.BatimentCreateNestedOneWithoutLotsInput
   events?: Prisma.EventCreateNestedManyWithoutLotsInput
-  task?: Prisma.TasksCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedLotsInput
+  users?: Prisma.UserCreateNestedManyWithoutLotsInput
 }
 
 export type LotUncheckedCreateInput = {
@@ -414,8 +421,9 @@ export type LotUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLotsInput
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutLotsInput
 }
 
 export type LotUpdateInput = {
@@ -432,9 +440,10 @@ export type LotUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutLotsNestedInput
   events?: Prisma.EventUpdateManyWithoutLotsNestedInput
-  task?: Prisma.TasksUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedLotsNestedInput
+  users?: Prisma.UserUpdateManyWithoutLotsNestedInput
 }
 
 export type LotUncheckedUpdateInput = {
@@ -452,8 +461,9 @@ export type LotUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutLotsNestedInput
-  task?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutLotsNestedInput
 }
 
 export type LotCreateManyInput = {
@@ -510,6 +520,11 @@ export type LotListRelationFilter = {
 
 export type LotOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type LotBatimentIdNameCompoundUniqueInput = {
+  batimentId: string
+  name: string
 }
 
 export type LotCountOrderByAggregateInput = {
@@ -579,10 +594,22 @@ export type LotCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
 }
 
+export type LotCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutUsersInput, Prisma.LotUncheckedCreateWithoutUsersInput> | Prisma.LotCreateWithoutUsersInput[] | Prisma.LotUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutUsersInput | Prisma.LotCreateOrConnectWithoutUsersInput[]
+  connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+}
+
 export type LotUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.LotCreateWithoutCreatedByInput, Prisma.LotUncheckedCreateWithoutCreatedByInput> | Prisma.LotCreateWithoutCreatedByInput[] | Prisma.LotUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.LotCreateOrConnectWithoutCreatedByInput | Prisma.LotCreateOrConnectWithoutCreatedByInput[]
   createMany?: Prisma.LotCreateManyCreatedByInputEnvelope
+  connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+}
+
+export type LotUncheckedCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutUsersInput, Prisma.LotUncheckedCreateWithoutUsersInput> | Prisma.LotCreateWithoutUsersInput[] | Prisma.LotUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutUsersInput | Prisma.LotCreateOrConnectWithoutUsersInput[]
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
 }
 
@@ -600,6 +627,19 @@ export type LotUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.LotScalarWhereInput | Prisma.LotScalarWhereInput[]
 }
 
+export type LotUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutUsersInput, Prisma.LotUncheckedCreateWithoutUsersInput> | Prisma.LotCreateWithoutUsersInput[] | Prisma.LotUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutUsersInput | Prisma.LotCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutUsersInput | Prisma.LotUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+  disconnect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+  delete?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+  connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+  update?: Prisma.LotUpdateWithWhereUniqueWithoutUsersInput | Prisma.LotUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.LotUpdateManyWithWhereWithoutUsersInput | Prisma.LotUpdateManyWithWhereWithoutUsersInput[]
+  deleteMany?: Prisma.LotScalarWhereInput | Prisma.LotScalarWhereInput[]
+}
+
 export type LotUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.LotCreateWithoutCreatedByInput, Prisma.LotUncheckedCreateWithoutCreatedByInput> | Prisma.LotCreateWithoutCreatedByInput[] | Prisma.LotUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.LotCreateOrConnectWithoutCreatedByInput | Prisma.LotCreateOrConnectWithoutCreatedByInput[]
@@ -611,6 +651,19 @@ export type LotUncheckedUpdateManyWithoutCreatedByNestedInput = {
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   update?: Prisma.LotUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.LotUpdateWithWhereUniqueWithoutCreatedByInput[]
   updateMany?: Prisma.LotUpdateManyWithWhereWithoutCreatedByInput | Prisma.LotUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.LotScalarWhereInput | Prisma.LotScalarWhereInput[]
+}
+
+export type LotUncheckedUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutUsersInput, Prisma.LotUncheckedCreateWithoutUsersInput> | Prisma.LotCreateWithoutUsersInput[] | Prisma.LotUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutUsersInput | Prisma.LotCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutUsersInput | Prisma.LotUpsertWithWhereUniqueWithoutUsersInput[]
+  set?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+  disconnect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+  delete?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+  connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
+  update?: Prisma.LotUpdateWithWhereUniqueWithoutUsersInput | Prisma.LotUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.LotUpdateManyWithWhereWithoutUsersInput | Prisma.LotUpdateManyWithWhereWithoutUsersInput[]
   deleteMany?: Prisma.LotScalarWhereInput | Prisma.LotScalarWhereInput[]
 }
 
@@ -694,79 +747,79 @@ export type LotUncheckedUpdateManyWithoutEventsNestedInput = {
   deleteMany?: Prisma.LotScalarWhereInput | Prisma.LotScalarWhereInput[]
 }
 
-export type LotCreateNestedManyWithoutTaskInput = {
-  create?: Prisma.XOR<Prisma.LotCreateWithoutTaskInput, Prisma.LotUncheckedCreateWithoutTaskInput> | Prisma.LotCreateWithoutTaskInput[] | Prisma.LotUncheckedCreateWithoutTaskInput[]
-  connectOrCreate?: Prisma.LotCreateOrConnectWithoutTaskInput | Prisma.LotCreateOrConnectWithoutTaskInput[]
+export type LotCreateNestedManyWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutTasksInput, Prisma.LotUncheckedCreateWithoutTasksInput> | Prisma.LotCreateWithoutTasksInput[] | Prisma.LotUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutTasksInput | Prisma.LotCreateOrConnectWithoutTasksInput[]
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
 }
 
-export type LotUncheckedCreateNestedManyWithoutTaskInput = {
-  create?: Prisma.XOR<Prisma.LotCreateWithoutTaskInput, Prisma.LotUncheckedCreateWithoutTaskInput> | Prisma.LotCreateWithoutTaskInput[] | Prisma.LotUncheckedCreateWithoutTaskInput[]
-  connectOrCreate?: Prisma.LotCreateOrConnectWithoutTaskInput | Prisma.LotCreateOrConnectWithoutTaskInput[]
+export type LotUncheckedCreateNestedManyWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutTasksInput, Prisma.LotUncheckedCreateWithoutTasksInput> | Prisma.LotCreateWithoutTasksInput[] | Prisma.LotUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutTasksInput | Prisma.LotCreateOrConnectWithoutTasksInput[]
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
 }
 
-export type LotUpdateManyWithoutTaskNestedInput = {
-  create?: Prisma.XOR<Prisma.LotCreateWithoutTaskInput, Prisma.LotUncheckedCreateWithoutTaskInput> | Prisma.LotCreateWithoutTaskInput[] | Prisma.LotUncheckedCreateWithoutTaskInput[]
-  connectOrCreate?: Prisma.LotCreateOrConnectWithoutTaskInput | Prisma.LotCreateOrConnectWithoutTaskInput[]
-  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutTaskInput | Prisma.LotUpsertWithWhereUniqueWithoutTaskInput[]
+export type LotUpdateManyWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutTasksInput, Prisma.LotUncheckedCreateWithoutTasksInput> | Prisma.LotCreateWithoutTasksInput[] | Prisma.LotUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutTasksInput | Prisma.LotCreateOrConnectWithoutTasksInput[]
+  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutTasksInput | Prisma.LotUpsertWithWhereUniqueWithoutTasksInput[]
   set?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   disconnect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   delete?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
-  update?: Prisma.LotUpdateWithWhereUniqueWithoutTaskInput | Prisma.LotUpdateWithWhereUniqueWithoutTaskInput[]
-  updateMany?: Prisma.LotUpdateManyWithWhereWithoutTaskInput | Prisma.LotUpdateManyWithWhereWithoutTaskInput[]
+  update?: Prisma.LotUpdateWithWhereUniqueWithoutTasksInput | Prisma.LotUpdateWithWhereUniqueWithoutTasksInput[]
+  updateMany?: Prisma.LotUpdateManyWithWhereWithoutTasksInput | Prisma.LotUpdateManyWithWhereWithoutTasksInput[]
   deleteMany?: Prisma.LotScalarWhereInput | Prisma.LotScalarWhereInput[]
 }
 
-export type LotUncheckedUpdateManyWithoutTaskNestedInput = {
-  create?: Prisma.XOR<Prisma.LotCreateWithoutTaskInput, Prisma.LotUncheckedCreateWithoutTaskInput> | Prisma.LotCreateWithoutTaskInput[] | Prisma.LotUncheckedCreateWithoutTaskInput[]
-  connectOrCreate?: Prisma.LotCreateOrConnectWithoutTaskInput | Prisma.LotCreateOrConnectWithoutTaskInput[]
-  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutTaskInput | Prisma.LotUpsertWithWhereUniqueWithoutTaskInput[]
+export type LotUncheckedUpdateManyWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutTasksInput, Prisma.LotUncheckedCreateWithoutTasksInput> | Prisma.LotCreateWithoutTasksInput[] | Prisma.LotUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutTasksInput | Prisma.LotCreateOrConnectWithoutTasksInput[]
+  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutTasksInput | Prisma.LotUpsertWithWhereUniqueWithoutTasksInput[]
   set?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   disconnect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   delete?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
-  update?: Prisma.LotUpdateWithWhereUniqueWithoutTaskInput | Prisma.LotUpdateWithWhereUniqueWithoutTaskInput[]
-  updateMany?: Prisma.LotUpdateManyWithWhereWithoutTaskInput | Prisma.LotUpdateManyWithWhereWithoutTaskInput[]
+  update?: Prisma.LotUpdateWithWhereUniqueWithoutTasksInput | Prisma.LotUpdateWithWhereUniqueWithoutTasksInput[]
+  updateMany?: Prisma.LotUpdateManyWithWhereWithoutTasksInput | Prisma.LotUpdateManyWithWhereWithoutTasksInput[]
   deleteMany?: Prisma.LotScalarWhereInput | Prisma.LotScalarWhereInput[]
 }
 
-export type LotCreateNestedManyWithoutBreedingParamInput = {
-  create?: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamInput, Prisma.LotUncheckedCreateWithoutBreedingParamInput> | Prisma.LotCreateWithoutBreedingParamInput[] | Prisma.LotUncheckedCreateWithoutBreedingParamInput[]
-  connectOrCreate?: Prisma.LotCreateOrConnectWithoutBreedingParamInput | Prisma.LotCreateOrConnectWithoutBreedingParamInput[]
+export type LotCreateNestedManyWithoutBreedingParamsInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamsInput, Prisma.LotUncheckedCreateWithoutBreedingParamsInput> | Prisma.LotCreateWithoutBreedingParamsInput[] | Prisma.LotUncheckedCreateWithoutBreedingParamsInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutBreedingParamsInput | Prisma.LotCreateOrConnectWithoutBreedingParamsInput[]
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
 }
 
-export type LotUncheckedCreateNestedManyWithoutBreedingParamInput = {
-  create?: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamInput, Prisma.LotUncheckedCreateWithoutBreedingParamInput> | Prisma.LotCreateWithoutBreedingParamInput[] | Prisma.LotUncheckedCreateWithoutBreedingParamInput[]
-  connectOrCreate?: Prisma.LotCreateOrConnectWithoutBreedingParamInput | Prisma.LotCreateOrConnectWithoutBreedingParamInput[]
+export type LotUncheckedCreateNestedManyWithoutBreedingParamsInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamsInput, Prisma.LotUncheckedCreateWithoutBreedingParamsInput> | Prisma.LotCreateWithoutBreedingParamsInput[] | Prisma.LotUncheckedCreateWithoutBreedingParamsInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutBreedingParamsInput | Prisma.LotCreateOrConnectWithoutBreedingParamsInput[]
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
 }
 
-export type LotUpdateManyWithoutBreedingParamNestedInput = {
-  create?: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamInput, Prisma.LotUncheckedCreateWithoutBreedingParamInput> | Prisma.LotCreateWithoutBreedingParamInput[] | Prisma.LotUncheckedCreateWithoutBreedingParamInput[]
-  connectOrCreate?: Prisma.LotCreateOrConnectWithoutBreedingParamInput | Prisma.LotCreateOrConnectWithoutBreedingParamInput[]
-  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutBreedingParamInput | Prisma.LotUpsertWithWhereUniqueWithoutBreedingParamInput[]
+export type LotUpdateManyWithoutBreedingParamsNestedInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamsInput, Prisma.LotUncheckedCreateWithoutBreedingParamsInput> | Prisma.LotCreateWithoutBreedingParamsInput[] | Prisma.LotUncheckedCreateWithoutBreedingParamsInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutBreedingParamsInput | Prisma.LotCreateOrConnectWithoutBreedingParamsInput[]
+  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutBreedingParamsInput | Prisma.LotUpsertWithWhereUniqueWithoutBreedingParamsInput[]
   set?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   disconnect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   delete?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
-  update?: Prisma.LotUpdateWithWhereUniqueWithoutBreedingParamInput | Prisma.LotUpdateWithWhereUniqueWithoutBreedingParamInput[]
-  updateMany?: Prisma.LotUpdateManyWithWhereWithoutBreedingParamInput | Prisma.LotUpdateManyWithWhereWithoutBreedingParamInput[]
+  update?: Prisma.LotUpdateWithWhereUniqueWithoutBreedingParamsInput | Prisma.LotUpdateWithWhereUniqueWithoutBreedingParamsInput[]
+  updateMany?: Prisma.LotUpdateManyWithWhereWithoutBreedingParamsInput | Prisma.LotUpdateManyWithWhereWithoutBreedingParamsInput[]
   deleteMany?: Prisma.LotScalarWhereInput | Prisma.LotScalarWhereInput[]
 }
 
-export type LotUncheckedUpdateManyWithoutBreedingParamNestedInput = {
-  create?: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamInput, Prisma.LotUncheckedCreateWithoutBreedingParamInput> | Prisma.LotCreateWithoutBreedingParamInput[] | Prisma.LotUncheckedCreateWithoutBreedingParamInput[]
-  connectOrCreate?: Prisma.LotCreateOrConnectWithoutBreedingParamInput | Prisma.LotCreateOrConnectWithoutBreedingParamInput[]
-  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutBreedingParamInput | Prisma.LotUpsertWithWhereUniqueWithoutBreedingParamInput[]
+export type LotUncheckedUpdateManyWithoutBreedingParamsNestedInput = {
+  create?: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamsInput, Prisma.LotUncheckedCreateWithoutBreedingParamsInput> | Prisma.LotCreateWithoutBreedingParamsInput[] | Prisma.LotUncheckedCreateWithoutBreedingParamsInput[]
+  connectOrCreate?: Prisma.LotCreateOrConnectWithoutBreedingParamsInput | Prisma.LotCreateOrConnectWithoutBreedingParamsInput[]
+  upsert?: Prisma.LotUpsertWithWhereUniqueWithoutBreedingParamsInput | Prisma.LotUpsertWithWhereUniqueWithoutBreedingParamsInput[]
   set?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   disconnect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   delete?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
   connect?: Prisma.LotWhereUniqueInput | Prisma.LotWhereUniqueInput[]
-  update?: Prisma.LotUpdateWithWhereUniqueWithoutBreedingParamInput | Prisma.LotUpdateWithWhereUniqueWithoutBreedingParamInput[]
-  updateMany?: Prisma.LotUpdateManyWithWhereWithoutBreedingParamInput | Prisma.LotUpdateManyWithWhereWithoutBreedingParamInput[]
+  update?: Prisma.LotUpdateWithWhereUniqueWithoutBreedingParamsInput | Prisma.LotUpdateWithWhereUniqueWithoutBreedingParamsInput[]
+  updateMany?: Prisma.LotUpdateManyWithWhereWithoutBreedingParamsInput | Prisma.LotUpdateManyWithWhereWithoutBreedingParamsInput[]
   deleteMany?: Prisma.LotScalarWhereInput | Prisma.LotScalarWhereInput[]
 }
 
@@ -784,8 +837,9 @@ export type LotCreateWithoutCreatedByInput = {
   updatedAt?: Date | string
   batiment: Prisma.BatimentCreateNestedOneWithoutLotsInput
   events?: Prisma.EventCreateNestedManyWithoutLotsInput
-  task?: Prisma.TasksCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
+  users?: Prisma.UserCreateNestedManyWithoutLotsInput
 }
 
 export type LotUncheckedCreateWithoutCreatedByInput = {
@@ -802,8 +856,9 @@ export type LotUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLotsInput
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutLotsInput
 }
 
 export type LotCreateOrConnectWithoutCreatedByInput = {
@@ -814,6 +869,49 @@ export type LotCreateOrConnectWithoutCreatedByInput = {
 export type LotCreateManyCreatedByInputEnvelope = {
   data: Prisma.LotCreateManyCreatedByInput | Prisma.LotCreateManyCreatedByInput[]
   skipDuplicates?: boolean
+}
+
+export type LotCreateWithoutUsersInput = {
+  id?: string
+  order?: number
+  name: string
+  status?: string
+  startDate?: Date | string
+  actualEndDate?: Date | string | null
+  plannedEndDate?: Date | string | null
+  initialChicks: number
+  initialAge: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  batiment: Prisma.BatimentCreateNestedOneWithoutLotsInput
+  events?: Prisma.EventCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedLotsInput
+}
+
+export type LotUncheckedCreateWithoutUsersInput = {
+  id?: string
+  order?: number
+  name: string
+  status?: string
+  startDate?: Date | string
+  actualEndDate?: Date | string | null
+  plannedEndDate?: Date | string | null
+  initialChicks: number
+  initialAge: number
+  batimentId: string
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+}
+
+export type LotCreateOrConnectWithoutUsersInput = {
+  where: Prisma.LotWhereUniqueInput
+  create: Prisma.XOR<Prisma.LotCreateWithoutUsersInput, Prisma.LotUncheckedCreateWithoutUsersInput>
 }
 
 export type LotUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -851,6 +949,22 @@ export type LotScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Lot"> | Date | string
 }
 
+export type LotUpsertWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.LotWhereUniqueInput
+  update: Prisma.XOR<Prisma.LotUpdateWithoutUsersInput, Prisma.LotUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.LotCreateWithoutUsersInput, Prisma.LotUncheckedCreateWithoutUsersInput>
+}
+
+export type LotUpdateWithWhereUniqueWithoutUsersInput = {
+  where: Prisma.LotWhereUniqueInput
+  data: Prisma.XOR<Prisma.LotUpdateWithoutUsersInput, Prisma.LotUncheckedUpdateWithoutUsersInput>
+}
+
+export type LotUpdateManyWithWhereWithoutUsersInput = {
+  where: Prisma.LotScalarWhereInput
+  data: Prisma.XOR<Prisma.LotUpdateManyMutationInput, Prisma.LotUncheckedUpdateManyWithoutUsersInput>
+}
+
 export type LotCreateWithoutBatimentInput = {
   id?: string
   order?: number
@@ -864,9 +978,10 @@ export type LotCreateWithoutBatimentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventCreateNestedManyWithoutLotsInput
-  task?: Prisma.TasksCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedLotsInput
+  users?: Prisma.UserCreateNestedManyWithoutLotsInput
 }
 
 export type LotUncheckedCreateWithoutBatimentInput = {
@@ -883,8 +998,9 @@ export type LotUncheckedCreateWithoutBatimentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLotsInput
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutLotsInput
 }
 
 export type LotCreateOrConnectWithoutBatimentInput = {
@@ -926,9 +1042,10 @@ export type LotCreateWithoutEventsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   batiment: Prisma.BatimentCreateNestedOneWithoutLotsInput
-  task?: Prisma.TasksCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedLotsInput
+  users?: Prisma.UserCreateNestedManyWithoutLotsInput
 }
 
 export type LotUncheckedCreateWithoutEventsInput = {
@@ -945,8 +1062,9 @@ export type LotUncheckedCreateWithoutEventsInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutLotsInput
 }
 
 export type LotCreateOrConnectWithoutEventsInput = {
@@ -970,7 +1088,7 @@ export type LotUpdateManyWithWhereWithoutEventsInput = {
   data: Prisma.XOR<Prisma.LotUpdateManyMutationInput, Prisma.LotUncheckedUpdateManyWithoutEventsInput>
 }
 
-export type LotCreateWithoutTaskInput = {
+export type LotCreateWithoutTasksInput = {
   id?: string
   order?: number
   name: string
@@ -984,11 +1102,12 @@ export type LotCreateWithoutTaskInput = {
   updatedAt?: Date | string
   batiment: Prisma.BatimentCreateNestedOneWithoutLotsInput
   events?: Prisma.EventCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutLotsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedLotsInput
+  users?: Prisma.UserCreateNestedManyWithoutLotsInput
 }
 
-export type LotUncheckedCreateWithoutTaskInput = {
+export type LotUncheckedCreateWithoutTasksInput = {
   id?: string
   order?: number
   name: string
@@ -1003,31 +1122,32 @@ export type LotUncheckedCreateWithoutTaskInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLotsInput
-  breedingParam?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutLotsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutLotsInput
 }
 
-export type LotCreateOrConnectWithoutTaskInput = {
+export type LotCreateOrConnectWithoutTasksInput = {
   where: Prisma.LotWhereUniqueInput
-  create: Prisma.XOR<Prisma.LotCreateWithoutTaskInput, Prisma.LotUncheckedCreateWithoutTaskInput>
+  create: Prisma.XOR<Prisma.LotCreateWithoutTasksInput, Prisma.LotUncheckedCreateWithoutTasksInput>
 }
 
-export type LotUpsertWithWhereUniqueWithoutTaskInput = {
+export type LotUpsertWithWhereUniqueWithoutTasksInput = {
   where: Prisma.LotWhereUniqueInput
-  update: Prisma.XOR<Prisma.LotUpdateWithoutTaskInput, Prisma.LotUncheckedUpdateWithoutTaskInput>
-  create: Prisma.XOR<Prisma.LotCreateWithoutTaskInput, Prisma.LotUncheckedCreateWithoutTaskInput>
+  update: Prisma.XOR<Prisma.LotUpdateWithoutTasksInput, Prisma.LotUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.LotCreateWithoutTasksInput, Prisma.LotUncheckedCreateWithoutTasksInput>
 }
 
-export type LotUpdateWithWhereUniqueWithoutTaskInput = {
+export type LotUpdateWithWhereUniqueWithoutTasksInput = {
   where: Prisma.LotWhereUniqueInput
-  data: Prisma.XOR<Prisma.LotUpdateWithoutTaskInput, Prisma.LotUncheckedUpdateWithoutTaskInput>
+  data: Prisma.XOR<Prisma.LotUpdateWithoutTasksInput, Prisma.LotUncheckedUpdateWithoutTasksInput>
 }
 
-export type LotUpdateManyWithWhereWithoutTaskInput = {
+export type LotUpdateManyWithWhereWithoutTasksInput = {
   where: Prisma.LotScalarWhereInput
-  data: Prisma.XOR<Prisma.LotUpdateManyMutationInput, Prisma.LotUncheckedUpdateManyWithoutTaskInput>
+  data: Prisma.XOR<Prisma.LotUpdateManyMutationInput, Prisma.LotUncheckedUpdateManyWithoutTasksInput>
 }
 
-export type LotCreateWithoutBreedingParamInput = {
+export type LotCreateWithoutBreedingParamsInput = {
   id?: string
   order?: number
   name: string
@@ -1041,11 +1161,12 @@ export type LotCreateWithoutBreedingParamInput = {
   updatedAt?: Date | string
   batiment: Prisma.BatimentCreateNestedOneWithoutLotsInput
   events?: Prisma.EventCreateNestedManyWithoutLotsInput
-  task?: Prisma.TasksCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutLotsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedLotsInput
+  users?: Prisma.UserCreateNestedManyWithoutLotsInput
 }
 
-export type LotUncheckedCreateWithoutBreedingParamInput = {
+export type LotUncheckedCreateWithoutBreedingParamsInput = {
   id?: string
   order?: number
   name: string
@@ -1060,28 +1181,29 @@ export type LotUncheckedCreateWithoutBreedingParamInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLotsInput
-  task?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutLotsInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutLotsInput
 }
 
-export type LotCreateOrConnectWithoutBreedingParamInput = {
+export type LotCreateOrConnectWithoutBreedingParamsInput = {
   where: Prisma.LotWhereUniqueInput
-  create: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamInput, Prisma.LotUncheckedCreateWithoutBreedingParamInput>
+  create: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamsInput, Prisma.LotUncheckedCreateWithoutBreedingParamsInput>
 }
 
-export type LotUpsertWithWhereUniqueWithoutBreedingParamInput = {
+export type LotUpsertWithWhereUniqueWithoutBreedingParamsInput = {
   where: Prisma.LotWhereUniqueInput
-  update: Prisma.XOR<Prisma.LotUpdateWithoutBreedingParamInput, Prisma.LotUncheckedUpdateWithoutBreedingParamInput>
-  create: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamInput, Prisma.LotUncheckedCreateWithoutBreedingParamInput>
+  update: Prisma.XOR<Prisma.LotUpdateWithoutBreedingParamsInput, Prisma.LotUncheckedUpdateWithoutBreedingParamsInput>
+  create: Prisma.XOR<Prisma.LotCreateWithoutBreedingParamsInput, Prisma.LotUncheckedCreateWithoutBreedingParamsInput>
 }
 
-export type LotUpdateWithWhereUniqueWithoutBreedingParamInput = {
+export type LotUpdateWithWhereUniqueWithoutBreedingParamsInput = {
   where: Prisma.LotWhereUniqueInput
-  data: Prisma.XOR<Prisma.LotUpdateWithoutBreedingParamInput, Prisma.LotUncheckedUpdateWithoutBreedingParamInput>
+  data: Prisma.XOR<Prisma.LotUpdateWithoutBreedingParamsInput, Prisma.LotUncheckedUpdateWithoutBreedingParamsInput>
 }
 
-export type LotUpdateManyWithWhereWithoutBreedingParamInput = {
+export type LotUpdateManyWithWhereWithoutBreedingParamsInput = {
   where: Prisma.LotScalarWhereInput
-  data: Prisma.XOR<Prisma.LotUpdateManyMutationInput, Prisma.LotUncheckedUpdateManyWithoutBreedingParamInput>
+  data: Prisma.XOR<Prisma.LotUpdateManyMutationInput, Prisma.LotUncheckedUpdateManyWithoutBreedingParamsInput>
 }
 
 export type LotCreateManyCreatedByInput = {
@@ -1113,8 +1235,9 @@ export type LotUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutLotsNestedInput
   events?: Prisma.EventUpdateManyWithoutLotsNestedInput
-  task?: Prisma.TasksUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
+  users?: Prisma.UserUpdateManyWithoutLotsNestedInput
 }
 
 export type LotUncheckedUpdateWithoutCreatedByInput = {
@@ -1131,8 +1254,9 @@ export type LotUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutLotsNestedInput
-  task?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutLotsNestedInput
 }
 
 export type LotUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1146,6 +1270,60 @@ export type LotUncheckedUpdateManyWithoutCreatedByInput = {
   initialChicks?: Prisma.IntFieldUpdateOperationsInput | number
   initialAge?: Prisma.IntFieldUpdateOperationsInput | number
   batimentId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LotUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  plannedEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  initialChicks?: Prisma.IntFieldUpdateOperationsInput | number
+  initialAge?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batiment?: Prisma.BatimentUpdateOneRequiredWithoutLotsNestedInput
+  events?: Prisma.EventUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedLotsNestedInput
+}
+
+export type LotUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  plannedEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  initialChicks?: Prisma.IntFieldUpdateOperationsInput | number
+  initialAge?: Prisma.IntFieldUpdateOperationsInput | number
+  batimentId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  events?: Prisma.EventUncheckedUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+}
+
+export type LotUncheckedUpdateManyWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  plannedEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  initialChicks?: Prisma.IntFieldUpdateOperationsInput | number
+  initialAge?: Prisma.IntFieldUpdateOperationsInput | number
+  batimentId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1178,9 +1356,10 @@ export type LotUpdateWithoutBatimentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUpdateManyWithoutLotsNestedInput
-  task?: Prisma.TasksUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedLotsNestedInput
+  users?: Prisma.UserUpdateManyWithoutLotsNestedInput
 }
 
 export type LotUncheckedUpdateWithoutBatimentInput = {
@@ -1197,8 +1376,9 @@ export type LotUncheckedUpdateWithoutBatimentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutLotsNestedInput
-  task?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutLotsNestedInput
 }
 
 export type LotUncheckedUpdateManyWithoutBatimentInput = {
@@ -1229,9 +1409,10 @@ export type LotUpdateWithoutEventsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutLotsNestedInput
-  task?: Prisma.TasksUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedLotsNestedInput
+  users?: Prisma.UserUpdateManyWithoutLotsNestedInput
 }
 
 export type LotUncheckedUpdateWithoutEventsInput = {
@@ -1248,8 +1429,9 @@ export type LotUncheckedUpdateWithoutEventsInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  task?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutLotsNestedInput
 }
 
 export type LotUncheckedUpdateManyWithoutEventsInput = {
@@ -1268,7 +1450,7 @@ export type LotUncheckedUpdateManyWithoutEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LotUpdateWithoutTaskInput = {
+export type LotUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1282,11 +1464,12 @@ export type LotUpdateWithoutTaskInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutLotsNestedInput
   events?: Prisma.EventUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutLotsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedLotsNestedInput
+  users?: Prisma.UserUpdateManyWithoutLotsNestedInput
 }
 
-export type LotUncheckedUpdateWithoutTaskInput = {
+export type LotUncheckedUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1301,10 +1484,11 @@ export type LotUncheckedUpdateWithoutTaskInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutLotsNestedInput
-  breedingParam?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutLotsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutLotsNestedInput
 }
 
-export type LotUncheckedUpdateManyWithoutTaskInput = {
+export type LotUncheckedUpdateManyWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1320,7 +1504,7 @@ export type LotUncheckedUpdateManyWithoutTaskInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LotUpdateWithoutBreedingParamInput = {
+export type LotUpdateWithoutBreedingParamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1334,11 +1518,12 @@ export type LotUpdateWithoutBreedingParamInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   batiment?: Prisma.BatimentUpdateOneRequiredWithoutLotsNestedInput
   events?: Prisma.EventUpdateManyWithoutLotsNestedInput
-  task?: Prisma.TasksUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutLotsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedLotsNestedInput
+  users?: Prisma.UserUpdateManyWithoutLotsNestedInput
 }
 
-export type LotUncheckedUpdateWithoutBreedingParamInput = {
+export type LotUncheckedUpdateWithoutBreedingParamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1353,10 +1538,11 @@ export type LotUncheckedUpdateWithoutBreedingParamInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutLotsNestedInput
-  task?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutLotsNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutLotsNestedInput
 }
 
-export type LotUncheckedUpdateManyWithoutBreedingParamInput = {
+export type LotUncheckedUpdateManyWithoutBreedingParamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1379,14 +1565,16 @@ export type LotUncheckedUpdateManyWithoutBreedingParamInput = {
 
 export type LotCountOutputType = {
   events: number
-  task: number
-  breedingParam: number
+  tasks: number
+  breedingParams: number
+  users: number
 }
 
 export type LotCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   events?: boolean | LotCountOutputTypeCountEventsArgs
-  task?: boolean | LotCountOutputTypeCountTaskArgs
-  breedingParam?: boolean | LotCountOutputTypeCountBreedingParamArgs
+  tasks?: boolean | LotCountOutputTypeCountTasksArgs
+  breedingParams?: boolean | LotCountOutputTypeCountBreedingParamsArgs
+  users?: boolean | LotCountOutputTypeCountUsersArgs
 }
 
 /**
@@ -1409,15 +1597,22 @@ export type LotCountOutputTypeCountEventsArgs<ExtArgs extends runtime.Types.Exte
 /**
  * LotCountOutputType without action
  */
-export type LotCountOutputTypeCountTaskArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type LotCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TasksWhereInput
 }
 
 /**
  * LotCountOutputType without action
  */
-export type LotCountOutputTypeCountBreedingParamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type LotCountOutputTypeCountBreedingParamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BreedingParamsWhereInput
+}
+
+/**
+ * LotCountOutputType without action
+ */
+export type LotCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
 }
 
 
@@ -1437,9 +1632,10 @@ export type LotSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   updatedAt?: boolean
   batiment?: boolean | Prisma.BatimentDefaultArgs<ExtArgs>
   events?: boolean | Prisma.Lot$eventsArgs<ExtArgs>
-  task?: boolean | Prisma.Lot$taskArgs<ExtArgs>
-  breedingParam?: boolean | Prisma.Lot$breedingParamArgs<ExtArgs>
+  tasks?: boolean | Prisma.Lot$tasksArgs<ExtArgs>
+  breedingParams?: boolean | Prisma.Lot$breedingParamsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Lot$usersArgs<ExtArgs>
   _count?: boolean | Prisma.LotCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lot"]>
 
@@ -1499,9 +1695,10 @@ export type LotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
 export type LotInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   batiment?: boolean | Prisma.BatimentDefaultArgs<ExtArgs>
   events?: boolean | Prisma.Lot$eventsArgs<ExtArgs>
-  task?: boolean | Prisma.Lot$taskArgs<ExtArgs>
-  breedingParam?: boolean | Prisma.Lot$breedingParamArgs<ExtArgs>
+  tasks?: boolean | Prisma.Lot$tasksArgs<ExtArgs>
+  breedingParams?: boolean | Prisma.Lot$breedingParamsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Lot$usersArgs<ExtArgs>
   _count?: boolean | Prisma.LotCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LotIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1518,9 +1715,10 @@ export type $LotPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   objects: {
     batiment: Prisma.$BatimentPayload<ExtArgs>
     events: Prisma.$EventPayload<ExtArgs>[]
-    task: Prisma.$TasksPayload<ExtArgs>[]
-    breedingParam: Prisma.$BreedingParamsPayload<ExtArgs>[]
+    tasks: Prisma.$TasksPayload<ExtArgs>[]
+    breedingParams: Prisma.$BreedingParamsPayload<ExtArgs>[]
     createdBy: Prisma.$UserPayload<ExtArgs>
+    users: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1932,9 +2130,10 @@ export interface Prisma__LotClient<T, Null = never, ExtArgs extends runtime.Type
   readonly [Symbol.toStringTag]: "PrismaPromise"
   batiment<T extends Prisma.BatimentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BatimentDefaultArgs<ExtArgs>>): Prisma.Prisma__BatimentClient<runtime.Types.Result.GetResult<Prisma.$BatimentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   events<T extends Prisma.Lot$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lot$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  task<T extends Prisma.Lot$taskArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lot$taskArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  breedingParam<T extends Prisma.Lot$breedingParamArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lot$breedingParamArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BreedingParamsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.Lot$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lot$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  breedingParams<T extends Prisma.Lot$breedingParamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lot$breedingParamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BreedingParamsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.Lot$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lot$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2397,9 +2596,9 @@ export type Lot$eventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 /**
- * Lot.task
+ * Lot.tasks
  */
-export type Lot$taskArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Lot$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Tasks
    */
@@ -2421,9 +2620,9 @@ export type Lot$taskArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 }
 
 /**
- * Lot.breedingParam
+ * Lot.breedingParams
  */
-export type Lot$breedingParamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Lot$breedingParamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the BreedingParams
    */
@@ -2442,6 +2641,30 @@ export type Lot$breedingParamArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.BreedingParamsScalarFieldEnum | Prisma.BreedingParamsScalarFieldEnum[]
+}
+
+/**
+ * Lot.users
+ */
+export type Lot$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

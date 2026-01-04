@@ -1,23 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../lib/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-////////////////////////////
-/////  Modèles Auth   //////
-////////////////////////////
+///////////////////////////////////
+/////  Modèles Better-Auth   ////// 
+///////////////////////////////////
+
 model User {
-  id            String   @id @default(cuid())
-  name          String
-  email         String   @unique
-  emailVerified Boolean  @default(false)
-  image         String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id               String   @id @default(cuid())
+  name             String?
+  email            String   @unique
+  emailVerified    Boolean  @default(false)
+  image            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  twoFactorEnabled Boolean  @default(false)
 
   // Auth relations
   sessions Session[]
@@ -27,43 +36,47 @@ model User {
   ownedTeams Team[]     @relation("TeamOwner")
   userTeams  UserTeam[]
 
-  createdItems       Item[]           @relation("ItemCreator")
-  createdEquipements Equipement[]     @relation("EquipementCreator")
-  createdLots        Lot[]            @relation("LotCreator")
-  phases             Phase[]          @relation("EquipementCreator")
-  events             Event[]          @relation("EquipementCreator")
-  tasks              Tasks[]          @relation("EquipementCreator")
-  breedingParams     BreedingParams[] @relation("EquipementCreator")
-  settings           Setting[]        @relation("EquipementCreator")
+  createdItems          Item[]           @relation("ItemCreatedBy")
+  createdEquipements    Equipement[]     @relation("EquipementCreatedBy")
+  createdLots           Lot[]            @relation("LotCreatedBy")
+  createdPhases         Phase[]          @relation("PhaseCreatedBy")
+  createdEvents         Event[]          @relation("EventCreatedBy")
+  createdTasks          Tasks[]          @relation("TaskCreatedBy")
+  createdBreedingParams BreedingParams[] @relation("BreedingParamsCreatedBy")
+  createdSettings       Setting[]        @relation("SettingCreatedBy")
+  items                 Item[]
+  equipements           Equipement[]
+  phases                Phase[]
+  events                Event[]
+  tasks                 Tasks[]
+  breedingParams        BreedingParams[]
+  lots                  Lot[]
+  settings              Setting[]
 
+  @@index([email])
+  @@index([createdAt])
   @@map("users")
 }
 
 model Session {
   id        String   @id @default(cuid())
-  userId    String
-  token     String   @unique
   expiresAt DateTime
-  ipAddress String?
-  userAgent String?
+  token     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([token])
-  @@index([userId])
   @@map("sessions")
 }
 
 model Account {
-  id         String @id @default(cuid())
-  accountId  String
-  providerId String
-  userId     String
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -73,22 +86,35 @@ model Account {
   password              String?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([providerId, accountId])
-  @@index([userId])
   @@map("accounts")
 }
 
-model Verification {
+model VerificationToken {
   id         String   @id @default(cuid())
   identifier String
-  value      String
+  token      String
   expiresAt  DateTime
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  @@index([identifier, value])
-  @@map("verifications")
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+////////////////////////
+///// ENUMS /////////
+////////////////////////
+enum SourceType {
+  predicted
+  observed
+}
+
+enum TeamType {
+  ORGANIZATION
+  TEAM
+  FARM
 }
 
 //////////////////
@@ -97,7 +123,7 @@ model Verification {
 model Item {
   id          String  @id @default(cuid())
   order       Int     @default(0)
-  TypeItem    String  @default("") // Epic | feature/ us | Task | Model| Champs|
+  TypeItem    String  @default("")
   name        String
   description String?
   parentId    String?
@@ -108,9 +134,11 @@ model Item {
 
   // Metadata
   createdById String
-  createdBy   User     @relation("ItemCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User     @relation("ItemCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  users User[]
 
   @@index([parentId])
   @@index([createdById])
@@ -121,10 +149,10 @@ model Item {
 //////   Teams   /////
 //////////////////////
 model Team {
-  id       String  @id @default(cuid())
-  order    Int     @default(0)
+  id       String   @id @default(cuid())
+  order    Int      @default(0)
   name     String
-  type     String  @default("TEAM") // ORGANIZATION | TEAM | FARM
+  type     TeamType @default(TEAM)
   parentId String?
 
   // Relations
@@ -132,11 +160,7 @@ model Team {
   children  Team[]     @relation("TeamHierarchy")
   members   UserTeam[]
   batiments Batiment[]
-
-  // 1-1 with Setting
-  setting Setting?
-
-  // Calendar
+  setting   Setting?
 
   // Metadata
   ownerId   String
@@ -154,7 +178,7 @@ model UserTeam {
   id     String @id @default(cuid())
   teamId String
   userId String
-  role   String @default("member") // owner|admin|member|viewer
+  role   String @default("member")
 
   team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -205,9 +229,11 @@ model Equipement {
 
   // Metadata
   createdById String
-  createdBy   User     @relation("EquipementCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User     @relation("EquipementCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  users User[]
 
   @@index([batimentId])
   @@index([createdById])
@@ -215,73 +241,82 @@ model Equipement {
 }
 
 /////////////////////////////////////////
-//////   Breeding plannification   /////
-///////////////////////////////////////
+//////   Breeding plannification   //////
+/////////////////////////////////////////
 
 model LifeCircle {
-  id    String  @id @default(cuid())
-  order Int     @default(0)
-  type  String // pondeuse | chair
-  phase Phase[] //Démarrage, Croissance, Pré-ponte, Mise en ponte, Monté en ponte, Pic de ponte, Plateau de ponte, Fin de cycle
+  id     String  @id @default(cuid())
+  order  Int     @default(0)
+  type   String
+  phases Phase[]
 }
 
 model Phase {
-  id            String           @id @default(cuid())
-  order         Int              @default(0)
-  name          String
-  weekStart     DateTime
-  weekEnd       DateTime
-  events        Event[] // objectif de poid, consomation de Gr, ponte
-  task          Tasks[] // prophylavie, intervention
-  breedingParam BreedingParams[] // reglage environement
-  lifeCircleId  String
-  lifeCircle    LifeCircle       @relation(fields: [lifeCircleId], references: [id], onDelete: Cascade)
+  id             String           @id @default(cuid())
+  order          Int              @default(0)
+  name           String
+  weekStart      DateTime
+  weekEnd        DateTime
+  events         Event[]
+  tasks          Tasks[]
+  breedingParams BreedingParams[]
+  lifeCircleId   String
+  lifeCircle     LifeCircle       @relation(fields: [lifeCircleId], references: [id], onDelete: Cascade)
 
   // Metadata
   createdById String
-  createdBy   User     @relation("EquipementCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User     @relation("PhaseCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  users User[]
 }
 
 model Event {
-  id          String  @id @default(cuid())
-  source      String  @default("predicted") // | observed (validation)
-  predictedId String? // Référence à l'id de l'Event prédit (si source = "observed")
+  id           String     @id @default(cuid())
+  source       SourceType @default(predicted)
+  predictedId  String?
+  predicted    Event?     @relation("EventPrediction", fields: [predictedId], references: [id])
+  observations Event[]    @relation("EventPrediction")
 
   order       Int      @default(0)
   name        String
   day         DateTime
-  currentAge  Int // en  J
-  Cheptel     Int // % restant de poule calculé dans l'app 
-  weightGrams Int // Objectif de poid en Gr,
-  feedAmount  Json //Alimtype et FeedQuantity
-  nbEggs      Int // ex ; 0.88 
-  nbeggS      Int // en % pourcalcul du nombre d'oeuf dans l'app
-  nbeggM      Int // en % pourcalcul du nombre d'oeuf dans l'app
-  nbeggL      Int // en % pourcalcul du nombre d'oeuf dans l'app
-  nbeggXL     Int // en % pourcalcul du nombre d'oeuf dans l'app
+  currentAge  Int
+  Cheptel     Int
+  weightGrams Int
+  feedAmount  Json
+  nbEggs      Int
+  nbeggS      Int
+  nbeggM      Int
+  nbeggL      Int
+  nbeggXL     Int
 
   phaseId String?
   phase   Phase?  @relation(fields: [phaseId], references: [id])
 
-  lots        Lot[]
+  lots Lot[]
+
   // Metadata
   createdById String
-  createdBy   User     @relation("EquipementCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User     @relation("EventCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  users User[]
 }
 
 model Tasks {
-  id          String  @id @default(cuid())
-  source      String  @default("predicted") // | observed (validation)
-  predictedId String? // Référence à l'id de l'Event prédit (si source = "observed")
+  id           String     @id @default(cuid())
+  source       SourceType @default(predicted)
+  predictedId  String?
+  predicted    Tasks?     @relation("TaskPrediction", fields: [predictedId], references: [id])
+  observations Tasks[]    @relation("TaskPrediction")
 
   order      Int      @default(0)
   name       String
   day        DateTime
-  currentAge Int // en  J
+  currentAge Int
   taskList   String[]
 
   phaseId String?
@@ -291,37 +326,45 @@ model Tasks {
 
   // Metadata
   createdById String
-  createdBy   User     @relation("EquipementCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User     @relation("TaskCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  users User[]
 }
 
 model BreedingParams {
-  id          String  @id @default(cuid())
-  source      String  @default("predicted") // | observed (validation)
-  predictedId String? // Référence à l'id de l'Event prédit (si source = "observed")
+  id           String           @id @default(cuid())
+  source       SourceType       @default(predicted)
+  predictedId  String?
+  predicted    BreedingParams?  @relation("BreedingParamsPrediction", fields: [predictedId], references: [id])
+  observations BreedingParams[] @relation("BreedingParamsPrediction")
 
   order          Int      @default(0)
   day            DateTime
-  currentAge     Int // en  J
-  temperature    String // °C
-  humidity       String // 40%,
-  lightHours     String // 15 h,
-  lightIntensity String // 25 mix,
-  phase          Phase?   @relation(fields: [phaseId], references: [id])
-  phaseId        String?
+  currentAge     Int
+  temperature    String
+  humidity       String
+  lightHours     String
+  lightIntensity String
 
-  lots        Lot[] // Metadata
+  phaseId String?
+  phase   Phase?  @relation(fields: [phaseId], references: [id])
+
+  lots Lot[]
+
+  // Metadata
   createdById String
-  createdBy   User     @relation("EquipementCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User     @relation("BreedingParamsCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  users User[]
 }
 
 ///////////////////////
 /////   Breeding   ////
 ///////////////////////
-
 model Lot {
   id             String           @id @default(cuid())
   order          Int              @default(0)
@@ -334,17 +377,19 @@ model Lot {
   initialAge     Int
   batimentId     String
   batiment       Batiment         @relation(fields: [batimentId], references: [id], onDelete: Cascade)
-  events         Event[] // objectif de poid, consomation de Gr, ponte
-  task           Tasks[] // prophylavie, intervention
-  breedingParam  BreedingParams[] // reglage environement
-  // 1 Lot -> N LotEvent
+  events         Event[]
+  tasks          Tasks[]
+  breedingParams BreedingParams[]
 
   // Metadata
   createdById String
-  createdBy   User     @relation("LotCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User     @relation("LotCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  users User[]
+
+  @@unique([batimentId, name])
   @@index([batimentId])
   @@index([status])
   @@index([startDate])
@@ -378,9 +423,11 @@ model Setting {
 
   // Metadata
   createdById String
-  createdBy   User     @relation("EquipementCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy   User     @relation("SettingCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  users User[]
 
   @@map("settings")
 }
@@ -394,68 +441,6 @@ model Calendar {
   title       String
   description String?
 
-  // Relations
-
-  // Metadata
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
-/**
- * Scénario 1 : Création d'un lot et génération des données prédites
- * Contexte :
- * L'utilisateur est un éleveur (membre d'une équipe/ferme) et souhaite démarrer un nouveau lot de poules pondeuses.
- * L'application a déjà configuré un modèle de cycle de vie (LifeCircle) pour les pondeuses, avec des phases (Phase) prédéfinies.
- * Étapes :
- * Création du lot :
- * L'utilisateur se rend dans la section "Lots" de son bâtiment et clique sur "Créer un lot".
- * Il remplit le formulaire :
- * Nom du lot : "Lot Pondeuses Avril 2024"
- * Bâtiment : sélectionne le bâtiment "Bâtiment A"
- * Type de volaille : Pondeuses
- * Date de démarrage : 01/04/2024
- * Nombre de poussins : 5000
- * Âge initial des poussins : 1 jour (ou 0, selon la convention)
- * Il soumet le formulaire.
- * Génération des données prédites :
- * À la création du lot, l'application va :
- * Récupérer le modèle de cycle de vie (LifeCircle) correspondant au type "pondeuse".
- * Pour chaque phase (Phase) dans le cycle de vie, créer des événements (Event), tâches (Tasks) et paramètres d'élevage (BreedingParams) prédits pour le lot, en fonction de la date de démarrage et de l'âge initial.
- * Ces données sont créées avec source = "predicted".
- * Exemple de données générées :
- * Événements (Event) :
- * Objectif de poids à 7 jours : 80g, consommation alimentaire : 15g/jour, ponte : 0%
- * Objectif de poids à 14 jours : 150g, consommation alimentaire : 28g/jour, ponte : 0%
- * ... jusqu'à la fin du cycle.
- * Tâches (Tasks) :
- * Jour 1 : Vaccination Marek
- * Jour 10 : Décrochage bec
- * ... etc.
- * Paramètres d'élevage (BreedingParams) :
- * Semaine 1-2 : Température 33°C, humidité 60%, lumière 23h
- * Semaine 3-4 : Température 30°C, humidité 55%, lumière 20h
- * ... etc.
- * Visualisation :
- * L'utilisateur peut maintenant voir dans le détail du lot un calendrier avec tous les événements et tâches prévus, ainsi que les paramètres d'élevage à appliquer.
- * Scénario 2 : Utilisation des prédictions et validation (saisie des observations réelles)
- * Contexte :
- * Le lot est en cours d'élevage. L'utilisateur doit effectuer un suivi quotidien ou hebdomadaire.
- * Étapes :
- * Suivi des paramètres d'élevage :
- * Chaque jour, l'utilisateur consulte les paramètres prédits (température, humidité, etc.) et les ajuste en fonction de la réalité.
- * Il peut valider ces paramètres en créant une nouvelle entrée dans BreedingParams avec source = "observed" et en les associant au lot (via le champ phaseId ou directement au lot ? Note : dans le modèle, BreedingParams est lié à une phase, mais aussi on a des BreedingParams au niveau du lot ?).
- * Note : Il semble y avoir une relation entre Lot et BreedingParams (via lot.breedingParam), mais aussi entre Phase et BreedingParams. Il faut clarifier comment les paramètres prédits sont stockés (via le modèle de phase) et comment les observations sont liées (peut-être directement au lot).
- * Suivi des événements :
- * Par exemple, à 7 jours, l'utilisateur pèse un échantillon de poulets et obtient un poids moyen de 85g. Il saisit cet événement observé.
- * L'application lui montre l'objectif prédit (80g) et il peut enregistrer la valeur observée avec source = "observed".
- * Suivi des tâches :
- * L'utilisateur consulte les tâches planifiées pour la journée. Par exemple, "Vaccination contre la maladie de Newcastle".
- * Après avoir effectué la tâche, il la marque comme réalisée (ce qui peut créer une nouvelle entrée Tasks avec source = "observed" ou simplement mettre à jour la tâche prédite ?).
- * Analyse des écarts :
- * L'application peut générer des rapports montrant les écarts entre les prédictions et les observations, permettant à l'éleveur d'ajuster ses pratiques.
- * Remarques sur le modèle de données :
- * Dans le modèle actuel, Event, Tasks et BreedingParams ont un champ source qui peut être "predicted" ou "observed".
- * Cependant, il n'est pas clair comment les observations sont liées aux prédictions. Par exemple, pour un événement prédit (objectif de poids à 7 jours), on voudrait peut-être enregistrer la valeur observée pour le même jour et le même type d'événement.
- * Une approche pourrait être d'avoir une relation entre l'événement prédit et l'événement observé (par exemple, un champ predictedEventId dans l'événement observé). Mais dans le modèle actuel, ce n'est pas prévu.
- */

@@ -9,7 +9,18 @@
 * 🟢 You can import this file directly.
 */
 
+export const SourceType = {
+  predicted: 'predicted',
+  observed: 'observed'
+} as const
+
+export type SourceType = (typeof SourceType)[keyof typeof SourceType]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const TeamType = {
+  ORGANIZATION: 'ORGANIZATION',
+  TEAM: 'TEAM',
+  FARM: 'FARM'
+} as const
+
+export type TeamType = (typeof TeamType)[keyof typeof TeamType]

@@ -8,15 +8,15 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model User
- * /////////////////////////
- * //  Modèles Auth   //////
- * /////////////////////////
+ * ////////////////////////////////
+ * //  Modèles Better-Auth   ////// 
+ * ////////////////////////////////
  */
 export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayload>
 
@@ -163,7 +163,7 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type UserGroupByOutputType = {
   id: string
-  name: string
+  name: string | null
   email: string
   emailVerified: boolean
   image: string | null
@@ -194,7 +194,7 @@ export type UserWhereInput = {
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
-  name?: Prisma.StringFilter<"User"> | string
+  name?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringFilter<"User"> | string
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
@@ -207,16 +207,24 @@ export type UserWhereInput = {
   createdItems?: Prisma.ItemListRelationFilter
   createdEquipements?: Prisma.EquipementListRelationFilter
   createdLots?: Prisma.LotListRelationFilter
+  createdPhases?: Prisma.PhaseListRelationFilter
+  createdEvents?: Prisma.EventListRelationFilter
+  createdTasks?: Prisma.TasksListRelationFilter
+  createdBreedingParams?: Prisma.BreedingParamsListRelationFilter
+  createdSettings?: Prisma.SettingListRelationFilter
+  items?: Prisma.ItemListRelationFilter
+  equipements?: Prisma.EquipementListRelationFilter
   phases?: Prisma.PhaseListRelationFilter
   events?: Prisma.EventListRelationFilter
   tasks?: Prisma.TasksListRelationFilter
   breedingParams?: Prisma.BreedingParamsListRelationFilter
+  lots?: Prisma.LotListRelationFilter
   settings?: Prisma.SettingListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  name?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -229,10 +237,18 @@ export type UserOrderByWithRelationInput = {
   createdItems?: Prisma.ItemOrderByRelationAggregateInput
   createdEquipements?: Prisma.EquipementOrderByRelationAggregateInput
   createdLots?: Prisma.LotOrderByRelationAggregateInput
+  createdPhases?: Prisma.PhaseOrderByRelationAggregateInput
+  createdEvents?: Prisma.EventOrderByRelationAggregateInput
+  createdTasks?: Prisma.TasksOrderByRelationAggregateInput
+  createdBreedingParams?: Prisma.BreedingParamsOrderByRelationAggregateInput
+  createdSettings?: Prisma.SettingOrderByRelationAggregateInput
+  items?: Prisma.ItemOrderByRelationAggregateInput
+  equipements?: Prisma.EquipementOrderByRelationAggregateInput
   phases?: Prisma.PhaseOrderByRelationAggregateInput
   events?: Prisma.EventOrderByRelationAggregateInput
   tasks?: Prisma.TasksOrderByRelationAggregateInput
   breedingParams?: Prisma.BreedingParamsOrderByRelationAggregateInput
+  lots?: Prisma.LotOrderByRelationAggregateInput
   settings?: Prisma.SettingOrderByRelationAggregateInput
 }
 
@@ -242,7 +258,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  name?: Prisma.StringFilter<"User"> | string
+  name?: Prisma.StringNullableFilter<"User"> | string | null
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -254,16 +270,24 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdItems?: Prisma.ItemListRelationFilter
   createdEquipements?: Prisma.EquipementListRelationFilter
   createdLots?: Prisma.LotListRelationFilter
+  createdPhases?: Prisma.PhaseListRelationFilter
+  createdEvents?: Prisma.EventListRelationFilter
+  createdTasks?: Prisma.TasksListRelationFilter
+  createdBreedingParams?: Prisma.BreedingParamsListRelationFilter
+  createdSettings?: Prisma.SettingListRelationFilter
+  items?: Prisma.ItemListRelationFilter
+  equipements?: Prisma.EquipementListRelationFilter
   phases?: Prisma.PhaseListRelationFilter
   events?: Prisma.EventListRelationFilter
   tasks?: Prisma.TasksListRelationFilter
   breedingParams?: Prisma.BreedingParamsListRelationFilter
+  lots?: Prisma.LotListRelationFilter
   settings?: Prisma.SettingListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  name?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -279,7 +303,7 @@ export type UserScalarWhereWithAggregatesInput = {
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
-  name?: Prisma.StringWithAggregatesFilter<"User"> | string
+  name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -289,7 +313,7 @@ export type UserScalarWhereWithAggregatesInput = {
 
 export type UserCreateInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -302,16 +326,24 @@ export type UserCreateInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -324,16 +356,24 @@ export type UserUncheckedCreateInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -346,16 +386,24 @@ export type UserUpdateInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -368,16 +416,24 @@ export type UserUncheckedUpdateInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -387,7 +443,7 @@ export type UserCreateManyInput = {
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -397,7 +453,7 @@ export type UserUpdateManyMutationInput = {
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -440,16 +496,26 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -490,12 +556,50 @@ export type UserCreateNestedOneWithoutCreatedItemsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
+export type UserCreateNestedManyWithoutItemsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutItemsInput, Prisma.UserUncheckedCreateWithoutItemsInput> | Prisma.UserCreateWithoutItemsInput[] | Prisma.UserUncheckedCreateWithoutItemsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutItemsInput | Prisma.UserCreateOrConnectWithoutItemsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutItemsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutItemsInput, Prisma.UserUncheckedCreateWithoutItemsInput> | Prisma.UserCreateWithoutItemsInput[] | Prisma.UserUncheckedCreateWithoutItemsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutItemsInput | Prisma.UserCreateOrConnectWithoutItemsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
 export type UserUpdateOneRequiredWithoutCreatedItemsNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedItemsInput, Prisma.UserUncheckedCreateWithoutCreatedItemsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedItemsInput
   upsert?: Prisma.UserUpsertWithoutCreatedItemsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedItemsInput, Prisma.UserUpdateWithoutCreatedItemsInput>, Prisma.UserUncheckedUpdateWithoutCreatedItemsInput>
+}
+
+export type UserUpdateManyWithoutItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutItemsInput, Prisma.UserUncheckedCreateWithoutItemsInput> | Prisma.UserCreateWithoutItemsInput[] | Prisma.UserUncheckedCreateWithoutItemsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutItemsInput | Prisma.UserCreateOrConnectWithoutItemsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutItemsInput | Prisma.UserUpsertWithWhereUniqueWithoutItemsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutItemsInput | Prisma.UserUpdateWithWhereUniqueWithoutItemsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutItemsInput | Prisma.UserUpdateManyWithWhereWithoutItemsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutItemsInput, Prisma.UserUncheckedCreateWithoutItemsInput> | Prisma.UserCreateWithoutItemsInput[] | Prisma.UserUncheckedCreateWithoutItemsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutItemsInput | Prisma.UserCreateOrConnectWithoutItemsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutItemsInput | Prisma.UserUpsertWithWhereUniqueWithoutItemsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutItemsInput | Prisma.UserUpdateWithWhereUniqueWithoutItemsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutItemsInput | Prisma.UserUpdateManyWithWhereWithoutItemsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type UserCreateNestedOneWithoutOwnedTeamsInput = {
@@ -532,6 +636,18 @@ export type UserCreateNestedOneWithoutCreatedEquipementsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
+export type UserCreateNestedManyWithoutEquipementsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEquipementsInput, Prisma.UserUncheckedCreateWithoutEquipementsInput> | Prisma.UserCreateWithoutEquipementsInput[] | Prisma.UserUncheckedCreateWithoutEquipementsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEquipementsInput | Prisma.UserCreateOrConnectWithoutEquipementsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutEquipementsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEquipementsInput, Prisma.UserUncheckedCreateWithoutEquipementsInput> | Prisma.UserCreateWithoutEquipementsInput[] | Prisma.UserUncheckedCreateWithoutEquipementsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEquipementsInput | Prisma.UserCreateOrConnectWithoutEquipementsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
 export type UserUpdateOneRequiredWithoutCreatedEquipementsNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedEquipementsInput, Prisma.UserUncheckedCreateWithoutCreatedEquipementsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedEquipementsInput
@@ -540,66 +656,256 @@ export type UserUpdateOneRequiredWithoutCreatedEquipementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedEquipementsInput, Prisma.UserUpdateWithoutCreatedEquipementsInput>, Prisma.UserUncheckedUpdateWithoutCreatedEquipementsInput>
 }
 
-export type UserCreateNestedOneWithoutPhasesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPhasesInput, Prisma.UserUncheckedCreateWithoutPhasesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhasesInput
+export type UserUpdateManyWithoutEquipementsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEquipementsInput, Prisma.UserUncheckedCreateWithoutEquipementsInput> | Prisma.UserCreateWithoutEquipementsInput[] | Prisma.UserUncheckedCreateWithoutEquipementsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEquipementsInput | Prisma.UserCreateOrConnectWithoutEquipementsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutEquipementsInput | Prisma.UserUpsertWithWhereUniqueWithoutEquipementsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutEquipementsInput | Prisma.UserUpdateWithWhereUniqueWithoutEquipementsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutEquipementsInput | Prisma.UserUpdateManyWithWhereWithoutEquipementsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutEquipementsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEquipementsInput, Prisma.UserUncheckedCreateWithoutEquipementsInput> | Prisma.UserCreateWithoutEquipementsInput[] | Prisma.UserUncheckedCreateWithoutEquipementsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEquipementsInput | Prisma.UserCreateOrConnectWithoutEquipementsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutEquipementsInput | Prisma.UserUpsertWithWhereUniqueWithoutEquipementsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutEquipementsInput | Prisma.UserUpdateWithWhereUniqueWithoutEquipementsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutEquipementsInput | Prisma.UserUpdateManyWithWhereWithoutEquipementsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutCreatedPhasesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPhasesInput, Prisma.UserUncheckedCreateWithoutCreatedPhasesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPhasesInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutPhasesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPhasesInput, Prisma.UserUncheckedCreateWithoutPhasesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhasesInput
-  upsert?: Prisma.UserUpsertWithoutPhasesInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPhasesInput, Prisma.UserUpdateWithoutPhasesInput>, Prisma.UserUncheckedUpdateWithoutPhasesInput>
+export type UserCreateNestedManyWithoutPhasesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPhasesInput, Prisma.UserUncheckedCreateWithoutPhasesInput> | Prisma.UserCreateWithoutPhasesInput[] | Prisma.UserUncheckedCreateWithoutPhasesInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhasesInput | Prisma.UserCreateOrConnectWithoutPhasesInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
-export type UserCreateNestedOneWithoutEventsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutEventsInput, Prisma.UserUncheckedCreateWithoutEventsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventsInput
+export type UserUncheckedCreateNestedManyWithoutPhasesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPhasesInput, Prisma.UserUncheckedCreateWithoutPhasesInput> | Prisma.UserCreateWithoutPhasesInput[] | Prisma.UserUncheckedCreateWithoutPhasesInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhasesInput | Prisma.UserCreateOrConnectWithoutPhasesInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateOneRequiredWithoutCreatedPhasesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPhasesInput, Prisma.UserUncheckedCreateWithoutCreatedPhasesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPhasesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedPhasesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedPhasesInput, Prisma.UserUpdateWithoutCreatedPhasesInput>, Prisma.UserUncheckedUpdateWithoutCreatedPhasesInput>
+}
+
+export type UserUpdateManyWithoutPhasesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPhasesInput, Prisma.UserUncheckedCreateWithoutPhasesInput> | Prisma.UserCreateWithoutPhasesInput[] | Prisma.UserUncheckedCreateWithoutPhasesInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhasesInput | Prisma.UserCreateOrConnectWithoutPhasesInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutPhasesInput | Prisma.UserUpsertWithWhereUniqueWithoutPhasesInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutPhasesInput | Prisma.UserUpdateWithWhereUniqueWithoutPhasesInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutPhasesInput | Prisma.UserUpdateManyWithWhereWithoutPhasesInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutPhasesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPhasesInput, Prisma.UserUncheckedCreateWithoutPhasesInput> | Prisma.UserCreateWithoutPhasesInput[] | Prisma.UserUncheckedCreateWithoutPhasesInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhasesInput | Prisma.UserCreateOrConnectWithoutPhasesInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutPhasesInput | Prisma.UserUpsertWithWhereUniqueWithoutPhasesInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutPhasesInput | Prisma.UserUpdateWithWhereUniqueWithoutPhasesInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutPhasesInput | Prisma.UserUpdateManyWithWhereWithoutPhasesInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutCreatedEventsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedEventsInput, Prisma.UserUncheckedCreateWithoutCreatedEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedEventsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutEventsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutEventsInput, Prisma.UserUncheckedCreateWithoutEventsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventsInput
-  upsert?: Prisma.UserUpsertWithoutEventsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEventsInput, Prisma.UserUpdateWithoutEventsInput>, Prisma.UserUncheckedUpdateWithoutEventsInput>
+export type UserCreateNestedManyWithoutEventsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEventsInput, Prisma.UserUncheckedCreateWithoutEventsInput> | Prisma.UserCreateWithoutEventsInput[] | Prisma.UserUncheckedCreateWithoutEventsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventsInput | Prisma.UserCreateOrConnectWithoutEventsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
-export type UserCreateNestedOneWithoutTasksInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput
+export type UserUncheckedCreateNestedManyWithoutEventsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEventsInput, Prisma.UserUncheckedCreateWithoutEventsInput> | Prisma.UserCreateWithoutEventsInput[] | Prisma.UserUncheckedCreateWithoutEventsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventsInput | Prisma.UserCreateOrConnectWithoutEventsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateOneRequiredWithoutCreatedEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedEventsInput, Prisma.UserUncheckedCreateWithoutCreatedEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedEventsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedEventsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedEventsInput, Prisma.UserUpdateWithoutCreatedEventsInput>, Prisma.UserUncheckedUpdateWithoutCreatedEventsInput>
+}
+
+export type UserUpdateManyWithoutEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEventsInput, Prisma.UserUncheckedCreateWithoutEventsInput> | Prisma.UserCreateWithoutEventsInput[] | Prisma.UserUncheckedCreateWithoutEventsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventsInput | Prisma.UserCreateOrConnectWithoutEventsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutEventsInput | Prisma.UserUpsertWithWhereUniqueWithoutEventsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutEventsInput | Prisma.UserUpdateWithWhereUniqueWithoutEventsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutEventsInput | Prisma.UserUpdateManyWithWhereWithoutEventsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEventsInput, Prisma.UserUncheckedCreateWithoutEventsInput> | Prisma.UserCreateWithoutEventsInput[] | Prisma.UserUncheckedCreateWithoutEventsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventsInput | Prisma.UserCreateOrConnectWithoutEventsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutEventsInput | Prisma.UserUpsertWithWhereUniqueWithoutEventsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutEventsInput | Prisma.UserUpdateWithWhereUniqueWithoutEventsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutEventsInput | Prisma.UserUpdateManyWithWhereWithoutEventsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutCreatedTasksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTasksInput, Prisma.UserUncheckedCreateWithoutCreatedTasksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTasksInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutTasksNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput
-  upsert?: Prisma.UserUpsertWithoutTasksInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTasksInput, Prisma.UserUpdateWithoutTasksInput>, Prisma.UserUncheckedUpdateWithoutTasksInput>
+export type UserCreateNestedManyWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput> | Prisma.UserCreateWithoutTasksInput[] | Prisma.UserUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput | Prisma.UserCreateOrConnectWithoutTasksInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
-export type UserCreateNestedOneWithoutBreedingParamsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutBreedingParamsInput, Prisma.UserUncheckedCreateWithoutBreedingParamsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBreedingParamsInput
+export type UserUncheckedCreateNestedManyWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput> | Prisma.UserCreateWithoutTasksInput[] | Prisma.UserUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput | Prisma.UserCreateOrConnectWithoutTasksInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateOneRequiredWithoutCreatedTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTasksInput, Prisma.UserUncheckedCreateWithoutCreatedTasksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTasksInput
+  upsert?: Prisma.UserUpsertWithoutCreatedTasksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedTasksInput, Prisma.UserUpdateWithoutCreatedTasksInput>, Prisma.UserUncheckedUpdateWithoutCreatedTasksInput>
+}
+
+export type UserUpdateManyWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput> | Prisma.UserCreateWithoutTasksInput[] | Prisma.UserUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput | Prisma.UserCreateOrConnectWithoutTasksInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutTasksInput | Prisma.UserUpsertWithWhereUniqueWithoutTasksInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutTasksInput | Prisma.UserUpdateWithWhereUniqueWithoutTasksInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutTasksInput | Prisma.UserUpdateManyWithWhereWithoutTasksInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput> | Prisma.UserCreateWithoutTasksInput[] | Prisma.UserUncheckedCreateWithoutTasksInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTasksInput | Prisma.UserCreateOrConnectWithoutTasksInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutTasksInput | Prisma.UserUpsertWithWhereUniqueWithoutTasksInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutTasksInput | Prisma.UserUpdateWithWhereUniqueWithoutTasksInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutTasksInput | Prisma.UserUpdateManyWithWhereWithoutTasksInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutCreatedBreedingParamsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedBreedingParamsInput, Prisma.UserUncheckedCreateWithoutCreatedBreedingParamsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBreedingParamsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutBreedingParamsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutBreedingParamsInput, Prisma.UserUncheckedCreateWithoutBreedingParamsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBreedingParamsInput
-  upsert?: Prisma.UserUpsertWithoutBreedingParamsInput
+export type UserCreateNestedManyWithoutBreedingParamsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBreedingParamsInput, Prisma.UserUncheckedCreateWithoutBreedingParamsInput> | Prisma.UserCreateWithoutBreedingParamsInput[] | Prisma.UserUncheckedCreateWithoutBreedingParamsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBreedingParamsInput | Prisma.UserCreateOrConnectWithoutBreedingParamsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutBreedingParamsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBreedingParamsInput, Prisma.UserUncheckedCreateWithoutBreedingParamsInput> | Prisma.UserCreateWithoutBreedingParamsInput[] | Prisma.UserUncheckedCreateWithoutBreedingParamsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBreedingParamsInput | Prisma.UserCreateOrConnectWithoutBreedingParamsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateOneRequiredWithoutCreatedBreedingParamsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedBreedingParamsInput, Prisma.UserUncheckedCreateWithoutCreatedBreedingParamsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBreedingParamsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedBreedingParamsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBreedingParamsInput, Prisma.UserUpdateWithoutBreedingParamsInput>, Prisma.UserUncheckedUpdateWithoutBreedingParamsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedBreedingParamsInput, Prisma.UserUpdateWithoutCreatedBreedingParamsInput>, Prisma.UserUncheckedUpdateWithoutCreatedBreedingParamsInput>
+}
+
+export type UserUpdateManyWithoutBreedingParamsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBreedingParamsInput, Prisma.UserUncheckedCreateWithoutBreedingParamsInput> | Prisma.UserCreateWithoutBreedingParamsInput[] | Prisma.UserUncheckedCreateWithoutBreedingParamsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBreedingParamsInput | Prisma.UserCreateOrConnectWithoutBreedingParamsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutBreedingParamsInput | Prisma.UserUpsertWithWhereUniqueWithoutBreedingParamsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutBreedingParamsInput | Prisma.UserUpdateWithWhereUniqueWithoutBreedingParamsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutBreedingParamsInput | Prisma.UserUpdateManyWithWhereWithoutBreedingParamsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutBreedingParamsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBreedingParamsInput, Prisma.UserUncheckedCreateWithoutBreedingParamsInput> | Prisma.UserCreateWithoutBreedingParamsInput[] | Prisma.UserUncheckedCreateWithoutBreedingParamsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBreedingParamsInput | Prisma.UserCreateOrConnectWithoutBreedingParamsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutBreedingParamsInput | Prisma.UserUpsertWithWhereUniqueWithoutBreedingParamsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutBreedingParamsInput | Prisma.UserUpdateWithWhereUniqueWithoutBreedingParamsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutBreedingParamsInput | Prisma.UserUpdateManyWithWhereWithoutBreedingParamsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type UserCreateNestedOneWithoutCreatedLotsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedLotsInput, Prisma.UserUncheckedCreateWithoutCreatedLotsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedLotsInput
   connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedManyWithoutLotsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLotsInput, Prisma.UserUncheckedCreateWithoutLotsInput> | Prisma.UserCreateWithoutLotsInput[] | Prisma.UserUncheckedCreateWithoutLotsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLotsInput | Prisma.UserCreateOrConnectWithoutLotsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutLotsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLotsInput, Prisma.UserUncheckedCreateWithoutLotsInput> | Prisma.UserCreateWithoutLotsInput[] | Prisma.UserUncheckedCreateWithoutLotsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLotsInput | Prisma.UserCreateOrConnectWithoutLotsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
 export type UserUpdateOneRequiredWithoutCreatedLotsNestedInput = {
@@ -610,23 +916,87 @@ export type UserUpdateOneRequiredWithoutCreatedLotsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedLotsInput, Prisma.UserUpdateWithoutCreatedLotsInput>, Prisma.UserUncheckedUpdateWithoutCreatedLotsInput>
 }
 
-export type UserCreateNestedOneWithoutSettingsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSettingsInput, Prisma.UserUncheckedCreateWithoutSettingsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSettingsInput
+export type UserUpdateManyWithoutLotsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLotsInput, Prisma.UserUncheckedCreateWithoutLotsInput> | Prisma.UserCreateWithoutLotsInput[] | Prisma.UserUncheckedCreateWithoutLotsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLotsInput | Prisma.UserCreateOrConnectWithoutLotsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutLotsInput | Prisma.UserUpsertWithWhereUniqueWithoutLotsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutLotsInput | Prisma.UserUpdateWithWhereUniqueWithoutLotsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutLotsInput | Prisma.UserUpdateManyWithWhereWithoutLotsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutLotsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLotsInput, Prisma.UserUncheckedCreateWithoutLotsInput> | Prisma.UserCreateWithoutLotsInput[] | Prisma.UserUncheckedCreateWithoutLotsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLotsInput | Prisma.UserCreateOrConnectWithoutLotsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutLotsInput | Prisma.UserUpsertWithWhereUniqueWithoutLotsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutLotsInput | Prisma.UserUpdateWithWhereUniqueWithoutLotsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutLotsInput | Prisma.UserUpdateManyWithWhereWithoutLotsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutCreatedSettingsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedSettingsInput, Prisma.UserUncheckedCreateWithoutCreatedSettingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedSettingsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutSettingsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSettingsInput, Prisma.UserUncheckedCreateWithoutSettingsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSettingsInput
-  upsert?: Prisma.UserUpsertWithoutSettingsInput
+export type UserCreateNestedManyWithoutSettingsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSettingsInput, Prisma.UserUncheckedCreateWithoutSettingsInput> | Prisma.UserCreateWithoutSettingsInput[] | Prisma.UserUncheckedCreateWithoutSettingsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSettingsInput | Prisma.UserCreateOrConnectWithoutSettingsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutSettingsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSettingsInput, Prisma.UserUncheckedCreateWithoutSettingsInput> | Prisma.UserCreateWithoutSettingsInput[] | Prisma.UserUncheckedCreateWithoutSettingsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSettingsInput | Prisma.UserCreateOrConnectWithoutSettingsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateOneRequiredWithoutCreatedSettingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedSettingsInput, Prisma.UserUncheckedCreateWithoutCreatedSettingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedSettingsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedSettingsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSettingsInput, Prisma.UserUpdateWithoutSettingsInput>, Prisma.UserUncheckedUpdateWithoutSettingsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedSettingsInput, Prisma.UserUpdateWithoutCreatedSettingsInput>, Prisma.UserUncheckedUpdateWithoutCreatedSettingsInput>
+}
+
+export type UserUpdateManyWithoutSettingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSettingsInput, Prisma.UserUncheckedCreateWithoutSettingsInput> | Prisma.UserCreateWithoutSettingsInput[] | Prisma.UserUncheckedCreateWithoutSettingsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSettingsInput | Prisma.UserCreateOrConnectWithoutSettingsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSettingsInput | Prisma.UserUpsertWithWhereUniqueWithoutSettingsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutSettingsInput | Prisma.UserUpdateWithWhereUniqueWithoutSettingsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSettingsInput | Prisma.UserUpdateManyWithWhereWithoutSettingsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutSettingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSettingsInput, Prisma.UserUncheckedCreateWithoutSettingsInput> | Prisma.UserCreateWithoutSettingsInput[] | Prisma.UserUncheckedCreateWithoutSettingsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSettingsInput | Prisma.UserCreateOrConnectWithoutSettingsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSettingsInput | Prisma.UserUpsertWithWhereUniqueWithoutSettingsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutSettingsInput | Prisma.UserUpdateWithWhereUniqueWithoutSettingsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSettingsInput | Prisma.UserUpdateManyWithWhereWithoutSettingsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type UserCreateWithoutSessionsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -638,16 +1008,24 @@ export type UserCreateWithoutSessionsInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -659,11 +1037,19 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -684,7 +1070,7 @@ export type UserUpdateToOneWithWhereWithoutSessionsInput = {
 
 export type UserUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -696,16 +1082,24 @@ export type UserUpdateWithoutSessionsInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -717,16 +1111,24 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -738,16 +1140,24 @@ export type UserCreateWithoutAccountsInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -759,11 +1169,19 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -784,7 +1202,7 @@ export type UserUpdateToOneWithWhereWithoutAccountsInput = {
 
 export type UserUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -796,16 +1214,24 @@ export type UserUpdateWithoutAccountsInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -817,16 +1243,24 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateWithoutCreatedItemsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -838,16 +1272,24 @@ export type UserCreateWithoutCreatedItemsInput = {
   userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutCreatedItemsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -859,16 +1301,87 @@ export type UserUncheckedCreateWithoutCreatedItemsInput = {
   userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutCreatedItemsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutCreatedItemsInput, Prisma.UserUncheckedCreateWithoutCreatedItemsInput>
+}
+
+export type UserCreateWithoutItemsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutItemsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutItemsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutItemsInput, Prisma.UserUncheckedCreateWithoutItemsInput>
 }
 
 export type UserUpsertWithoutCreatedItemsInput = {
@@ -884,7 +1397,7 @@ export type UserUpdateToOneWithWhereWithoutCreatedItemsInput = {
 
 export type UserUpdateWithoutCreatedItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -896,16 +1409,24 @@ export type UserUpdateWithoutCreatedItemsInput = {
   userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -917,16 +1438,53 @@ export type UserUncheckedUpdateWithoutCreatedItemsInput = {
   userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUpsertWithWhereUniqueWithoutItemsInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutItemsInput, Prisma.UserUncheckedUpdateWithoutItemsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutItemsInput, Prisma.UserUncheckedCreateWithoutItemsInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutItemsInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutItemsInput, Prisma.UserUncheckedUpdateWithoutItemsInput>
+}
+
+export type UserUpdateManyWithWhereWithoutItemsInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutItemsInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  name?: Prisma.StringNullableFilter<"User"> | string | null
+  email?: Prisma.StringFilter<"User"> | string
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  image?: Prisma.StringNullableFilter<"User"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
 
 export type UserCreateWithoutOwnedTeamsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -938,16 +1496,24 @@ export type UserCreateWithoutOwnedTeamsInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutOwnedTeamsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -959,11 +1525,19 @@ export type UserUncheckedCreateWithoutOwnedTeamsInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutOwnedTeamsInput = {
@@ -984,7 +1558,7 @@ export type UserUpdateToOneWithWhereWithoutOwnedTeamsInput = {
 
 export type UserUpdateWithoutOwnedTeamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -996,16 +1570,24 @@ export type UserUpdateWithoutOwnedTeamsInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedTeamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1017,16 +1599,24 @@ export type UserUncheckedUpdateWithoutOwnedTeamsInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateWithoutUserTeamsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1038,16 +1628,24 @@ export type UserCreateWithoutUserTeamsInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutUserTeamsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1059,11 +1657,19 @@ export type UserUncheckedCreateWithoutUserTeamsInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutUserTeamsInput = {
@@ -1084,7 +1690,7 @@ export type UserUpdateToOneWithWhereWithoutUserTeamsInput = {
 
 export type UserUpdateWithoutUserTeamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1096,16 +1702,24 @@ export type UserUpdateWithoutUserTeamsInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserTeamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1117,16 +1731,24 @@ export type UserUncheckedUpdateWithoutUserTeamsInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateWithoutCreatedEquipementsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1138,16 +1760,24 @@ export type UserCreateWithoutCreatedEquipementsInput = {
   userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutCreatedEquipementsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1159,16 +1789,87 @@ export type UserUncheckedCreateWithoutCreatedEquipementsInput = {
   userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutCreatedEquipementsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutCreatedEquipementsInput, Prisma.UserUncheckedCreateWithoutCreatedEquipementsInput>
+}
+
+export type UserCreateWithoutEquipementsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutEquipementsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutEquipementsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEquipementsInput, Prisma.UserUncheckedCreateWithoutEquipementsInput>
 }
 
 export type UserUpsertWithoutCreatedEquipementsInput = {
@@ -1184,7 +1885,7 @@ export type UserUpdateToOneWithWhereWithoutCreatedEquipementsInput = {
 
 export type UserUpdateWithoutCreatedEquipementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1196,16 +1897,24 @@ export type UserUpdateWithoutCreatedEquipementsInput = {
   userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedEquipementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1217,16 +1926,40 @@ export type UserUncheckedUpdateWithoutCreatedEquipementsInput = {
   userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
-export type UserCreateWithoutPhasesInput = {
+export type UserUpsertWithWhereUniqueWithoutEquipementsInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEquipementsInput, Prisma.UserUncheckedUpdateWithoutEquipementsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEquipementsInput, Prisma.UserUncheckedCreateWithoutEquipementsInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutEquipementsInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEquipementsInput, Prisma.UserUncheckedUpdateWithoutEquipementsInput>
+}
+
+export type UserUpdateManyWithWhereWithoutEquipementsInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutEquipementsInput>
+}
+
+export type UserCreateWithoutCreatedPhasesInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1239,15 +1972,23 @@ export type UserCreateWithoutPhasesInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
-export type UserUncheckedCreateWithoutPhasesInput = {
+export type UserUncheckedCreateWithoutCreatedPhasesInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1260,10 +2001,81 @@ export type UserUncheckedCreateWithoutPhasesInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutCreatedPhasesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPhasesInput, Prisma.UserUncheckedCreateWithoutCreatedPhasesInput>
+}
+
+export type UserCreateWithoutPhasesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutPhasesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutPhasesInput = {
@@ -1271,20 +2083,20 @@ export type UserCreateOrConnectWithoutPhasesInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutPhasesInput, Prisma.UserUncheckedCreateWithoutPhasesInput>
 }
 
-export type UserUpsertWithoutPhasesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutPhasesInput, Prisma.UserUncheckedUpdateWithoutPhasesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutPhasesInput, Prisma.UserUncheckedCreateWithoutPhasesInput>
+export type UserUpsertWithoutCreatedPhasesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPhasesInput, Prisma.UserUncheckedUpdateWithoutCreatedPhasesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPhasesInput, Prisma.UserUncheckedCreateWithoutCreatedPhasesInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutPhasesInput = {
+export type UserUpdateToOneWithWhereWithoutCreatedPhasesInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutPhasesInput, Prisma.UserUncheckedUpdateWithoutPhasesInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPhasesInput, Prisma.UserUncheckedUpdateWithoutCreatedPhasesInput>
 }
 
-export type UserUpdateWithoutPhasesInput = {
+export type UserUpdateWithoutCreatedPhasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1297,15 +2109,23 @@ export type UserUpdateWithoutPhasesInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
-export type UserUncheckedUpdateWithoutPhasesInput = {
+export type UserUncheckedUpdateWithoutCreatedPhasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1318,15 +2138,39 @@ export type UserUncheckedUpdateWithoutPhasesInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
-export type UserCreateWithoutEventsInput = {
+export type UserUpsertWithWhereUniqueWithoutPhasesInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPhasesInput, Prisma.UserUncheckedUpdateWithoutPhasesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPhasesInput, Prisma.UserUncheckedCreateWithoutPhasesInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutPhasesInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPhasesInput, Prisma.UserUncheckedUpdateWithoutPhasesInput>
+}
+
+export type UserUpdateManyWithWhereWithoutPhasesInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutPhasesInput>
+}
+
+export type UserCreateWithoutCreatedEventsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1339,15 +2183,23 @@ export type UserCreateWithoutEventsInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
-export type UserUncheckedCreateWithoutEventsInput = {
+export type UserUncheckedCreateWithoutCreatedEventsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1360,10 +2212,81 @@ export type UserUncheckedCreateWithoutEventsInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutCreatedEventsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedEventsInput, Prisma.UserUncheckedCreateWithoutCreatedEventsInput>
+}
+
+export type UserCreateWithoutEventsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutEventsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutEventsInput = {
@@ -1371,20 +2294,20 @@ export type UserCreateOrConnectWithoutEventsInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutEventsInput, Prisma.UserUncheckedCreateWithoutEventsInput>
 }
 
-export type UserUpsertWithoutEventsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutEventsInput, Prisma.UserUncheckedUpdateWithoutEventsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutEventsInput, Prisma.UserUncheckedCreateWithoutEventsInput>
+export type UserUpsertWithoutCreatedEventsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedEventsInput, Prisma.UserUncheckedUpdateWithoutCreatedEventsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedEventsInput, Prisma.UserUncheckedCreateWithoutCreatedEventsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutEventsInput = {
+export type UserUpdateToOneWithWhereWithoutCreatedEventsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutEventsInput, Prisma.UserUncheckedUpdateWithoutEventsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedEventsInput, Prisma.UserUncheckedUpdateWithoutCreatedEventsInput>
 }
 
-export type UserUpdateWithoutEventsInput = {
+export type UserUpdateWithoutCreatedEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1397,15 +2320,23 @@ export type UserUpdateWithoutEventsInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
-export type UserUncheckedUpdateWithoutEventsInput = {
+export type UserUncheckedUpdateWithoutCreatedEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1418,15 +2349,39 @@ export type UserUncheckedUpdateWithoutEventsInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
-export type UserCreateWithoutTasksInput = {
+export type UserUpsertWithWhereUniqueWithoutEventsInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEventsInput, Prisma.UserUncheckedUpdateWithoutEventsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEventsInput, Prisma.UserUncheckedCreateWithoutEventsInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutEventsInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEventsInput, Prisma.UserUncheckedUpdateWithoutEventsInput>
+}
+
+export type UserUpdateManyWithWhereWithoutEventsInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutEventsInput>
+}
+
+export type UserCreateWithoutCreatedTasksInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1439,15 +2394,23 @@ export type UserCreateWithoutTasksInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
-export type UserUncheckedCreateWithoutTasksInput = {
+export type UserUncheckedCreateWithoutCreatedTasksInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1460,10 +2423,81 @@ export type UserUncheckedCreateWithoutTasksInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutCreatedTasksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTasksInput, Prisma.UserUncheckedCreateWithoutCreatedTasksInput>
+}
+
+export type UserCreateWithoutTasksInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutTasksInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -1471,20 +2505,20 @@ export type UserCreateOrConnectWithoutTasksInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput>
 }
 
-export type UserUpsertWithoutTasksInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutTasksInput, Prisma.UserUncheckedUpdateWithoutTasksInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput>
+export type UserUpsertWithoutCreatedTasksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTasksInput, Prisma.UserUncheckedUpdateWithoutCreatedTasksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTasksInput, Prisma.UserUncheckedCreateWithoutCreatedTasksInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutTasksInput = {
+export type UserUpdateToOneWithWhereWithoutCreatedTasksInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutTasksInput, Prisma.UserUncheckedUpdateWithoutTasksInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTasksInput, Prisma.UserUncheckedUpdateWithoutCreatedTasksInput>
 }
 
-export type UserUpdateWithoutTasksInput = {
+export type UserUpdateWithoutCreatedTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1497,15 +2531,23 @@ export type UserUpdateWithoutTasksInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
-export type UserUncheckedUpdateWithoutTasksInput = {
+export type UserUncheckedUpdateWithoutCreatedTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1518,15 +2560,39 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
-export type UserCreateWithoutBreedingParamsInput = {
+export type UserUpsertWithWhereUniqueWithoutTasksInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTasksInput, Prisma.UserUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTasksInput, Prisma.UserUncheckedCreateWithoutTasksInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutTasksInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTasksInput, Prisma.UserUncheckedUpdateWithoutTasksInput>
+}
+
+export type UserUpdateManyWithWhereWithoutTasksInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutTasksInput>
+}
+
+export type UserCreateWithoutCreatedBreedingParamsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1539,15 +2605,23 @@ export type UserCreateWithoutBreedingParamsInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
-export type UserUncheckedCreateWithoutBreedingParamsInput = {
+export type UserUncheckedCreateWithoutCreatedBreedingParamsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1560,10 +2634,81 @@ export type UserUncheckedCreateWithoutBreedingParamsInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutCreatedBreedingParamsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedBreedingParamsInput, Prisma.UserUncheckedCreateWithoutCreatedBreedingParamsInput>
+}
+
+export type UserCreateWithoutBreedingParamsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutBreedingParamsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutBreedingParamsInput = {
@@ -1571,20 +2716,20 @@ export type UserCreateOrConnectWithoutBreedingParamsInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutBreedingParamsInput, Prisma.UserUncheckedCreateWithoutBreedingParamsInput>
 }
 
-export type UserUpsertWithoutBreedingParamsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutBreedingParamsInput, Prisma.UserUncheckedUpdateWithoutBreedingParamsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutBreedingParamsInput, Prisma.UserUncheckedCreateWithoutBreedingParamsInput>
+export type UserUpsertWithoutCreatedBreedingParamsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedBreedingParamsInput, Prisma.UserUncheckedUpdateWithoutCreatedBreedingParamsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedBreedingParamsInput, Prisma.UserUncheckedCreateWithoutCreatedBreedingParamsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutBreedingParamsInput = {
+export type UserUpdateToOneWithWhereWithoutCreatedBreedingParamsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutBreedingParamsInput, Prisma.UserUncheckedUpdateWithoutBreedingParamsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedBreedingParamsInput, Prisma.UserUncheckedUpdateWithoutCreatedBreedingParamsInput>
 }
 
-export type UserUpdateWithoutBreedingParamsInput = {
+export type UserUpdateWithoutCreatedBreedingParamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1597,15 +2742,23 @@ export type UserUpdateWithoutBreedingParamsInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
-export type UserUncheckedUpdateWithoutBreedingParamsInput = {
+export type UserUncheckedUpdateWithoutCreatedBreedingParamsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1618,15 +2771,39 @@ export type UserUncheckedUpdateWithoutBreedingParamsInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUpsertWithWhereUniqueWithoutBreedingParamsInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBreedingParamsInput, Prisma.UserUncheckedUpdateWithoutBreedingParamsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBreedingParamsInput, Prisma.UserUncheckedCreateWithoutBreedingParamsInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutBreedingParamsInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBreedingParamsInput, Prisma.UserUncheckedUpdateWithoutBreedingParamsInput>
+}
+
+export type UserUpdateManyWithWhereWithoutBreedingParamsInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutBreedingParamsInput>
 }
 
 export type UserCreateWithoutCreatedLotsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1638,16 +2815,24 @@ export type UserCreateWithoutCreatedLotsInput = {
   userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutCreatedLotsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1659,16 +2844,87 @@ export type UserUncheckedCreateWithoutCreatedLotsInput = {
   userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
-  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutCreatedLotsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutCreatedLotsInput, Prisma.UserUncheckedCreateWithoutCreatedLotsInput>
+}
+
+export type UserCreateWithoutLotsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutLotsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutLotsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutLotsInput, Prisma.UserUncheckedCreateWithoutLotsInput>
 }
 
 export type UserUpsertWithoutCreatedLotsInput = {
@@ -1684,7 +2940,7 @@ export type UserUpdateToOneWithWhereWithoutCreatedLotsInput = {
 
 export type UserUpdateWithoutCreatedLotsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1696,16 +2952,24 @@ export type UserUpdateWithoutCreatedLotsInput = {
   userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedLotsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1717,16 +2981,40 @@ export type UserUncheckedUpdateWithoutCreatedLotsInput = {
   userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
-  settings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
 }
 
-export type UserCreateWithoutSettingsInput = {
+export type UserUpsertWithWhereUniqueWithoutLotsInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutLotsInput, Prisma.UserUncheckedUpdateWithoutLotsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutLotsInput, Prisma.UserUncheckedCreateWithoutLotsInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutLotsInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutLotsInput, Prisma.UserUncheckedUpdateWithoutLotsInput>
+}
+
+export type UserUpdateManyWithWhereWithoutLotsInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutLotsInput>
+}
+
+export type UserCreateWithoutCreatedSettingsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1739,15 +3027,23 @@ export type UserCreateWithoutSettingsInput = {
   createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingCreateNestedManyWithoutUsersInput
 }
 
-export type UserUncheckedCreateWithoutSettingsInput = {
+export type UserUncheckedCreateWithoutCreatedSettingsInput = {
   id?: string
-  name: string
+  name?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1760,10 +3056,81 @@ export type UserUncheckedCreateWithoutSettingsInput = {
   createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
   createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
-  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
-  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
+  settings?: Prisma.SettingUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutCreatedSettingsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedSettingsInput, Prisma.UserUncheckedCreateWithoutCreatedSettingsInput>
+}
+
+export type UserCreateWithoutSettingsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutSettingsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  ownedTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutOwnerInput
+  userTeams?: Prisma.UserTeamUncheckedCreateNestedManyWithoutUserInput
+  createdItems?: Prisma.ItemUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEquipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutCreatedByInput
+  createdLots?: Prisma.LotUncheckedCreateNestedManyWithoutCreatedByInput
+  createdPhases?: Prisma.PhaseUncheckedCreateNestedManyWithoutCreatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  createdTasks?: Prisma.TasksUncheckedCreateNestedManyWithoutCreatedByInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSettings?: Prisma.SettingUncheckedCreateNestedManyWithoutCreatedByInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUsersInput
+  equipements?: Prisma.EquipementUncheckedCreateNestedManyWithoutUsersInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutUsersInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutUsersInput
+  tasks?: Prisma.TasksUncheckedCreateNestedManyWithoutUsersInput
+  breedingParams?: Prisma.BreedingParamsUncheckedCreateNestedManyWithoutUsersInput
+  lots?: Prisma.LotUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutSettingsInput = {
@@ -1771,20 +3138,20 @@ export type UserCreateOrConnectWithoutSettingsInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutSettingsInput, Prisma.UserUncheckedCreateWithoutSettingsInput>
 }
 
-export type UserUpsertWithoutSettingsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutSettingsInput, Prisma.UserUncheckedUpdateWithoutSettingsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutSettingsInput, Prisma.UserUncheckedCreateWithoutSettingsInput>
+export type UserUpsertWithoutCreatedSettingsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedSettingsInput, Prisma.UserUncheckedUpdateWithoutCreatedSettingsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedSettingsInput, Prisma.UserUncheckedCreateWithoutCreatedSettingsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutSettingsInput = {
+export type UserUpdateToOneWithWhereWithoutCreatedSettingsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutSettingsInput, Prisma.UserUncheckedUpdateWithoutSettingsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedSettingsInput, Prisma.UserUncheckedUpdateWithoutCreatedSettingsInput>
 }
 
-export type UserUpdateWithoutSettingsInput = {
+export type UserUpdateWithoutCreatedSettingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1797,15 +3164,23 @@ export type UserUpdateWithoutSettingsInput = {
   createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
 }
 
-export type UserUncheckedUpdateWithoutSettingsInput = {
+export type UserUncheckedUpdateWithoutCreatedSettingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1818,10 +3193,578 @@ export type UserUncheckedUpdateWithoutSettingsInput = {
   createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
   createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
-  phases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
-  events?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  tasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
-  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUpsertWithWhereUniqueWithoutSettingsInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSettingsInput, Prisma.UserUncheckedUpdateWithoutSettingsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSettingsInput, Prisma.UserUncheckedCreateWithoutSettingsInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutSettingsInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSettingsInput, Prisma.UserUncheckedUpdateWithoutSettingsInput>
+}
+
+export type UserUpdateManyWithWhereWithoutSettingsInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutSettingsInput>
+}
+
+export type UserUpdateWithoutItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUncheckedUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutEquipementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEquipementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUncheckedUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutEquipementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutPhasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPhasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUncheckedUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutPhasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUncheckedUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUncheckedUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutBreedingParamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBreedingParamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUncheckedUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutBreedingParamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutLotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutLotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUncheckedUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  settings?: Prisma.SettingUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutLotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  ownedTeams?: Prisma.TeamUncheckedUpdateManyWithoutOwnerNestedInput
+  userTeams?: Prisma.UserTeamUncheckedUpdateManyWithoutUserNestedInput
+  createdItems?: Prisma.ItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEquipements?: Prisma.EquipementUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdLots?: Prisma.LotUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdPhases?: Prisma.PhaseUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdTasks?: Prisma.TasksUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdBreedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSettings?: Prisma.SettingUncheckedUpdateManyWithoutCreatedByNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUsersNestedInput
+  equipements?: Prisma.EquipementUncheckedUpdateManyWithoutUsersNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutUsersNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutUsersNestedInput
+  tasks?: Prisma.TasksUncheckedUpdateManyWithoutUsersNestedInput
+  breedingParams?: Prisma.BreedingParamsUncheckedUpdateManyWithoutUsersNestedInput
+  lots?: Prisma.LotUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -1837,10 +3780,18 @@ export type UserCountOutputType = {
   createdItems: number
   createdEquipements: number
   createdLots: number
+  createdPhases: number
+  createdEvents: number
+  createdTasks: number
+  createdBreedingParams: number
+  createdSettings: number
+  items: number
+  equipements: number
   phases: number
   events: number
   tasks: number
   breedingParams: number
+  lots: number
   settings: number
 }
 
@@ -1852,10 +3803,18 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   createdItems?: boolean | UserCountOutputTypeCountCreatedItemsArgs
   createdEquipements?: boolean | UserCountOutputTypeCountCreatedEquipementsArgs
   createdLots?: boolean | UserCountOutputTypeCountCreatedLotsArgs
+  createdPhases?: boolean | UserCountOutputTypeCountCreatedPhasesArgs
+  createdEvents?: boolean | UserCountOutputTypeCountCreatedEventsArgs
+  createdTasks?: boolean | UserCountOutputTypeCountCreatedTasksArgs
+  createdBreedingParams?: boolean | UserCountOutputTypeCountCreatedBreedingParamsArgs
+  createdSettings?: boolean | UserCountOutputTypeCountCreatedSettingsArgs
+  items?: boolean | UserCountOutputTypeCountItemsArgs
+  equipements?: boolean | UserCountOutputTypeCountEquipementsArgs
   phases?: boolean | UserCountOutputTypeCountPhasesArgs
   events?: boolean | UserCountOutputTypeCountEventsArgs
   tasks?: boolean | UserCountOutputTypeCountTasksArgs
   breedingParams?: boolean | UserCountOutputTypeCountBreedingParamsArgs
+  lots?: boolean | UserCountOutputTypeCountLotsArgs
   settings?: boolean | UserCountOutputTypeCountSettingsArgs
 }
 
@@ -1921,6 +3880,55 @@ export type UserCountOutputTypeCountCreatedLotsArgs<ExtArgs extends runtime.Type
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountCreatedPhasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PhaseWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TasksWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedBreedingParamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BreedingParamsWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedSettingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SettingWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEquipementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EquipementWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountPhasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PhaseWhereInput
 }
@@ -1949,6 +3957,13 @@ export type UserCountOutputTypeCountBreedingParamsArgs<ExtArgs extends runtime.T
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountLotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LotWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountSettingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SettingWhereInput
 }
@@ -1969,10 +3984,18 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdItems?: boolean | Prisma.User$createdItemsArgs<ExtArgs>
   createdEquipements?: boolean | Prisma.User$createdEquipementsArgs<ExtArgs>
   createdLots?: boolean | Prisma.User$createdLotsArgs<ExtArgs>
+  createdPhases?: boolean | Prisma.User$createdPhasesArgs<ExtArgs>
+  createdEvents?: boolean | Prisma.User$createdEventsArgs<ExtArgs>
+  createdTasks?: boolean | Prisma.User$createdTasksArgs<ExtArgs>
+  createdBreedingParams?: boolean | Prisma.User$createdBreedingParamsArgs<ExtArgs>
+  createdSettings?: boolean | Prisma.User$createdSettingsArgs<ExtArgs>
+  items?: boolean | Prisma.User$itemsArgs<ExtArgs>
+  equipements?: boolean | Prisma.User$equipementsArgs<ExtArgs>
   phases?: boolean | Prisma.User$phasesArgs<ExtArgs>
   events?: boolean | Prisma.User$eventsArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   breedingParams?: boolean | Prisma.User$breedingParamsArgs<ExtArgs>
+  lots?: boolean | Prisma.User$lotsArgs<ExtArgs>
   settings?: boolean | Prisma.User$settingsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -2016,10 +4039,18 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdItems?: boolean | Prisma.User$createdItemsArgs<ExtArgs>
   createdEquipements?: boolean | Prisma.User$createdEquipementsArgs<ExtArgs>
   createdLots?: boolean | Prisma.User$createdLotsArgs<ExtArgs>
+  createdPhases?: boolean | Prisma.User$createdPhasesArgs<ExtArgs>
+  createdEvents?: boolean | Prisma.User$createdEventsArgs<ExtArgs>
+  createdTasks?: boolean | Prisma.User$createdTasksArgs<ExtArgs>
+  createdBreedingParams?: boolean | Prisma.User$createdBreedingParamsArgs<ExtArgs>
+  createdSettings?: boolean | Prisma.User$createdSettingsArgs<ExtArgs>
+  items?: boolean | Prisma.User$itemsArgs<ExtArgs>
+  equipements?: boolean | Prisma.User$equipementsArgs<ExtArgs>
   phases?: boolean | Prisma.User$phasesArgs<ExtArgs>
   events?: boolean | Prisma.User$eventsArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   breedingParams?: boolean | Prisma.User$breedingParamsArgs<ExtArgs>
+  lots?: boolean | Prisma.User$lotsArgs<ExtArgs>
   settings?: boolean | Prisma.User$settingsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2036,15 +4067,23 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdItems: Prisma.$ItemPayload<ExtArgs>[]
     createdEquipements: Prisma.$EquipementPayload<ExtArgs>[]
     createdLots: Prisma.$LotPayload<ExtArgs>[]
+    createdPhases: Prisma.$PhasePayload<ExtArgs>[]
+    createdEvents: Prisma.$EventPayload<ExtArgs>[]
+    createdTasks: Prisma.$TasksPayload<ExtArgs>[]
+    createdBreedingParams: Prisma.$BreedingParamsPayload<ExtArgs>[]
+    createdSettings: Prisma.$SettingPayload<ExtArgs>[]
+    items: Prisma.$ItemPayload<ExtArgs>[]
+    equipements: Prisma.$EquipementPayload<ExtArgs>[]
     phases: Prisma.$PhasePayload<ExtArgs>[]
     events: Prisma.$EventPayload<ExtArgs>[]
     tasks: Prisma.$TasksPayload<ExtArgs>[]
     breedingParams: Prisma.$BreedingParamsPayload<ExtArgs>[]
+    lots: Prisma.$LotPayload<ExtArgs>[]
     settings: Prisma.$SettingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    name: string
+    name: string | null
     email: string
     emailVerified: boolean
     image: string | null
@@ -2451,10 +4490,18 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   createdItems<T extends Prisma.User$createdItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdEquipements<T extends Prisma.User$createdEquipementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdEquipementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdLots<T extends Prisma.User$createdLotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdLotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdPhases<T extends Prisma.User$createdPhasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdPhasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PhasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdEvents<T extends Prisma.User$createdEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdTasks<T extends Prisma.User$createdTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdBreedingParams<T extends Prisma.User$createdBreedingParamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdBreedingParamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BreedingParamsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdSettings<T extends Prisma.User$createdSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdSettingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  items<T extends Prisma.User$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  equipements<T extends Prisma.User$equipementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$equipementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   phases<T extends Prisma.User$phasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$phasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PhasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   events<T extends Prisma.User$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.User$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   breedingParams<T extends Prisma.User$breedingParamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$breedingParamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BreedingParamsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lots<T extends Prisma.User$lotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$lotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   settings<T extends Prisma.User$settingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$settingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3048,6 +5095,174 @@ export type User$createdLotsArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * User.createdPhases
+ */
+export type User$createdPhasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Phase
+   */
+  select?: Prisma.PhaseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Phase
+   */
+  omit?: Prisma.PhaseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PhaseInclude<ExtArgs> | null
+  where?: Prisma.PhaseWhereInput
+  orderBy?: Prisma.PhaseOrderByWithRelationInput | Prisma.PhaseOrderByWithRelationInput[]
+  cursor?: Prisma.PhaseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PhaseScalarFieldEnum | Prisma.PhaseScalarFieldEnum[]
+}
+
+/**
+ * User.createdEvents
+ */
+export type User$createdEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Event
+   */
+  select?: Prisma.EventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Event
+   */
+  omit?: Prisma.EventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
+  where?: Prisma.EventWhereInput
+  orderBy?: Prisma.EventOrderByWithRelationInput | Prisma.EventOrderByWithRelationInput[]
+  cursor?: Prisma.EventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventScalarFieldEnum | Prisma.EventScalarFieldEnum[]
+}
+
+/**
+ * User.createdTasks
+ */
+export type User$createdTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tasks
+   */
+  select?: Prisma.TasksSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tasks
+   */
+  omit?: Prisma.TasksOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TasksInclude<ExtArgs> | null
+  where?: Prisma.TasksWhereInput
+  orderBy?: Prisma.TasksOrderByWithRelationInput | Prisma.TasksOrderByWithRelationInput[]
+  cursor?: Prisma.TasksWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TasksScalarFieldEnum | Prisma.TasksScalarFieldEnum[]
+}
+
+/**
+ * User.createdBreedingParams
+ */
+export type User$createdBreedingParamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BreedingParams
+   */
+  select?: Prisma.BreedingParamsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BreedingParams
+   */
+  omit?: Prisma.BreedingParamsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BreedingParamsInclude<ExtArgs> | null
+  where?: Prisma.BreedingParamsWhereInput
+  orderBy?: Prisma.BreedingParamsOrderByWithRelationInput | Prisma.BreedingParamsOrderByWithRelationInput[]
+  cursor?: Prisma.BreedingParamsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BreedingParamsScalarFieldEnum | Prisma.BreedingParamsScalarFieldEnum[]
+}
+
+/**
+ * User.createdSettings
+ */
+export type User$createdSettingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Setting
+   */
+  select?: Prisma.SettingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Setting
+   */
+  omit?: Prisma.SettingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SettingInclude<ExtArgs> | null
+  where?: Prisma.SettingWhereInput
+  orderBy?: Prisma.SettingOrderByWithRelationInput | Prisma.SettingOrderByWithRelationInput[]
+  cursor?: Prisma.SettingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SettingScalarFieldEnum | Prisma.SettingScalarFieldEnum[]
+}
+
+/**
+ * User.items
+ */
+export type User$itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+  orderBy?: Prisma.ItemOrderByWithRelationInput | Prisma.ItemOrderByWithRelationInput[]
+  cursor?: Prisma.ItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ItemScalarFieldEnum | Prisma.ItemScalarFieldEnum[]
+}
+
+/**
+ * User.equipements
+ */
+export type User$equipementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Equipement
+   */
+  select?: Prisma.EquipementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Equipement
+   */
+  omit?: Prisma.EquipementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EquipementInclude<ExtArgs> | null
+  where?: Prisma.EquipementWhereInput
+  orderBy?: Prisma.EquipementOrderByWithRelationInput | Prisma.EquipementOrderByWithRelationInput[]
+  cursor?: Prisma.EquipementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EquipementScalarFieldEnum | Prisma.EquipementScalarFieldEnum[]
+}
+
+/**
  * User.phases
  */
 export type User$phasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3141,6 +5356,30 @@ export type User$breedingParamsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.BreedingParamsScalarFieldEnum | Prisma.BreedingParamsScalarFieldEnum[]
+}
+
+/**
+ * User.lots
+ */
+export type User$lotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Lot
+   */
+  select?: Prisma.LotSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Lot
+   */
+  omit?: Prisma.LotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LotInclude<ExtArgs> | null
+  where?: Prisma.LotWhereInput
+  orderBy?: Prisma.LotOrderByWithRelationInput | Prisma.LotOrderByWithRelationInput[]
+  cursor?: Prisma.LotWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LotScalarFieldEnum | Prisma.LotScalarFieldEnum[]
 }
 
 /**

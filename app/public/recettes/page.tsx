@@ -4,9 +4,7 @@ import { recipes, type Recipe } from "@/app/public/recettes/recettesData";
 
 function RecipeCard({ r }: { r: Recipe }) {
   const img = r.image?.[0]; // dans tes datas: ["huevos-rancheros-1.jpg", ...] [file:330]
-  const src = img
-    ? `/images/recettes/${img}`
-    : `/images/recettes/placeholder.jpg`; // à créer
+  const src = img ? `/recipes/${img}` : `/recipes/placeholder.jpg`; // à créer
 
   return (
     <article className="overflow-hidden rounded-xl border bg-card shadow-sm hover:shadow-md transition">
@@ -25,6 +23,7 @@ function RecipeCard({ r }: { r: Recipe }) {
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-semibold leading-snug">{r.title}</h3>
           <span className="text-xs rounded-full border px-2 py-0.5 text-muted-foreground">
+            {r.ordre}
             {r.difficulty}
           </span>
         </div>

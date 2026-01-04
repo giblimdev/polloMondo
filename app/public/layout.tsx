@@ -26,32 +26,6 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
       </a>
 
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-        <div className="container mx-auto px-4">
-          <div className="flex h-16 items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center gap-2">
-              <Link
-                href="/public"
-                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-              >
-                <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Home className="h-4 w-4 text-primary" />
-                </div>
-                <span className="text-lg font-bold tracking-tight">
-                  Espace Public
-                </span>
-              </Link>
-            </div>
-
-            {/* Sous-titre pour desktop */}
-            <div className="hidden md:flex items-center">
-              <p className="text-sm text-muted-foreground">
-                Découvrez nos ressources gratuites
-              </p>
-            </div>
-          </div>
-        </div>
-
         <PublicNav />
       </header>
 

@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -200,14 +200,14 @@ export type LifeCircleWhereInput = {
   id?: Prisma.StringFilter<"LifeCircle"> | string
   order?: Prisma.IntFilter<"LifeCircle"> | number
   type?: Prisma.StringFilter<"LifeCircle"> | string
-  phase?: Prisma.PhaseListRelationFilter
+  phases?: Prisma.PhaseListRelationFilter
 }
 
 export type LifeCircleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   order?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  phase?: Prisma.PhaseOrderByRelationAggregateInput
+  phases?: Prisma.PhaseOrderByRelationAggregateInput
 }
 
 export type LifeCircleWhereUniqueInput = Prisma.AtLeast<{
@@ -217,7 +217,7 @@ export type LifeCircleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LifeCircleWhereInput | Prisma.LifeCircleWhereInput[]
   order?: Prisma.IntFilter<"LifeCircle"> | number
   type?: Prisma.StringFilter<"LifeCircle"> | string
-  phase?: Prisma.PhaseListRelationFilter
+  phases?: Prisma.PhaseListRelationFilter
 }, "id">
 
 export type LifeCircleOrderByWithAggregationInput = {
@@ -244,28 +244,28 @@ export type LifeCircleCreateInput = {
   id?: string
   order?: number
   type: string
-  phase?: Prisma.PhaseCreateNestedManyWithoutLifeCircleInput
+  phases?: Prisma.PhaseCreateNestedManyWithoutLifeCircleInput
 }
 
 export type LifeCircleUncheckedCreateInput = {
   id?: string
   order?: number
   type: string
-  phase?: Prisma.PhaseUncheckedCreateNestedManyWithoutLifeCircleInput
+  phases?: Prisma.PhaseUncheckedCreateNestedManyWithoutLifeCircleInput
 }
 
 export type LifeCircleUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  phase?: Prisma.PhaseUpdateManyWithoutLifeCircleNestedInput
+  phases?: Prisma.PhaseUpdateManyWithoutLifeCircleNestedInput
 }
 
 export type LifeCircleUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  phase?: Prisma.PhaseUncheckedUpdateManyWithoutLifeCircleNestedInput
+  phases?: Prisma.PhaseUncheckedUpdateManyWithoutLifeCircleNestedInput
 }
 
 export type LifeCircleCreateManyInput = {
@@ -317,55 +317,55 @@ export type LifeCircleScalarRelationFilter = {
   isNot?: Prisma.LifeCircleWhereInput
 }
 
-export type LifeCircleCreateNestedOneWithoutPhaseInput = {
-  create?: Prisma.XOR<Prisma.LifeCircleCreateWithoutPhaseInput, Prisma.LifeCircleUncheckedCreateWithoutPhaseInput>
-  connectOrCreate?: Prisma.LifeCircleCreateOrConnectWithoutPhaseInput
+export type LifeCircleCreateNestedOneWithoutPhasesInput = {
+  create?: Prisma.XOR<Prisma.LifeCircleCreateWithoutPhasesInput, Prisma.LifeCircleUncheckedCreateWithoutPhasesInput>
+  connectOrCreate?: Prisma.LifeCircleCreateOrConnectWithoutPhasesInput
   connect?: Prisma.LifeCircleWhereUniqueInput
 }
 
-export type LifeCircleUpdateOneRequiredWithoutPhaseNestedInput = {
-  create?: Prisma.XOR<Prisma.LifeCircleCreateWithoutPhaseInput, Prisma.LifeCircleUncheckedCreateWithoutPhaseInput>
-  connectOrCreate?: Prisma.LifeCircleCreateOrConnectWithoutPhaseInput
-  upsert?: Prisma.LifeCircleUpsertWithoutPhaseInput
+export type LifeCircleUpdateOneRequiredWithoutPhasesNestedInput = {
+  create?: Prisma.XOR<Prisma.LifeCircleCreateWithoutPhasesInput, Prisma.LifeCircleUncheckedCreateWithoutPhasesInput>
+  connectOrCreate?: Prisma.LifeCircleCreateOrConnectWithoutPhasesInput
+  upsert?: Prisma.LifeCircleUpsertWithoutPhasesInput
   connect?: Prisma.LifeCircleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.LifeCircleUpdateToOneWithWhereWithoutPhaseInput, Prisma.LifeCircleUpdateWithoutPhaseInput>, Prisma.LifeCircleUncheckedUpdateWithoutPhaseInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LifeCircleUpdateToOneWithWhereWithoutPhasesInput, Prisma.LifeCircleUpdateWithoutPhasesInput>, Prisma.LifeCircleUncheckedUpdateWithoutPhasesInput>
 }
 
-export type LifeCircleCreateWithoutPhaseInput = {
+export type LifeCircleCreateWithoutPhasesInput = {
   id?: string
   order?: number
   type: string
 }
 
-export type LifeCircleUncheckedCreateWithoutPhaseInput = {
+export type LifeCircleUncheckedCreateWithoutPhasesInput = {
   id?: string
   order?: number
   type: string
 }
 
-export type LifeCircleCreateOrConnectWithoutPhaseInput = {
+export type LifeCircleCreateOrConnectWithoutPhasesInput = {
   where: Prisma.LifeCircleWhereUniqueInput
-  create: Prisma.XOR<Prisma.LifeCircleCreateWithoutPhaseInput, Prisma.LifeCircleUncheckedCreateWithoutPhaseInput>
+  create: Prisma.XOR<Prisma.LifeCircleCreateWithoutPhasesInput, Prisma.LifeCircleUncheckedCreateWithoutPhasesInput>
 }
 
-export type LifeCircleUpsertWithoutPhaseInput = {
-  update: Prisma.XOR<Prisma.LifeCircleUpdateWithoutPhaseInput, Prisma.LifeCircleUncheckedUpdateWithoutPhaseInput>
-  create: Prisma.XOR<Prisma.LifeCircleCreateWithoutPhaseInput, Prisma.LifeCircleUncheckedCreateWithoutPhaseInput>
+export type LifeCircleUpsertWithoutPhasesInput = {
+  update: Prisma.XOR<Prisma.LifeCircleUpdateWithoutPhasesInput, Prisma.LifeCircleUncheckedUpdateWithoutPhasesInput>
+  create: Prisma.XOR<Prisma.LifeCircleCreateWithoutPhasesInput, Prisma.LifeCircleUncheckedCreateWithoutPhasesInput>
   where?: Prisma.LifeCircleWhereInput
 }
 
-export type LifeCircleUpdateToOneWithWhereWithoutPhaseInput = {
+export type LifeCircleUpdateToOneWithWhereWithoutPhasesInput = {
   where?: Prisma.LifeCircleWhereInput
-  data: Prisma.XOR<Prisma.LifeCircleUpdateWithoutPhaseInput, Prisma.LifeCircleUncheckedUpdateWithoutPhaseInput>
+  data: Prisma.XOR<Prisma.LifeCircleUpdateWithoutPhasesInput, Prisma.LifeCircleUncheckedUpdateWithoutPhasesInput>
 }
 
-export type LifeCircleUpdateWithoutPhaseInput = {
+export type LifeCircleUpdateWithoutPhasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type LifeCircleUncheckedUpdateWithoutPhaseInput = {
+export type LifeCircleUncheckedUpdateWithoutPhasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
@@ -377,11 +377,11 @@ export type LifeCircleUncheckedUpdateWithoutPhaseInput = {
  */
 
 export type LifeCircleCountOutputType = {
-  phase: number
+  phases: number
 }
 
 export type LifeCircleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  phase?: boolean | LifeCircleCountOutputTypeCountPhaseArgs
+  phases?: boolean | LifeCircleCountOutputTypeCountPhasesArgs
 }
 
 /**
@@ -397,7 +397,7 @@ export type LifeCircleCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
 /**
  * LifeCircleCountOutputType without action
  */
-export type LifeCircleCountOutputTypeCountPhaseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type LifeCircleCountOutputTypeCountPhasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PhaseWhereInput
 }
 
@@ -406,7 +406,7 @@ export type LifeCircleSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   order?: boolean
   type?: boolean
-  phase?: boolean | Prisma.LifeCircle$phaseArgs<ExtArgs>
+  phases?: boolean | Prisma.LifeCircle$phasesArgs<ExtArgs>
   _count?: boolean | Prisma.LifeCircleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lifeCircle"]>
 
@@ -430,7 +430,7 @@ export type LifeCircleSelectScalar = {
 
 export type LifeCircleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "order" | "type", ExtArgs["result"]["lifeCircle"]>
 export type LifeCircleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  phase?: boolean | Prisma.LifeCircle$phaseArgs<ExtArgs>
+  phases?: boolean | Prisma.LifeCircle$phasesArgs<ExtArgs>
   _count?: boolean | Prisma.LifeCircleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LifeCircleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -439,7 +439,7 @@ export type LifeCircleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type $LifeCirclePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LifeCircle"
   objects: {
-    phase: Prisma.$PhasePayload<ExtArgs>[]
+    phases: Prisma.$PhasePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -839,7 +839,7 @@ readonly fields: LifeCircleFieldRefs;
  */
 export interface Prisma__LifeCircleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  phase<T extends Prisma.LifeCircle$phaseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LifeCircle$phaseArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PhasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  phases<T extends Prisma.LifeCircle$phasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LifeCircle$phasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PhasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1260,9 +1260,9 @@ export type LifeCircleDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * LifeCircle.phase
+ * LifeCircle.phases
  */
-export type LifeCircle$phaseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type LifeCircle$phasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Phase
    */

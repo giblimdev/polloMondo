@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { JSX } from "react";
 import { Home, BookOpen, ChefHat } from "lucide-react";
+import GoHome from "@/components/common/GoHome";
 
 type PublicNavItem = {
   href: string;
@@ -20,12 +21,6 @@ type PublicNavItem = {
 };
 
 const NAV_ITEMS: readonly PublicNavItem[] = [
-  {
-    href: "/public",
-    label: "Accueil",
-    description: "Page d'accueil de l'espace public",
-    icon: <Home className="h-4 w-4" />,
-  },
   {
     href: "/public/recettes",
     label: "Recettes de Cuisine",
@@ -67,18 +62,10 @@ export default function PublicNav(): JSX.Element {
       aria-label="Navigation principale de l'espace public"
       className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60"
     >
+      {" "}
+      <GoHome />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo/Brand */}
-          <div className="flex items-center">
-            <Link href="/public" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                <span className="text-primary font-bold">P</span>
-              </div>
-              <span className="font-semibold text-lg">Public</span>
-            </Link>
-          </div>
-
           {/* Navigation Items */}
           <ul className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
@@ -133,12 +120,10 @@ export default function PublicNav(): JSX.Element {
         {/* Description pour les écrans larges */}
         <div className="hidden md:block pb-3">
           <p className="text-xs text-muted-foreground px-1">
-            Accès direct aux ressources publiques : recettes de cuisine et guide
-            d'élevage de poules pondeuses.
+            Accès direct aux ressources publiques
           </p>
         </div>
       </div>
-
       {/* Mobile navigation (simplifié) */}
       <div className="md:hidden border-t">
         <div className="px-2 py-3 space-y-1">

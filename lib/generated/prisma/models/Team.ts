@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -40,7 +40,7 @@ export type TeamMinAggregateOutputType = {
   id: string | null
   order: number | null
   name: string | null
-  type: string | null
+  type: $Enums.TeamType | null
   parentId: string | null
   ownerId: string | null
   createdAt: Date | null
@@ -51,7 +51,7 @@ export type TeamMaxAggregateOutputType = {
   id: string | null
   order: number | null
   name: string | null
-  type: string | null
+  type: $Enums.TeamType | null
   parentId: string | null
   ownerId: string | null
   createdAt: Date | null
@@ -203,7 +203,7 @@ export type TeamGroupByOutputType = {
   id: string
   order: number
   name: string
-  type: string
+  type: $Enums.TeamType
   parentId: string | null
   ownerId: string
   createdAt: Date
@@ -237,7 +237,7 @@ export type TeamWhereInput = {
   id?: Prisma.StringFilter<"Team"> | string
   order?: Prisma.IntFilter<"Team"> | number
   name?: Prisma.StringFilter<"Team"> | string
-  type?: Prisma.StringFilter<"Team"> | string
+  type?: Prisma.EnumTeamTypeFilter<"Team"> | $Enums.TeamType
   parentId?: Prisma.StringNullableFilter<"Team"> | string | null
   ownerId?: Prisma.StringFilter<"Team"> | string
   createdAt?: Prisma.DateTimeFilter<"Team"> | Date | string
@@ -274,7 +274,7 @@ export type TeamWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.TeamWhereInput | Prisma.TeamWhereInput[]
   order?: Prisma.IntFilter<"Team"> | number
   name?: Prisma.StringFilter<"Team"> | string
-  type?: Prisma.StringFilter<"Team"> | string
+  type?: Prisma.EnumTeamTypeFilter<"Team"> | $Enums.TeamType
   parentId?: Prisma.StringNullableFilter<"Team"> | string | null
   ownerId?: Prisma.StringFilter<"Team"> | string
   createdAt?: Prisma.DateTimeFilter<"Team"> | Date | string
@@ -310,7 +310,7 @@ export type TeamScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Team"> | string
   order?: Prisma.IntWithAggregatesFilter<"Team"> | number
   name?: Prisma.StringWithAggregatesFilter<"Team"> | string
-  type?: Prisma.StringWithAggregatesFilter<"Team"> | string
+  type?: Prisma.EnumTeamTypeWithAggregatesFilter<"Team"> | $Enums.TeamType
   parentId?: Prisma.StringNullableWithAggregatesFilter<"Team"> | string | null
   ownerId?: Prisma.StringWithAggregatesFilter<"Team"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Team"> | Date | string
@@ -321,7 +321,7 @@ export type TeamCreateInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   createdAt?: Date | string
   updatedAt?: Date | string
   parent?: Prisma.TeamCreateNestedOneWithoutChildrenInput
@@ -336,7 +336,7 @@ export type TeamUncheckedCreateInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   parentId?: string | null
   ownerId: string
   createdAt?: Date | string
@@ -351,7 +351,7 @@ export type TeamUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parent?: Prisma.TeamUpdateOneWithoutChildrenNestedInput
@@ -366,7 +366,7 @@ export type TeamUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -381,7 +381,7 @@ export type TeamCreateManyInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   parentId?: string | null
   ownerId: string
   createdAt?: Date | string
@@ -392,7 +392,7 @@ export type TeamUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -401,7 +401,7 @@ export type TeamUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -531,6 +531,10 @@ export type TeamUncheckedCreateNestedManyWithoutParentInput = {
   connect?: Prisma.TeamWhereUniqueInput | Prisma.TeamWhereUniqueInput[]
 }
 
+export type EnumTeamTypeFieldUpdateOperationsInput = {
+  set?: $Enums.TeamType
+}
+
 export type TeamUpdateOneWithoutChildrenNestedInput = {
   create?: Prisma.XOR<Prisma.TeamCreateWithoutChildrenInput, Prisma.TeamUncheckedCreateWithoutChildrenInput>
   connectOrCreate?: Prisma.TeamCreateOrConnectWithoutChildrenInput
@@ -615,7 +619,7 @@ export type TeamCreateWithoutOwnerInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   createdAt?: Date | string
   updatedAt?: Date | string
   parent?: Prisma.TeamCreateNestedOneWithoutChildrenInput
@@ -629,7 +633,7 @@ export type TeamUncheckedCreateWithoutOwnerInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -672,7 +676,7 @@ export type TeamScalarWhereInput = {
   id?: Prisma.StringFilter<"Team"> | string
   order?: Prisma.IntFilter<"Team"> | number
   name?: Prisma.StringFilter<"Team"> | string
-  type?: Prisma.StringFilter<"Team"> | string
+  type?: Prisma.EnumTeamTypeFilter<"Team"> | $Enums.TeamType
   parentId?: Prisma.StringNullableFilter<"Team"> | string | null
   ownerId?: Prisma.StringFilter<"Team"> | string
   createdAt?: Prisma.DateTimeFilter<"Team"> | Date | string
@@ -683,7 +687,7 @@ export type TeamCreateWithoutChildrenInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   createdAt?: Date | string
   updatedAt?: Date | string
   parent?: Prisma.TeamCreateNestedOneWithoutChildrenInput
@@ -697,7 +701,7 @@ export type TeamUncheckedCreateWithoutChildrenInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   parentId?: string | null
   ownerId: string
   createdAt?: Date | string
@@ -716,7 +720,7 @@ export type TeamCreateWithoutParentInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.TeamCreateNestedManyWithoutParentInput
@@ -730,7 +734,7 @@ export type TeamUncheckedCreateWithoutParentInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -765,7 +769,7 @@ export type TeamUpdateWithoutChildrenInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parent?: Prisma.TeamUpdateOneWithoutChildrenNestedInput
@@ -779,7 +783,7 @@ export type TeamUncheckedUpdateWithoutChildrenInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -809,7 +813,7 @@ export type TeamCreateWithoutMembersInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   createdAt?: Date | string
   updatedAt?: Date | string
   parent?: Prisma.TeamCreateNestedOneWithoutChildrenInput
@@ -823,7 +827,7 @@ export type TeamUncheckedCreateWithoutMembersInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   parentId?: string | null
   ownerId: string
   createdAt?: Date | string
@@ -853,7 +857,7 @@ export type TeamUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parent?: Prisma.TeamUpdateOneWithoutChildrenNestedInput
@@ -867,7 +871,7 @@ export type TeamUncheckedUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -881,7 +885,7 @@ export type TeamCreateWithoutBatimentsInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   createdAt?: Date | string
   updatedAt?: Date | string
   parent?: Prisma.TeamCreateNestedOneWithoutChildrenInput
@@ -895,7 +899,7 @@ export type TeamUncheckedCreateWithoutBatimentsInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   parentId?: string | null
   ownerId: string
   createdAt?: Date | string
@@ -925,7 +929,7 @@ export type TeamUpdateWithoutBatimentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parent?: Prisma.TeamUpdateOneWithoutChildrenNestedInput
@@ -939,7 +943,7 @@ export type TeamUncheckedUpdateWithoutBatimentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -953,7 +957,7 @@ export type TeamCreateWithoutSettingInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   createdAt?: Date | string
   updatedAt?: Date | string
   parent?: Prisma.TeamCreateNestedOneWithoutChildrenInput
@@ -967,7 +971,7 @@ export type TeamUncheckedCreateWithoutSettingInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   parentId?: string | null
   ownerId: string
   createdAt?: Date | string
@@ -997,7 +1001,7 @@ export type TeamUpdateWithoutSettingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parent?: Prisma.TeamUpdateOneWithoutChildrenNestedInput
@@ -1011,7 +1015,7 @@ export type TeamUncheckedUpdateWithoutSettingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1025,7 +1029,7 @@ export type TeamCreateManyOwnerInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1035,7 +1039,7 @@ export type TeamUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parent?: Prisma.TeamUpdateOneWithoutChildrenNestedInput
@@ -1049,7 +1053,7 @@ export type TeamUncheckedUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1063,7 +1067,7 @@ export type TeamUncheckedUpdateManyWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1073,7 +1077,7 @@ export type TeamCreateManyParentInput = {
   id?: string
   order?: number
   name: string
-  type?: string
+  type?: $Enums.TeamType
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1083,7 +1087,7 @@ export type TeamUpdateWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.TeamUpdateManyWithoutParentNestedInput
@@ -1097,7 +1101,7 @@ export type TeamUncheckedUpdateWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1111,7 +1115,7 @@ export type TeamUncheckedUpdateManyWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTeamTypeFieldUpdateOperationsInput | $Enums.TeamType
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1254,7 +1258,7 @@ export type $TeamPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     order: number
     name: string
-    type: string
+    type: $Enums.TeamType
     parentId: string | null
     ownerId: string
     createdAt: Date
@@ -1691,7 +1695,7 @@ export interface TeamFieldRefs {
   readonly id: Prisma.FieldRef<"Team", 'String'>
   readonly order: Prisma.FieldRef<"Team", 'Int'>
   readonly name: Prisma.FieldRef<"Team", 'String'>
-  readonly type: Prisma.FieldRef<"Team", 'String'>
+  readonly type: Prisma.FieldRef<"Team", 'TeamType'>
   readonly parentId: Prisma.FieldRef<"Team", 'String'>
   readonly ownerId: Prisma.FieldRef<"Team", 'String'>
   readonly createdAt: Prisma.FieldRef<"Team", 'DateTime'>
